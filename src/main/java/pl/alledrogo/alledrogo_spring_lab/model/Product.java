@@ -15,7 +15,7 @@ public class Product {
 //        this.price = price;
 //    }
     @JsonCreator
-    Product(
+    public Product(
             @JsonProperty("name") String name,
             @JsonProperty("description") String description,
             @JsonProperty("price") double price) {

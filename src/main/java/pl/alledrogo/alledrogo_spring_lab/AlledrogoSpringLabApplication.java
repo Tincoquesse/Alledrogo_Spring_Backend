@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 @SpringBootApplication
@@ -27,5 +28,7 @@ public class AlledrogoSpringLabApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        alledrogoService.addProduct(new Product("dupa", "dupa", 123));
+        alledrogoService.addProduct(new Product("dupa1", "dupa", 123));
     }
 }
