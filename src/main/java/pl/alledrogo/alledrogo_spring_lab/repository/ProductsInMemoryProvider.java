@@ -6,31 +6,42 @@ import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Order;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductsInMemoryProvider {
 
     private final Map<String, Product> productList = new ConcurrentHashMap<>();
-    Basket basket = new Basket();
-    Order order;
+    private Basket basket = new Basket();
+    private Order order;
 
     public void addProduct(Product product) {
         productList.put(product.getName(), product);
     }
 
-    Optional<Product> getProduct(String name) {
+    public Optional<Product> getProduct(String name) {
         return productList.values().stream()
                 .filter(product -> product.getName().equals(name))
                 .findFirst();
     }
-    void addProductToBasket(String name) {
+    public void addProductToBasket(String name) {
         basket.addProduct(productList.get(name));
     }
-    void removeProductFromBasket(String name) {
+    public void removeProductFromBasket(String name) {
         productList.remove(name);
     }
-
+    public List<Product> getAllProducts() {
+        return Optional.ofNullable(productList.values().stream().collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
+    }
+    public List<Product> getAllProductsFromBasket() {
+        return Optional.ofNullable(basket.getAllProducts()).orElse(Collections.emptyList());
+    }
+    public Order makeOrder(String shipmentAddress){
+        Order order = new Order(shipmentAddress);
+        order.addProducts(getAllProductsFromBasket());
+        return order;
+    }
 }

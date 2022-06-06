@@ -1,12 +1,24 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Product {
 
     private final String name;
     private final String description;
     private final double price;
 
-    public Product(String name, String description, double price) {
+//    public Product(String name, String description, double price) {
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//    }
+    @JsonCreator
+    Product(
+            @JsonProperty("name") String name,
+            @JsonProperty("description") String description,
+            @JsonProperty("price") double price) {
         this.name = name;
         this.description = description;
         this.price = price;

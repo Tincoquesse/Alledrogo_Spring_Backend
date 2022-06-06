@@ -1,0 +1,18 @@
+allegro lab:
+- utwórz nowy projekt (wykonaj kroki z ćwiczenia 1)
+- napiszemy sklep internetowy
+- naszym UI będzie Postman
+- utwórz odpowiednie klasy: Product(name, descritpion, price), Basket(products), Order(products, shipmentAddress)
+  * nazwa produktu jest unikalna (nie ma dwóch o takiej samej nazwie)
+- utwórz konktroler oraz serwisy pozwalające na dodanie nowego prduktu do sklepu (produkt powinien zostać zapamiętany)
+- dodaj akcję pozwalającą na wyświetlenie wszystkich produktów
+- dodaj akcję pozwalającą na dodanie produktu do koszyka
+- dodaj akcję pozwalającą na usunięcie dowolnego produktu z koszyka
+- dodaj akcję pozwalającą na wyświetlenie zawartości koszyka
+- dodaj akcję pozwalającą na usunięcie dowolnego produktu z koszyka
+- dodaj akcję pozwalającą na zatwierdzenie koszyka (zakup)
+  * kupić można tylko produkty dostępne w sklepie (identyfikujemy po nazwie)
+  * aby kupić produkty trzeba podać adres dostawy
+  * akcja powinna zwracać poprawnie wypełniony obiekt typu Order
+  * zakup czyści koszyk (usuwa wszysystkie dodane elementy)
+- dodaj testy do swoich kontrolerów aby być pewnym że działają

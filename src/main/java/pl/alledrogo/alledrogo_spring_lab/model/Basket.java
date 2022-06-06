@@ -22,4 +22,7 @@ public class Basket {
                 .stream()
                 .toList();
     }
+    void clear() {
+        productMap.clear();
+    }
 }
