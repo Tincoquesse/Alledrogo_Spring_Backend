@@ -5,6 +5,7 @@ import pl.alledrogo.alledrogo_spring_lab.model.Order;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductsInMemoryProvider;
 
+
 import java.util.List;
 
 @Service
@@ -31,9 +32,11 @@ public class AlledrogoService {
     public  List<Product> getAllProducts() {
         return productsInMemoryProvider.getAllProducts();
     }
+
     public List<Product> getALlProductsFromBasket() {
         return productsInMemoryProvider.getAllProductsFromBasket();
     }
+
     public Order makeOrder(String shipmentAddress) {
         return productsInMemoryProvider.makeOrder(shipmentAddress);
     }

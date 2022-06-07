@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class ProductsInMemoryProvider {
 
     private final Map<String, Product> productList = new ConcurrentHashMap<>();
-    private Basket basket = new Basket();
+    private final Basket basket = new Basket();
     private Order order;
 
     public void addProduct(Product product) {
@@ -29,8 +29,9 @@ public class ProductsInMemoryProvider {
     public void addProductToBasket(String name) {
         basket.addProduct(productList.get(name));
     }
+
     public void removeProductFromBasket(String name) {
-        productList.remove(name);
+        basket.removeProduct(name);
     }
     public List<Product> getAllProducts() {
         return Optional.ofNullable(productList.values().stream().collect(Collectors.toList()))
@@ -40,8 +41,10 @@ public class ProductsInMemoryProvider {
         return Optional.ofNullable(basket.getAllProducts()).orElse(Collections.emptyList());
     }
     public Order makeOrder(String shipmentAddress){
-        Order order = new Order(shipmentAddress);
+        Order order = new Order();
         order.addProducts(getAllProductsFromBasket());
+        order.setShipmentAddress(shipmentAddress);
+        basket.clear();
         return order;
     }
 }
