@@ -16,13 +16,14 @@ class AlledrogoControllerTest {
     AlledrogoService alledrogoService = new AlledrogoService(productsInMemoryProvider);
     AlledrogoController alledrogoController = new AlledrogoController(alledrogoService);
 
+
     @BeforeEach
     void clearProductsList() { productsInMemoryProvider.clearProductsList();}
 
     @Test
     void addProduct() {
     //given
-        alledrogoController.addProduct("test1", "testowy", 1234.);
+        alledrogoController.addProduct("test1", "testowy", 1234);
     //when
         int result= 1;
     //then

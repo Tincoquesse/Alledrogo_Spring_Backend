@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -56,8 +55,9 @@ class AlledrogoServiceTest {
         //when
         alledrogoService.addProductToBasket("dupa");
         Product product = alledrogoService.getALlProductsFromBasket().stream()
-                .filter(product2 -> product2.getName() == name)
-                        .findFirst().get();
+                .filter(product2 -> product2.getName().equals(name))
+                .findFirst()
+                .get();
 
         //then
         assertThat(product).isEqualTo(product1);
