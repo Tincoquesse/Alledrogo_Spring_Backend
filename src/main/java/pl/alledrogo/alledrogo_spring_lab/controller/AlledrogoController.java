@@ -19,9 +19,11 @@ public class AlledrogoController {
         this.alledrogoService = alledrogoService;
     }
 
-    @PostMapping("/addProduct")
-    void addProduct(@RequestBody Product product) {
-        alledrogoService.addProduct(product);
+    @PostMapping("/addProduct/{name}/{description}/{price}")
+    String addProduct(@PathVariable String name, @PathVariable String description,@PathVariable double price) {
+        Product product1 = new Product(name, description, price);
+        alledrogoService.addProduct(product1);
+        return "SAVED";
     }
 
     @GetMapping("/getAll")
@@ -43,8 +45,9 @@ public class AlledrogoController {
     }
 
     @PostMapping("/addProductToBasket/{name}")
-    void addProductToBasket(@PathVariable String name) {
+    String addProductToBasket(@PathVariable String name) {
         alledrogoService.addProductToBasket(name);
+        return "Product: " + name + " added to basket!";
     }
 
     @PostMapping("/removeProductFromBasket/{name}")

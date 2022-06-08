@@ -11,7 +11,7 @@ import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 @SpringBootApplication
 
-public class AlledrogoSpringLabApplication implements CommandLineRunner {
+public class AlledrogoSpringLabApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(AlledrogoSpringLabApplication.class, args);
@@ -22,20 +22,7 @@ public class AlledrogoSpringLabApplication implements CommandLineRunner {
     public AlledrogoSpringLabApplication(AlledrogoService alledrogoService) {
         this.alledrogoService = alledrogoService;
     }
-    @Bean
 
-    ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
 
-    @Override
 
-    public void run(String... args) throws Exception {
-
-        alledrogoService.addProduct(new Product("dupa", "dupa", 123));
-        alledrogoService.addProduct(new Product("dupa1", "dupa1", 234));
-        alledrogoService.addProduct(new Product("dupa2", "dupa2", 345));
-        alledrogoService.addProduct(new Product("dupa3", "dupa3", 456));
-
-    }
 }

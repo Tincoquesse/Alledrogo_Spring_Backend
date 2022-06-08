@@ -49,12 +49,18 @@ class AlledrogoServiceTest {
     @Test
     void productFromOrderSameAsGIven () {
         //given
-        Product product1 = new Product("dupa", "dupa", 1234);
+        String name = "dupa";
+        Product product1 = new Product(name, "dupa", 1234);
         alledrogoService.addProduct(product1);
 
         //when
         alledrogoService.addProductToBasket("dupa");
+        Product product = alledrogoService.getALlProductsFromBasket().stream()
+                .filter(product2 -> product2.getName() == name)
+                        .findFirst().get();
 
+        //then
+        assertThat(product).isEqualTo(product1);
 
     }
 }
