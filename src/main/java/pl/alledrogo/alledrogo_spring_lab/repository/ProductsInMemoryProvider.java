@@ -26,6 +26,7 @@ public class ProductsInMemoryProvider {
                 .filter(product -> product.getName().equals(name))
                 .findFirst();
     }
+
     public void addProductToBasket(String name) {
         basket.addProduct(productList.get(name));
     }
@@ -33,13 +34,16 @@ public class ProductsInMemoryProvider {
     public void removeProductFromBasket(String name) {
         basket.removeProduct(name);
     }
+
     public List<Product> getAllProducts() {
         return Optional.ofNullable(productList.values().stream().collect(Collectors.toList()))
                 .orElse(Collections.emptyList());
     }
+
     public List<Product> getAllProductsFromBasket() {
         return Optional.ofNullable(basket.getAllProducts()).orElse(Collections.emptyList());
     }
+
     public Order makeOrder(String shipmentAddress){
         Order order = new Order();
         order.addProducts(getAllProductsFromBasket());
@@ -47,4 +51,6 @@ public class ProductsInMemoryProvider {
         basket.clear();
         return order;
     }
+
+    public void clearProductsList() { productList.clear();}
 }
