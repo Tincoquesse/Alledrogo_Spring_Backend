@@ -1,13 +1,8 @@
 package pl.alledrogo.alledrogo_spring_lab;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
-
 
 @SpringBootApplication
 
@@ -22,7 +17,5 @@ public class AlledrogoSpringLabApplication{
     public AlledrogoSpringLabApplication(AlledrogoService alledrogoService) {
         this.alledrogoService = alledrogoService;
     }
-
-
 
 }
