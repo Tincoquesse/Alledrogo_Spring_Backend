@@ -11,11 +11,4 @@ public class AlledrogoSpringLabApplication{
     public static void main(String[] args) {
         SpringApplication.run(AlledrogoSpringLabApplication.class, args);
     }
-
-    AlledrogoService alledrogoService;
-
-    public AlledrogoSpringLabApplication(AlledrogoService alledrogoService) {
-        this.alledrogoService = alledrogoService;
-    }
-
 }
