@@ -3,6 +3,7 @@ package pl.alledrogo.alledrogo_spring_lab.controllerJPA;
 
 import org.springframework.web.bind.annotation.*;
 
+import pl.alledrogo.alledrogo_spring_lab.modelJPA.BasketAlt;
 import pl.alledrogo.alledrogo_spring_lab.modelJPA.ProductAlt;
 import pl.alledrogo.alledrogo_spring_lab.serviceJPA.AlledrogoJPAService;
 

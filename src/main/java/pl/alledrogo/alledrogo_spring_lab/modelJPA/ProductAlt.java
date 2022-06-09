@@ -13,18 +13,24 @@ public class ProductAlt {
     private String productDescription;
     private Double productPrice;
 
-//    @ManyToOne
-//    BasketAlt basketAlt;
-
+    @ManyToOne
+    BasketAlt basketAlt;
 
     public ProductAlt() {
     }
 
     public ProductAlt(String name, String description, Double price){
-
         this.productName = name;
         this.productDescription = description;
         this.productPrice = price;
+    }
+
+    public BasketAlt getBasketAlt() {
+        return basketAlt;
+    }
+
+    public void setBasketAlt(BasketAlt basketAlt) {
+        this.basketAlt = basketAlt;
     }
 
     public void setProductName(String productName) {
