@@ -1,0 +1,90 @@
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-09T184419.200.json
+
+###
+
+POST http://localhost:6666/jpa/removeProduct/pierwszy
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-09T184343.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/pierwszy/produkt/1234
+
+<> 2022-06-09T184337.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-09T184301.200.json
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-09T180916.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/drugi/produkt/12345
+
+<> 2022-06-09T180909.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-09T180809.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/pierwszy/produkt/9876
+
+<> 2022-06-09T180754.200.txt
+
+###
+
+GET http://localhost:6666/alledrogo/getAllFromBasket
+
+<> 2022-06-07T194506.200.json
+
+###
+
+POST http://localhost:6666/alledrogo/addProductToBasket/dupa
+
+###
+
+GET http://localhost:6666/alledrogo/makeOrder/Budzów%20561,%2034-211%20Budzów
+
+<> 2022-06-07T194451.200.json
+
+###
+
+GET http://localhost:6666/alledrogo/makeOrder/Budzów%20561,%2034-211%20Budzów
+
+<> 2022-06-07T192907.200.json
+
+###
+
+GET http://localhost:6666/alledrogo/getAllFromBasket
+
+<> 2022-06-07T192809.200.json
+
+###
+
+POST http://localhost:6666/alledrogo/addProductToBasket/dupa
+
+###
+
+GET http://localhost:6666/alledrogo/getAll
+
+<> 2022-06-07T192655.200.json
+
+###
+

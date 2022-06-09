@@ -1,14 +1,12 @@
 package pl.alledrogo.alledrogo_spring_lab.controllerJPA;
 
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import pl.alledrogo.alledrogo_spring_lab.modelJPA.ProductAlt;
 import pl.alledrogo.alledrogo_spring_lab.serviceJPA.AlledrogoJPAService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("jpa")
@@ -26,5 +24,16 @@ public class AlledrogoJPAController {
         ProductAlt product1 = new ProductAlt(name, description, price);
         jpaService.addProduct(product1);
         return "SAVED";
+    }
+
+    @GetMapping("/getAll")
+    @ResponseBody
+    List<ProductAlt> getAllProducts() {
+        return jpaService.getAll();
+    }
+
+    @PostMapping("/removeProduct/{name}")
+    void removeProduct(@PathVariable String name) {
+        jpaService.deleteProduct(jpaService.findProductByName(name));
     }
 }

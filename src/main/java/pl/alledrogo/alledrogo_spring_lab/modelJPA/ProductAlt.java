@@ -27,6 +27,18 @@ public class ProductAlt {
         this.productPrice = price;
     }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
+    }
+
     public String getProductName() {
         return productName;
     }
