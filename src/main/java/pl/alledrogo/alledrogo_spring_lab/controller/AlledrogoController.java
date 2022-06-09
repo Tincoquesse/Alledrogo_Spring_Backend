@@ -54,4 +54,9 @@ public class AlledrogoController {
     void removeProductFromBasket(@PathVariable String name) {
         alledrogoService.removeProductFromBasket(name);
     }
+
+    @GetMapping("/test")
+    String test() {
+        return " TEST WORK";
+    }
 }
