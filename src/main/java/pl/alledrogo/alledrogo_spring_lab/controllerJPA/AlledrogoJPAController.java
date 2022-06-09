@@ -3,9 +3,8 @@ package pl.alledrogo.alledrogo_spring_lab.controllerJPA;
 
 import org.springframework.web.bind.annotation.*;
 
-import pl.alledrogo.alledrogo_spring_lab.modelJPA.BasketAlt;
-import pl.alledrogo.alledrogo_spring_lab.modelJPA.ProductAlt;
-import pl.alledrogo.alledrogo_spring_lab.serviceJPA.AlledrogoJPAService;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import java.util.List;
 
@@ -13,23 +12,23 @@ import java.util.List;
 @RequestMapping("jpa")
 public class AlledrogoJPAController {
 
-    AlledrogoJPAService jpaService;
+    AlledrogoService jpaService;
 
 
-    public AlledrogoJPAController(AlledrogoJPAService jpaService) {
+    public AlledrogoJPAController(AlledrogoService jpaService) {
         this.jpaService = jpaService;
     }
 
     @PostMapping("/addProduct/{name}/{description}/{price}")
     String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price) {
-        ProductAlt product1 = new ProductAlt(name, description, price);
+        Product product1 = new Product(name, description, price);
         jpaService.addProduct(product1);
         return "SAVED";
     }
 
     @GetMapping("/getAll")
     @ResponseBody
-    List<ProductAlt> getAllProducts() {
+    List<Product> getAllProducts() {
         return jpaService.getAll();
     }
 

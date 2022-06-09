@@ -1,47 +1,60 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.*;
 
+
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private final String name;
-    private final String description;
-    private final double price;
+    private String productName;
+    private String productDescription;
+    private Double productPrice;
 
-    //    public Product(String name, String description, double price) {
-//        this.name = name;
-//        this.description = description;
-//        this.price = price;
-//    }
-    @JsonCreator
-    public Product(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("price") double price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
+    @ManyToOne
+    Basket basketAlt;
+
+    public Product() {
     }
 
-    public String getName() {
-        return name;
+    public Product(String name, String description, Double price){
+        this.productName = name;
+        this.productDescription = description;
+        this.productPrice = price;
     }
 
-    public String getDescription() {
-        return description;
+    public Basket getBasketAlt() {
+        return basketAlt;
     }
 
-    public double getPrice() {
-        return price;
+    public void setBasketAlt(Basket basketAlt) {
+        this.basketAlt = basketAlt;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
 }

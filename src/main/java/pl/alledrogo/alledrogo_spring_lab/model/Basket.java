@@ -1,29 +1,35 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
-import java.util.HashMap;
+
+import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
+
+@Entity
 public class Basket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private final Map<String, Product> productMap = new HashMap<>();
+    @OneToMany
+    List<Product> productAltList;
 
     public Basket() {
     }
 
-    public void addProduct(Product product) {
-        productMap.put(product.getName(), product);
+    public Long getId() {
+        return id;
     }
 
-    public void removeProduct(String name) {
-        productMap.remove(name);
+    public void setId(Long id) {
+        this.id = id;
     }
-    public List<Product> getAllProducts() {
-        return productMap.values()
-                .stream()
-                .toList();
+
+    public List<Product> getProductAltList() {
+        return productAltList;
     }
-    public void clear() {
-        productMap.clear();
+
+    public void AddProductToBasket(Product productAlt) {
+        productAltList.add(productAlt);
     }
 }

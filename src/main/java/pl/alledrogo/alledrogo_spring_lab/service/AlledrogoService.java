@@ -1,43 +1,34 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
-import org.springframework.stereotype.Service;
-import pl.alledrogo.alledrogo_spring_lab.model.Order;
-import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.repository.ProductsInMemoryProvider;
 
+import org.springframework.stereotype.Service;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 
 import java.util.List;
 
 @Service
 public class AlledrogoService {
 
-    ProductsInMemoryProvider productsInMemoryProvider;
+    ProductRepository productAltRepository;
 
-    public AlledrogoService(ProductsInMemoryProvider products) {
-        this.productsInMemoryProvider = products;
+    public AlledrogoService(ProductRepository productAltRepository) {
+        this.productAltRepository = productAltRepository;
     }
 
-    public void addProduct(Product product) {
-        productsInMemoryProvider.addProduct(product);
+    public void addProduct(Product productAlt) {
+        productAltRepository.save(productAlt);
     }
 
-    public void addProductToBasket(String name) {
-        productsInMemoryProvider.addProductToBasket(name);
+    public List<Product> getAll() {
+        return (List<Product>) productAltRepository.findAll();
     }
 
-    public void removeProductFromBasket(String name) {
-        productsInMemoryProvider.removeProductFromBasket(name);
+    public Product findProductByName(String name) {
+        return productAltRepository.findByProductName(name);
     }
 
-    public  List<Product> getAllProducts() {
-        return productsInMemoryProvider.getAllProducts();
-    }
-
-    public List<Product> getALlProductsFromBasket() {
-        return productsInMemoryProvider.getAllProductsFromBasket();
-    }
-
-    public Order makeOrder(String shipmentAddress) {
-        return productsInMemoryProvider.makeOrder(shipmentAddress);
+    public void deleteProduct(Product productAlt) {
+        productAltRepository.delete(productAlt);
     }
 }
