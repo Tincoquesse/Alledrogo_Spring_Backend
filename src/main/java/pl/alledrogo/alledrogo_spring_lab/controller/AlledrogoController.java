@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.alledrogo.alledrogo_spring_lab.model.Order;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
+import pl.alledrogo.alledrogo_spring_lab.serviceJPA.AlledrogoJPAService;
 
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class AlledrogoController {
 
     AlledrogoService alledrogoService;
+
 
     public AlledrogoController(AlledrogoService alledrogoService) {
         this.alledrogoService = alledrogoService;

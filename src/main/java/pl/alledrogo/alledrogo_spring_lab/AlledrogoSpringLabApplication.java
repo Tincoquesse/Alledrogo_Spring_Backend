@@ -2,7 +2,7 @@ package pl.alledrogo.alledrogo_spring_lab;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
+
 
 @SpringBootApplication
 
