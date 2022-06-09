@@ -13,14 +13,14 @@ public class Order {
     private Map<String,Product> productMap = new HashMap<>();
     private String shipmentAddress;
 
-    @JsonCreator
-    Order(
-            @JsonProperty("productMap") Map<String, Product> productMap,
-            @JsonProperty("shipmentAddress") String shipmentAddress) {
-
-        this.productMap = productMap;
-        this.shipmentAddress = shipmentAddress;
-    }
+//    @JsonCreator
+//    Order(
+//            @JsonProperty("productMap") Map<String, Product> productMap,
+//            @JsonProperty("shipmentAddress") String shipmentAddress) {
+//
+//        this.productMap = productMap;
+//        this.shipmentAddress = shipmentAddress;
+//    }
 
     public Order() {
     }
