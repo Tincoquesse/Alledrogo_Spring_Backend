@@ -1,3 +1,15 @@
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-09T190834.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/pierwszy/dzban/09999
+
+<> 2022-06-09T190824.200.txt
+
+###
+
 POST http://localhost:6666/jpa/addProduct/pierwszy/produkt/3456
 
 <> 2022-06-09T185631.200.txt
