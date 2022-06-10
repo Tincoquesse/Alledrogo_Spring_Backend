@@ -9,12 +9,19 @@ import java.util.List;
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
+
 
     @OneToMany
-    List<Product> productAltList;
+    private List<Product> products;
+
+    private String basketName;
 
     public Basket() {
+    }
+
+    public Basket(String basketName) {
+        this.basketName = basketName;
     }
 
     public Long getId() {
@@ -25,11 +32,25 @@ public class Basket {
         this.id = id;
     }
 
-    public List<Product> getProductAltList() {
-        return productAltList;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void AddProductToBasket(Product productAlt) {
-        productAltList.add(productAlt);
+    public void addProductToBasket(Product product) {
+        products.add(product);
     }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public void setBasketName(String basketName) {
+        this.basketName = basketName;
+    }
+
+    public String getBasketName() {
+        return basketName;
+    }
+
+
 }

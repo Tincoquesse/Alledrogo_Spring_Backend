@@ -14,7 +14,7 @@ public class Product {
     private Double productPrice;
 
     @ManyToOne
-    Basket basketAlt;
+    private Basket basket;
 
     public Product() {
     }
@@ -25,12 +25,12 @@ public class Product {
         this.productPrice = price;
     }
 
-    public Basket getBasketAlt() {
-        return basketAlt;
+    public Basket getBasket() {
+        return basket;
     }
 
-    public void setBasketAlt(Basket basketAlt) {
-        this.basketAlt = basketAlt;
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 
     public void setProductName(String productName) {
@@ -56,5 +56,6 @@ public class Product {
     public double getProductPrice() {
         return productPrice;
     }
+
 
 }

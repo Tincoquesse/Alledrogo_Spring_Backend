@@ -1,114 +1,296 @@
+GET http://localhost:6666/jpa/getAllFromBasket/basket
+
+<> 2022-06-10T121722.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-10T121715.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/product/test/666
+
+<> 2022-06-10T121707.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+<> 2022-06-10T121656.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/basket
+
+<> 2022-06-10T120138.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-10T120133.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/product/test/666
+
+<> 2022-06-10T120128.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+<> 2022-06-10T120119.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/basket
+
+<> 2022-06-10T115954.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-10T115949.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/product/test/666
+
+<> 2022-06-10T115943.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+<> 2022-06-10T115936.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/basket
+
+<> 2022-06-10T115628.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-10T115612.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/product/test/666
+
+<> 2022-06-10T115609.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+<> 2022-06-10T115605.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-10T115501.200.txt
+
+###
+
 GET http://localhost:6666/jpa/getAll
 
-<> 2022-06-09T190834.200.json
+<> 2022-06-10T115434.200.json
 
 ###
 
-POST http://localhost:6666/jpa/addProduct/pierwszy/dzban/09999
+POST http://localhost:6666/jpa/addProduct/product/test/666
 
-<> 2022-06-09T190824.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/pierwszy/produkt/3456
-
-<> 2022-06-09T185631.200.txt
+<> 2022-06-10T115421.200.txt
 
 ###
 
-GET http://localhost:6666/jpa/getAll
+POST http://localhost:6666/jpa/addBasket/basket
 
-<> 2022-06-09T185557.200.json
-
-###
-
-GET http://localhost:6666/jpa/getAll
-
-<> 2022-06-09T184419.200.json
+<> 2022-06-10T115359.200.txt
 
 ###
 
-POST http://localhost:6666/jpa/removeProduct/pierwszy
+POST http://localhost:6666/jpa/addBasket/first
+
+<> 2022-06-10T114627.200.txt
 
 ###
 
-GET http://localhost:6666/jpa/getAll
+GET http://localhost:6666/jpa/getAllFromBasket/first
 
-<> 2022-06-09T184343.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProduct/pierwszy/produkt/1234
-
-<> 2022-06-09T184337.200.txt
+<> 2022-06-10T114253.500.json
 
 ###
 
-GET http://localhost:6666/jpa/getAll
+POST http://localhost:6666/jpa/addProduct/raz/once/9999
 
-<> 2022-06-09T184301.200.json
-
-###
-
-GET http://localhost:6666/jpa/getAll
-
-<> 2022-06-09T180916.200.json
+<> 2022-06-10T114246.200.txt
 
 ###
 
-POST http://localhost:6666/jpa/addProduct/drugi/produkt/12345
+POST http://localhost:6666/jpa/addProduct/raz/once/9999
 
-<> 2022-06-09T180909.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAll
-
-<> 2022-06-09T180809.200.json
+<> 2022-06-10T114239.200.txt
 
 ###
 
-POST http://localhost:6666/jpa/addProduct/pierwszy/produkt/9876
+POST http://localhost:6666/jpa/addProductToBasket/first/raz
 
-<> 2022-06-09T180754.200.txt
-
-###
-
-GET http://localhost:6666/alledrogo/getAllFromBasket
-
-<> 2022-06-07T194506.200.json
+<> 2022-06-10T111720.200.txt
 
 ###
 
-POST http://localhost:6666/alledrogo/addProductToBasket/dupa
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T111631.200.json
 
 ###
 
-GET http://localhost:6666/alledrogo/makeOrder/Budzów%20561,%2034-211%20Budzów
+POST http://localhost:6666/jpa/addProductToBasket/first/raz
 
-<> 2022-06-07T194451.200.json
-
-###
-
-GET http://localhost:6666/alledrogo/makeOrder/Budzów%20561,%2034-211%20Budzów
-
-<> 2022-06-07T192907.200.json
+<> 2022-06-10T111626.200.txt
 
 ###
 
-GET http://localhost:6666/alledrogo/getAllFromBasket
+POST http://localhost:6666/jpa/addProduct/raz/once/9999
 
-<> 2022-06-07T192809.200.json
-
-###
-
-POST http://localhost:6666/alledrogo/addProductToBasket/dupa
+<> 2022-06-10T111620.200.txt
 
 ###
 
-GET http://localhost:6666/alledrogo/getAll
+POST http://localhost:6666/jpa/addBasket/first
 
-<> 2022-06-07T192655.200.json
+<> 2022-06-10T111615.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T111053.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/first/raz
+
+<> 2022-06-10T111045.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T111036.200.json
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T111019.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/first/raz
+
+<> 2022-06-10T111007.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/raz/once/9999
+
+<> 2022-06-10T111002.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/first
+
+<> 2022-06-10T110957.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T110559.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/first/raz
+
+<> 2022-06-10T110544.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/raz/once/9999
+
+<> 2022-06-10T110533.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/first
+
+<> 2022-06-10T110525.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T110354.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/first/raz
+
+<> 2022-06-10T110220.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/raz/once/9999
+
+<> 2022-06-10T110159.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/first
+
+<> 2022-06-10T110134.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/raz/once/666666
+
+<> 2022-06-10T110000.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/first
+
+<> 2022-06-10T105925.200.json
+
+###
+
+POST http://localhost:6666/jpa/addBasket/first
+
+<> 2022-06-10T105905.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/1
+
+<> 2022-06-10T104801.500.json
 
 ###
 
