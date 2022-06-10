@@ -29,7 +29,8 @@ public class AlledrogoJPAController {
 
     @PostMapping("/addBasket/{name}")
     public String addBasket(@PathVariable String name) {
-        Basket basket = new Basket(name);
+        Basket basket= new Basket();
+        basket.setBasketName(name);
         jpaService.addBasket(basket);
         return "SAVED";
     }

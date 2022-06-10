@@ -45,7 +45,7 @@ public class AlledrogoService {
     }
 
     public void addProductToBasket(String basketName, String productName) {
-     basketRepository.findByBasketName(basketName).orElse(new Basket("default"))
+     basketRepository.findByBasketName(basketName).orElse(new Basket())
              .addProductToBasket(productRepository.findByProductName(productName));
 
     }

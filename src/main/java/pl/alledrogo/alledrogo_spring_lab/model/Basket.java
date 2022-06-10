@@ -7,10 +7,10 @@ import java.util.List;
 
 @Entity
 public class Basket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
 
     @OneToMany
     private List<Product> products;
@@ -18,10 +18,6 @@ public class Basket {
     private String basketName;
 
     public Basket() {
-    }
-
-    public Basket(String basketName) {
-        this.basketName = basketName;
     }
 
     public Long getId() {
