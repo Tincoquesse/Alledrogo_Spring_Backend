@@ -1,3 +1,193 @@
+GET http://localhost:6666/jpa/getAllBaskets
+
+<> 2022-06-12T131235.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/koszyk/produkt1
+
+<> 2022-06-12T131224.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-12T131128.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/produkt1/produkt/6667
+
+<> 2022-06-12T131101.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllBaskets
+
+<> 2022-06-12T130935.200.json
+
+###
+
+POST http://localhost:6666/jpa/addBasket/koszyk
+
+<> 2022-06-12T130925.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllBaskets
+
+<> 2022-06-12T123417.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/koszyk/produkt1
+
+<> 2022-06-12T123410.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProduct/produkt1/prod/6523
+
+<> 2022-06-12T123405.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllBaskets
+
+<> 2022-06-12T123307.200.json
+
+###
+
+POST http://localhost:6666/jpa/addBasket/koszyk
+
+<> 2022-06-12T123256.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-12T122706.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/koszyk/produkt1
+
+<> 2022-06-12T122657.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/koszyk
+
+<> 2022-06-12T122638.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/koszyk/produkt1
+
+<> 2022-06-12T122622.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-12T122555.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/produkt1/prod/6523
+
+<> 2022-06-12T122544.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/koszyk
+
+<> 2022-06-12T122419.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/koszyk
+
+<> 2022-06-12T122242.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/produkt
+
+<> 2022-06-12T083340.200.json
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/{{basketName}}
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/produkt/jeden
+
+<> 2022-06-12T083317.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/produkt
+
+<> 2022-06-12T083244.200.json
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-12T083202.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/jeden/dsa/1234
+
+<> 2022-06-12T083151.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/produkt
+
+<> 2022-06-12T083040.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAllFromBasket/basket
+
+<> 2022-06-11T082018.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-11T081948.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addProductToBasket/basket/product
+
+<> 2022-06-11T081803.200.txt
+
+###
+
+GET http://localhost:6666/jpa/getAll
+
+<> 2022-06-11T081728.200.json
+
+###
+
+POST http://localhost:6666/jpa/addProduct/product/prod/6665
+
+<> 2022-06-11T081715.200.txt
+
+###
+
+POST http://localhost:6666/jpa/addBasket/basket
+
+<> 2022-06-11T081641.200.txt
+
+###
+
 GET http://localhost:6666/jpa/getAllFromBasket/basket
 
 <> 2022-06-10T122526.200.json
@@ -99,198 +289,6 @@ POST http://localhost:6666/jpa/addProductToBasket/basket/product
 POST http://localhost:6666/jpa/addProduct/product/test/666
 
 <> 2022-06-10T115943.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/basket
-
-<> 2022-06-10T115936.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/basket
-
-<> 2022-06-10T115628.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/basket/product
-
-<> 2022-06-10T115612.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/product/test/666
-
-<> 2022-06-10T115609.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/basket
-
-<> 2022-06-10T115605.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/basket/product
-
-<> 2022-06-10T115501.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAll
-
-<> 2022-06-10T115434.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProduct/product/test/666
-
-<> 2022-06-10T115421.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/basket
-
-<> 2022-06-10T115359.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/first
-
-<> 2022-06-10T114627.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T114253.500.json
-
-###
-
-POST http://localhost:6666/jpa/addProduct/raz/once/9999
-
-<> 2022-06-10T114246.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/raz/once/9999
-
-<> 2022-06-10T114239.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/first/raz
-
-<> 2022-06-10T111720.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T111631.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/first/raz
-
-<> 2022-06-10T111626.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/raz/once/9999
-
-<> 2022-06-10T111620.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/first
-
-<> 2022-06-10T111615.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T111053.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/first/raz
-
-<> 2022-06-10T111045.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T111036.200.json
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T111019.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/first/raz
-
-<> 2022-06-10T111007.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/raz/once/9999
-
-<> 2022-06-10T111002.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/first
-
-<> 2022-06-10T110957.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T110559.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/first/raz
-
-<> 2022-06-10T110544.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/raz/once/9999
-
-<> 2022-06-10T110533.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addBasket/first
-
-<> 2022-06-10T110525.200.txt
-
-###
-
-GET http://localhost:6666/jpa/getAllFromBasket/first
-
-<> 2022-06-10T110354.200.json
-
-###
-
-POST http://localhost:6666/jpa/addProductToBasket/first/raz
-
-<> 2022-06-10T110220.200.txt
-
-###
-
-POST http://localhost:6666/jpa/addProduct/raz/once/9999
-
-<> 2022-06-10T110159.200.txt
 
 ###
 

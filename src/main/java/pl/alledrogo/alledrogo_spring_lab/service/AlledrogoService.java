@@ -7,6 +7,7 @@ import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AlledrogoService {
@@ -24,8 +25,12 @@ public class AlledrogoService {
         productRepository.save(productAlt);
     }
 
-    public List<Product> getAll() {
+    public List<Product> getAllProducts() {
         return (List<Product>) productRepository.findAll();
+    }
+
+    public List<Basket> getAllBaskets() {
+        return basketRepository.findAll();
     }
 
     public Product findProductByName(String name) {
@@ -45,13 +50,12 @@ public class AlledrogoService {
     }
 
     public void addProductToBasket(String basketName, String productName) {
-     basketRepository.findByBasketName(basketName).orElse(new Basket())
+     basketRepository.findByBasketName(basketName).orElseThrow()
              .addProductToBasket(productRepository.findByProductName(productName));
-
     }
 
-    public List<Product> getALlProductsFromBasket(String basketName) {
+    public Set<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
-                .orElseThrow(() -> new RuntimeException("No basket: " + basketName)).getProducts();
+                .orElseThrow(() -> new RuntimeException("No basket: " + basketName)).getBasketProducts();
     }
 }

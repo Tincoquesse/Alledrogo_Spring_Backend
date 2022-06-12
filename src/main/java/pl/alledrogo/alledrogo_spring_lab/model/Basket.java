@@ -2,7 +2,10 @@ package pl.alledrogo.alledrogo_spring_lab.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -10,10 +13,10 @@ public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
-    @OneToMany
-    private List<Product> products;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Product> basketProducts = new HashSet<>();
 
     private String basketName;
 
@@ -28,16 +31,16 @@ public class Basket {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Set<Product> getBasketProducts() {
+        return basketProducts;
     }
 
     public void addProductToBasket(Product product) {
-        products.add(product);
+        basketProducts.add(product);
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setBasketProducts(Set<Product> products) {
+        this.basketProducts = products;
     }
 
     public void setBasketName(String basketName) {

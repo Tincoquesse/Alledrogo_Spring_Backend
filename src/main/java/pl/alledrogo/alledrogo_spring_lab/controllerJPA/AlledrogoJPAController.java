@@ -8,6 +8,7 @@ import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("jpa")
@@ -38,9 +39,14 @@ public class AlledrogoJPAController {
     @GetMapping("/getAll")
     @ResponseBody
     public List<Product> getAllProducts() {
-        return jpaService.getAll();
+        return jpaService.getAllProducts();
     }
 
+    @GetMapping("/getAllBaskets")
+    @ResponseBody
+    public List<Basket> getAllBaskets() {
+        return jpaService.getAllBaskets();
+    }
 
     @PostMapping("/removeProduct/{name}")
     void removeProduct(@PathVariable String name) {
@@ -48,14 +54,14 @@ public class AlledrogoJPAController {
     }
 
     @PostMapping("/addProductToBasket/{basketName}/{product}")
-    String addProductToBasket(@PathVariable String basketName, @PathVariable String product) {
+    public String addProductToBasket(@PathVariable String basketName, @PathVariable String product) {
         jpaService.addProductToBasket(basketName, product);
         return "Product: " + basketName + ", added to basket!";
     }
 
     @GetMapping("/getAllFromBasket/{basketName}")
     @ResponseBody
-    List<Product> getAllProductsFromBasket(@PathVariable String basketName) {
+    public Set<Product> getAllProductsFromBasket(@PathVariable String basketName) {
         return jpaService.getALlProductsFromBasket(basketName);
     }
 
