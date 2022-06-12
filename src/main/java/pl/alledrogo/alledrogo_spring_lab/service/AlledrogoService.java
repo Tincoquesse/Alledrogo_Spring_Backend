@@ -52,6 +52,8 @@ public class AlledrogoService {
     public void addProductToBasket(String basketName, String productName) {
      basketRepository.findByBasketName(basketName).orElseThrow()
              .addProductToBasket(productRepository.findByProductName(productName));
+        System.out.println("Koszyk: " + basketName + ". Nazwa Produktu: " + productName
+                            + " Poziom serwis.");
     }
 
     public Set<Product> getALlProductsFromBasket(String basketName) {
