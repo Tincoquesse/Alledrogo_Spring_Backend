@@ -2,7 +2,9 @@ package pl.alledrogo.alledrogo_spring_lab.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -14,7 +16,7 @@ public class Basket {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Product> basketProducts = new HashSet<>();
+    private List<Product> basketProducts = new ArrayList<>(1);
 
     private String basketName;
 
@@ -29,7 +31,7 @@ public class Basket {
         this.id = id;
     }
 
-    public Set<Product> getBasketProducts() {
+    public List<Product> getBasketProducts() {
         return basketProducts;
     }
 
@@ -38,7 +40,7 @@ public class Basket {
         System.out.println(product.toString() + ". Poziom encji Basket");
     }
 
-    public void setBasketProducts(Set<Product> products) {
+    public void setBasketProducts(List<Product> products) {
         this.basketProducts = products;
     }
 

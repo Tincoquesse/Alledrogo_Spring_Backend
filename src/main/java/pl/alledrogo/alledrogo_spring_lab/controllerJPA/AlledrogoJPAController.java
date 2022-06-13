@@ -8,7 +8,6 @@ import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("jpa")
@@ -61,7 +60,7 @@ public class AlledrogoJPAController {
 
     @GetMapping("/getAllFromBasket/{basketName}")
     @ResponseBody
-    public Set<Product> getAllProductsFromBasket(@PathVariable String basketName) {
+    public List<Product> getAllProductsFromBasket(@PathVariable String basketName) {
         return jpaService.getALlProductsFromBasket(basketName);
     }
 

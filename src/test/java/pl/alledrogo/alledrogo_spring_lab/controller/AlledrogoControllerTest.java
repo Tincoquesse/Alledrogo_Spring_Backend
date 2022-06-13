@@ -1,11 +1,9 @@
 package pl.alledrogo.alledrogo_spring_lab.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.alledrogo.alledrogo_spring_lab.controllerJPA.AlledrogoJPAController;
-import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import javax.transaction.Transactional;
 

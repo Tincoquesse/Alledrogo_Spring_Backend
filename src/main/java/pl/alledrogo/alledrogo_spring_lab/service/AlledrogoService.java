@@ -6,10 +6,13 @@ import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @Service
+@Transactional
 public class AlledrogoService {
 
     private final ProductRepository productRepository;
@@ -56,8 +59,9 @@ public class AlledrogoService {
                             + " Poziom serwis.");
     }
 
-    public Set<Product> getALlProductsFromBasket(String basketName) {
+    public List<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
-                .orElseThrow(() -> new RuntimeException("No basket: " + basketName)).getBasketProducts();
+                .get().getBasketProducts();
+
     }
 }
