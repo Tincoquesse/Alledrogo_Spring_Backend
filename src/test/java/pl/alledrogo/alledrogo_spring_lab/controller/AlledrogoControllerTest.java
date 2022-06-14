@@ -3,7 +3,6 @@ package pl.alledrogo.alledrogo_spring_lab.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.alledrogo.alledrogo_spring_lab.controllerJPA.AlledrogoJPAController;
 
 import javax.transaction.Transactional;
 
@@ -14,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AlledrogoControllerTest {
 
     @Autowired
-    AlledrogoJPAController alledrogoJPAController;
+    AlledrogoController alledrogoJPAController;
 
 
     @Test

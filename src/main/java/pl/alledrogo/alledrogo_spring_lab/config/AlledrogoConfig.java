@@ -1,19 +1,18 @@
 package pl.alledrogo.alledrogo_spring_lab.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-import pl.alledrogo.alledrogo_spring_lab.controllerJPA.AlledrogoJPAController;
+import pl.alledrogo.alledrogo_spring_lab.controller.AlledrogoController;
 
 @Configuration
 public class AlledrogoConfig {
 
 final
-AlledrogoJPAController controller;
+AlledrogoController controller;
 
-    public AlledrogoConfig(AlledrogoJPAController controller) {
+    public AlledrogoConfig(AlledrogoController controller) {
         this.controller = controller;
     }
 

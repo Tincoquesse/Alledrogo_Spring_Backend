@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.controllerJPA;
+package pl.alledrogo.alledrogo_spring_lab.controller;
 
 
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("jpa")
-public class AlledrogoJPAController {
+public class AlledrogoController {
 
     AlledrogoService jpaService;
 
 
-    public AlledrogoJPAController(AlledrogoService jpaService) {
+    public AlledrogoController(AlledrogoService jpaService) {
         this.jpaService = jpaService;
     }
 
