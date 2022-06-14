@@ -41,8 +41,14 @@ public class AlledrogoService {
     public void deleteProduct(String name) {
         productRepository.deleteByProductName(name);
     }
+
     public void deleteBasket(String name) {
         basketRepository.deleteByBasketName(name);
+    }
+
+    public void deleteProductFromBasket(String basket, String productName) {
+        basketRepository.findByBasketName(basket).orElseThrow(NullPointerException::new)
+                .removeProductFromBasket(productRepository.findByProductName(productName).get());
     }
 
     public void clearProductsList() {
