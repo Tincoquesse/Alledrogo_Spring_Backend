@@ -1,12 +1,7 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 
 @Entity
 public class Basket {
@@ -15,8 +10,8 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Product> basketProducts = new ArrayList<>(1);
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Product> productsList;
 
     private String basketName;
 
@@ -31,17 +26,16 @@ public class Basket {
         this.id = id;
     }
 
-    public List<Product> getBasketProducts() {
-        return basketProducts;
+    public List<Product> getProductsList() {
+        return productsList;
     }
 
     public void addProductToBasket(Product product) {
-        basketProducts.add(product);
-        System.out.println(product.toString() + ". Poziom encji Basket");
+        productsList.add(product);
     }
 
-    public void setBasketProducts(List<Product> products) {
-        this.basketProducts = products;
+    public void setProductsList(List<Product> products) {
+        this.productsList = products;
     }
 
     public void setBasketName(String basketName) {

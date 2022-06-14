@@ -49,7 +49,12 @@ public class AlledrogoJPAController {
 
     @PostMapping("/removeProduct/{name}")
     void removeProduct(@PathVariable String name) {
-        jpaService.deleteProduct(jpaService.findProductByName(name));
+        jpaService.deleteProduct(name);
+    }
+
+    @PostMapping("/removeBasket/{name}")
+    void removeBasket(@PathVariable String name) {
+        jpaService.deleteBasket(name);
     }
 
     @PostMapping("/addProductToBasket/{basketName}/{product}")

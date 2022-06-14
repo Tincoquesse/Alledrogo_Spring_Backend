@@ -7,8 +7,6 @@ import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -37,11 +35,14 @@ public class AlledrogoService {
     }
 
     public Product findProductByName(String name) {
-        return productRepository.findByProductName(name);
+        return productRepository.findByProductName(name).orElseThrow(NullPointerException::new);
     }
 
-    public void deleteProduct(Product productAlt) {
-        productRepository.delete(productAlt);
+    public void deleteProduct(String name) {
+        productRepository.deleteByProductName(name);
+    }
+    public void deleteBasket(String name) {
+        basketRepository.deleteByBasketName(name);
     }
 
     public void clearProductsList() {
@@ -54,14 +55,13 @@ public class AlledrogoService {
 
     public void addProductToBasket(String basketName, String productName) {
      basketRepository.findByBasketName(basketName).orElseThrow()
-             .addProductToBasket(productRepository.findByProductName(productName));
-        System.out.println("Koszyk: " + basketName + ". Nazwa Produktu: " + productName
-                            + " Poziom serwis.");
+             .addProductToBasket(productRepository.findByProductName(productName).get());
+
     }
 
     public List<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
-                .get().getBasketProducts();
+                .get().getProductsList();
 
     }
 }

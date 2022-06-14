@@ -13,8 +13,8 @@ public class Product {
     private String productDescription;
     private Double productPrice;
 
-//    @ManyToOne
-//    private Basket basket;
+    @ManyToOne
+    private Basket basket;
 
     public Product() {
     }
@@ -24,14 +24,14 @@ public class Product {
         this.productDescription = description;
         this.productPrice = price;
     }
-//
-//    public Basket getBasket() {
-//        return basket;
-//    }
-//
-//    public void setBasket(Basket basket) {
-//        this.basket = basket;
-//    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
 
     public void setProductName(String productName) {
         this.productName = productName;
