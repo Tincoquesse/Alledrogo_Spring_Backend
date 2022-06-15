@@ -36,10 +36,6 @@ public class AlledrogoService {
         return basketRepository.findAll();
     }
 
-    public Product findProductByName(String name) {
-        return productRepository.findByProductName(name).orElseThrow(NullPointerException::new);
-    }
-
     public void deleteProduct(String name) {
         productRepository.deleteByProductName(name);
     }
