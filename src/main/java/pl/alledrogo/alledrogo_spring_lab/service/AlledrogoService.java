@@ -29,7 +29,7 @@ public class AlledrogoService {
     }
 
     public List<Product> getAllProducts() {
-        return (List<Product>) productRepository.findAll();
+        return productRepository.findAll();
     }
 
     public List<Basket> getAllBaskets() {
@@ -64,14 +64,16 @@ public class AlledrogoService {
     }
 
     public void addProductToBasket(String basketName, String productName) {
-     basketRepository.findByBasketName(basketName).orElseThrow()
-             .addProductToBasket(productRepository.findByProductName(productName).get());
+        basketRepository.findByBasketName(basketName).orElseThrow()
+                .addProductToBasket(productRepository.findByProductName(productName).orElseThrow(
+                        () -> new ProductNotFoundException("Product: " + productName + ", was not found")));
 
     }
 
     public List<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
-                .get().getProductsList();
+                .orElseThrow(() -> new BasketNotFoundException("Basket: " + basketName + ", was not found."))
+                .getProductsList();
 
     }
 }
