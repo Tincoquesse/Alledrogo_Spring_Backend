@@ -1,3 +1,127 @@
+POST http://localhost:8080/jpa/addProduct/produkt5/piąty/555.55
+
+<> f-1.txt
+
+###
+
+POST http://localhost:8080/jpa/addProduct/produkt5/piąty/555.55
+
+<> f.txt
+
+###
+
+POST http://localhost:8080/jpa/removeProduct/produkt1
+
+###
+
+GET http://localhost:8080/jpa/getAllBaskets
+
+<> 2022-06-16T180124.200.json
+
+###
+
+POST http://localhost:8080/jpa/removeBasket/koszyk1
+
+###
+
+POST http://localhost:8080/jpa/removeProduct/produkt4
+
+###
+
+POST http://localhost:8080/jpa/removeProduct/produkt3
+
+<> 2022-06-16T175955.500.json
+
+###
+
+POST http://localhost:8080/jpa/removeProduct/produkt1
+
+<> 2022-06-16T175947.500.json
+
+###
+
+POST http://localhost:8080/jpa/addProduct/produkt4/czwarty/4444
+
+<> 2022-06-16T174850.200.txt
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-16T172829.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-16T003259.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-16T002015.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-16T001934.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-16T001923.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-16T001700.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-15T205048.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-15T203648.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-15T194416.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-15T192442.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAllBaskets
+
+<> 2022-06-15T191330.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-15T191204.200.json
+
+###
+
 GET http://localhost:8080/jpa/getAll
 
 <> 2022-06-15T133906.200.json
@@ -149,108 +273,6 @@ GET http://localhost:8080/jpa/getAll
 POST http://localhost:8080/jpa/addProductToBasket/koszyk1/produkt1
 
 <> 2022-06-14T133414.200.txt
-
-###
-
-GET http://localhost:8080/jpa/getAllFromBasket/koszyk1
-
-<> 2022-06-14T133346.200.json
-
-###
-
-POST http://localhost:8080/jpa/removeProductFromBasket/koszyk1/produkt1
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt3
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-<> 2022-06-14T125148.500.json
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt2
-
-<> 2022-06-14T125140.500.json
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt2
-
-<> 2022-06-14T123953.500.json
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt3
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-<> 2022-06-14T121649.500.json
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-<> 2022-06-14T121412.500.json
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-<> 2022-06-14T120907.500.json
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
 
 ###
 
