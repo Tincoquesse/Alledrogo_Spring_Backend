@@ -1,3 +1,45 @@
+GET http://localhost:8080/jpa/getAllBaskets
+
+<> 2022-06-18T070555.200.html
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-18T070349.200.html
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-17T121639.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAllBaskets
+
+<> 2022-06-17T093451.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAllBaskets
+
+<> 2022-06-17T075101.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-17T075052.200.json
+
+###
+
+GET http://localhost:8080/jpa/getAll
+
+<> 2022-06-17T073223.200.json
+
+###
+
 POST http://localhost:8080/jpa/addProduct/produkt5/piąty/555.55
 
 <> f-1.txt
@@ -235,44 +277,6 @@ GET http://localhost:8080/jpa/getAllFromBasket/koszyk1
 POST http://localhost:8080/jpa/addProductToBasket/koszyk1/produkt1
 
 <> 2022-06-15T080012.500.json
-
-###
-
-GET http://localhost:8080/jpa/getAllBaskets
-
-<> 2022-06-15T080001.200.json
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-GET http://localhost:8080/jpa/getAllBaskets
-
-<> 2022-06-14T134203.200.json
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-14T134153.200.json
-
-###
-
-POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-14T134128.200.json
-
-###
-
-POST http://localhost:8080/jpa/addProductToBasket/koszyk1/produkt1
-
-<> 2022-06-14T133414.200.txt
 
 ###
 
