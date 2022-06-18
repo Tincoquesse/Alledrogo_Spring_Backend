@@ -39,14 +39,16 @@ public class RegistrationService {
                 )
         );
     }
-    @Transactional
-    public String confirmToken(String token) {
-        ConfirmationToken confirmationToken = confirmationTokenService.getToken(token)
-                .orElseThrow(() -> new IllegalStateException("token not found"));
 
-        if (confirmationToken.getConfirmedAt()!= null) {
-            throw new IllegalStateException("email already confirmed");
-        }
-    }
+    //TODO: add confirmation of token
+//    @Transactional
+//    public String confirmToken(String token) {
+//        ConfirmationToken confirmationToken = confirmationTokenService.getToken(token)
+//                .orElseThrow(() -> new IllegalStateException("token not found"));
+//
+//        if (confirmationToken.getConfirmedAt()!= null) {
+//            throw new IllegalStateException("email already confirmed");
+//        }
+//    }
 
 }
