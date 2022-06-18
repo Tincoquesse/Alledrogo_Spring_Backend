@@ -14,23 +14,21 @@ public class AppUser implements UserDetails {
 
     @Id
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                    generator = "student_sequence")
+            generator = "user_sequence")
     private Long id;
-    private String name;
-    private String userName;
+    private String firstName;
+    private String lastname;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    private Boolean locked;
-    private Boolean enabled;
-
-
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
 
     @Override
@@ -44,9 +42,16 @@ public class AppUser implements UserDetails {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return userName;
+    public AppUser(String name,
+                   String userName,
+                   String email,
+                   String password,
+                   AppUserRole appUserRole) {
+        this.firstName = name;
+        this.lastname = userName;
+        this.email = email;
+        this.password = password;
+        this.appUserRole = appUserRole;
     }
 
     @Override
@@ -72,28 +77,17 @@ public class AppUser implements UserDetails {
     public AppUser() {
     }
 
-    public AppUser(String name,
-                   String userName,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole,
-                   Boolean locked,
-                   Boolean enabled) {
-        this.name = name;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.appUserRole = appUserRole;
-        this.locked = locked;
-        this.enabled = enabled;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
     public String getEmail() {
@@ -112,12 +106,12 @@ public class AppUser implements UserDetails {
         return enabled;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLastname(String userName) {
+        this.lastname = userName;
     }
 
     public void setEmail(String email) {
@@ -145,11 +139,11 @@ public class AppUser implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return Objects.equals(id, appUser.id) && Objects.equals(name, appUser.name) && Objects.equals(userName, appUser.userName) && Objects.equals(email, appUser.email) && Objects.equals(password, appUser.password) && appUserRole == appUser.appUserRole && Objects.equals(locked, appUser.locked) && Objects.equals(enabled, appUser.enabled);
+        return Objects.equals(id, appUser.id) && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastname, appUser.lastname) && Objects.equals(email, appUser.email) && Objects.equals(password, appUser.password) && appUserRole == appUser.appUserRole && Objects.equals(locked, appUser.locked) && Objects.equals(enabled, appUser.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, userName, email, password, appUserRole, locked, enabled);
+        return Objects.hash(id, firstName, lastname, email, password, appUserRole, locked, enabled);
     }
 }

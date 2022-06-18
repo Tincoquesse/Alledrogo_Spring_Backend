@@ -14,6 +14,8 @@ public class Product {
     private Double productPrice;
 
     @ManyToOne
+//    @JoinColumn(nullable = false,
+//                name = "basket_id")
     private Basket basket;
 
     public Product() {

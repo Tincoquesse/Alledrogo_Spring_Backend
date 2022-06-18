@@ -12,7 +12,7 @@ public class Basket {
     private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Product> productsList = new ArrayList<>();
+    private List<Product> productsList;
 
     private String basketName;
 
