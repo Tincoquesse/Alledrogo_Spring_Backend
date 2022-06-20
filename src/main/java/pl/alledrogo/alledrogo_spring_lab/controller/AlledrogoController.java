@@ -10,7 +10,7 @@ import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("jpa")
+@RequestMapping("shop")
 public class AlledrogoController {
 
     private final AlledrogoService jpaService;
@@ -20,14 +20,14 @@ public class AlledrogoController {
         this.jpaService = jpaService;
     }
 
-    @PostMapping("/addProduct/{name}/{description}/{price}")
+    @PostMapping("/product/add/{name}/{description}/{price}")
     public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price) {
         Product product1 = new Product(name, description, price);
         jpaService.addProduct(product1);
         return "SAVED";
     }
 
-    @PostMapping("/addBasket/{name}")
+    @PostMapping("basket/add/{name}")
     public String addBasket(@PathVariable String name) {
         Basket basket= new Basket();
         basket.setBasketName(name);
@@ -35,40 +35,40 @@ public class AlledrogoController {
         return "SAVED";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("product/getAll")
     @ResponseBody
     public List<Product> getAllProducts() {
         return jpaService.getAllProducts();
     }
 
-    @GetMapping("/getAllBaskets")
+    @GetMapping("basket/getAll")
     @ResponseBody
     public List<Basket> getAllBaskets() {
         return jpaService.getAllBaskets();
     }
 
-    @PostMapping("/removeProduct/{name}")
+    @PostMapping("product/remove/{name}")
     void removeProduct(@PathVariable String name) {
         jpaService.deleteProduct(name);
     }
 
-    @PostMapping("/removeProductFromBasket/{basket}/{product}")
+    @PostMapping("product/removeFromBasket/{basket}/{product}")
     void removeProduct(@PathVariable String basket, @PathVariable String product) {
         jpaService.deleteProductFromBasket(basket, product);
     }
 
-    @PostMapping("/removeBasket/{name}")
+    @PostMapping("basket/remove/{name}")
     void removeBasket(@PathVariable String name) {
         jpaService.deleteBasket(name);
     }
 
-    @PostMapping("/addProductToBasket/{basketName}/{product}")
+    @PostMapping("product/addToBasket/{basketName}/{product}")
     public String addProductToBasket(@PathVariable String basketName, @PathVariable String product) {
         jpaService.addProductToBasket(basketName, product);
         return "Product: " + basketName + ", added to basket!";
     }
 
-    @GetMapping("/getAllFromBasket/{basketName}")
+    @GetMapping("product/getAllFromBasket/{basketName}")
     @ResponseBody
     public List<Product> getAllProductsFromBasket(@PathVariable String basketName) {
         return jpaService.getALlProductsFromBasket(basketName);
