@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("jpa")
 public class AlledrogoController {
 
-    AlledrogoService jpaService;
+    private final AlledrogoService jpaService;
 
 
     public AlledrogoController(AlledrogoService jpaService) {
