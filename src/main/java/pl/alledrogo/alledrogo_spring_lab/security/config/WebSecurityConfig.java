@@ -29,11 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**", "/jpa/getAll")
+                .antMatchers("/api/v*/registration/**", "/jpa/getAll", "/console")
                 .permitAll()
                 .anyRequest()
-                .authenticated().and()
-                .formLogin();
+                .permitAll();
+//                .authenticated().and()
+//                .formLogin();
     }
 
     @Override
