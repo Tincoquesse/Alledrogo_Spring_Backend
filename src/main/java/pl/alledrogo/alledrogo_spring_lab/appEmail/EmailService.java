@@ -16,10 +16,10 @@ public class EmailService implements EmailSender{
 
     private final Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
 
-    private JavaMailSender mailSender;
+    private JavaMailSender emailSender;
 
     public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+        this.emailSender = mailSender;
     }
 
 
@@ -27,13 +27,13 @@ public class EmailService implements EmailSender{
     @Async
     public void send(String to, String email) {
     try {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
         helper.setText(email, true);
         helper.setTo(to);
         helper.setSubject("Confirm your Email");
         helper.setFrom("kamilforex87@gmail.com");
-        mailSender.send(mimeMessage);
+        emailSender.send(mimeMessage);
 
     } catch (MessagingException e) {
         LOGGER.error("failed to send email", e);
