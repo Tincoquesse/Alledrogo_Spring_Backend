@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.security.config;
+package pl.alledrogo.alledrogo_spring_lab.appSecurity.config;
 
 
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import pl.alledrogo.alledrogo_spring_lab.appUser.AppUserRole;
 import pl.alledrogo.alledrogo_spring_lab.appUser.AppUserService;
 
 @Configuration

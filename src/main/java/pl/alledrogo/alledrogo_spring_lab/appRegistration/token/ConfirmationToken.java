@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.registration.token;
+package pl.alledrogo.alledrogo_spring_lab.appRegistration.token;
 
 import pl.alledrogo.alledrogo_spring_lab.appUser.AppUser;
 

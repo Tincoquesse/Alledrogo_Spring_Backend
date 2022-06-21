@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.security;
+package pl.alledrogo.alledrogo_spring_lab.appSecurity;
 
 
 import org.springframework.context.annotation.Bean;

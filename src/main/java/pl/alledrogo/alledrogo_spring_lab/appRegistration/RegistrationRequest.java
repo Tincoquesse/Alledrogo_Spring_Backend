@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.registration;
+package pl.alledrogo.alledrogo_spring_lab.appRegistration;
 
 
 public class RegistrationRequest {

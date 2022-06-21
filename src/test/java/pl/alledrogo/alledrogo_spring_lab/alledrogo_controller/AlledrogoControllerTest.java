@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.controller;
+package pl.alledrogo.alledrogo_spring_lab.alledrogo_controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

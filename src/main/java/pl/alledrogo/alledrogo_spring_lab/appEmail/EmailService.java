@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.email;
+package pl.alledrogo.alledrogo_spring_lab.appEmail;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

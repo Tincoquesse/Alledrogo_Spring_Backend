@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.registration.token;
+package pl.alledrogo.alledrogo_spring_lab.appRegistration.token;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

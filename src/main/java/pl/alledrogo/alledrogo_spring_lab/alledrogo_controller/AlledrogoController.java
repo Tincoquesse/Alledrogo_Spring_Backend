@@ -1,11 +1,11 @@
-package pl.alledrogo.alledrogo_spring_lab.controller;
+package pl.alledrogo.alledrogo_spring_lab.alledrogo_controller;
 
 
 import org.springframework.web.bind.annotation.*;
 
-import pl.alledrogo.alledrogo_spring_lab.model.Basket;
-import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
+import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Basket;
+import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Product;
+import pl.alledrogo.alledrogo_spring_lab.alledrogo_service.AlledrogoService;
 
 import java.util.List;
 

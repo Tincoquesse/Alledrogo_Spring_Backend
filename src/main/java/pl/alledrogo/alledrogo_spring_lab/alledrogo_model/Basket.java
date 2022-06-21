@@ -1,7 +1,6 @@
-package pl.alledrogo.alledrogo_spring_lab.model;
+package pl.alledrogo.alledrogo_spring_lab.alledrogo_model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

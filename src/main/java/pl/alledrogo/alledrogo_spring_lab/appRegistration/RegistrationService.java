@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.registration;
+package pl.alledrogo.alledrogo_spring_lab.appRegistration;
 
 
 import org.springframework.stereotype.Service;
@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.alledrogo.alledrogo_spring_lab.appUser.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.appUser.AppUserRole;
 import pl.alledrogo.alledrogo_spring_lab.appUser.AppUserService;
-import pl.alledrogo.alledrogo_spring_lab.email.EmailSender;
-import pl.alledrogo.alledrogo_spring_lab.registration.token.ConfirmationToken;
-import pl.alledrogo.alledrogo_spring_lab.registration.token.ConfirmationTokenService;
+import pl.alledrogo.alledrogo_spring_lab.appEmail.EmailSender;
+import pl.alledrogo.alledrogo_spring_lab.appRegistration.token.ConfirmationToken;
+import pl.alledrogo.alledrogo_spring_lab.appRegistration.token.ConfirmationTokenService;
 
 import java.time.LocalDateTime;
 
