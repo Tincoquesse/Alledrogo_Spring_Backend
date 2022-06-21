@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_controller;
+package pl.alledrogo.alledrogo_spring_lab.alledrogo_API;
 
 
 import org.springframework.web.bind.annotation.*;

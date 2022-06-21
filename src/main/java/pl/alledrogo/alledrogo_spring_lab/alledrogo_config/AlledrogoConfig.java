@@ -5,14 +5,16 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_controller.AlledrogoController;
+import pl.alledrogo.alledrogo_spring_lab.alledrogo_API.AlledrogoController;
 
 import java.util.Arrays;
 
 @Configuration
+@EnableTransactionManagement
 public class AlledrogoConfig {
 
 final

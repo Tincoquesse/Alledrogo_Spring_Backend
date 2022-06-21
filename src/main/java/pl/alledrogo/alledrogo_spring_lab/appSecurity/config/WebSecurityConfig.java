@@ -32,9 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v*/registration/**", "/shop/product/getAll")
                 .permitAll()
                 .anyRequest()
-                .permitAll();
-//                .authenticated().and()
-//                .formLogin();
+                .authenticated().and()
+                .formLogin();
     }
 
     @Override

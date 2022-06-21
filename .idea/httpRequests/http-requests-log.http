@@ -1,3 +1,39 @@
+GET http://localhost:8080/shop/product/getAll
+
+<> 2022-06-21T090832.200.json
+
+###
+
+GET http://localhost:8080/shop/product/getAll
+
+<> 2022-06-21T085210.200.json
+
+###
+
+GET http://localhost:8080/shop/basket/getAll
+
+<> 2022-06-21T085200.200.html
+
+###
+
+GET http://localhost:8080/shop/basket/getAll
+
+<> 2022-06-21T074513.200.html
+
+###
+
+GET http://localhost:8080/shop/product/getAll
+
+<> 2022-06-21T074501.200.json
+
+###
+
+GET http://localhost:8080/shop/product/getAll
+
+<> 2022-06-21T074415.200.json
+
+###
+
 GET http://localhost:8080/jpa/getAll
 
 <> 2022-06-18T101810.200.html
@@ -249,36 +285,6 @@ GET http://localhost:8080/jpa/getAllBaskets
 GET http://localhost:8080/jpa/getAll
 
 <> 2022-06-15T093741.200.json
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-15T092241.200.json
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-15T092116.200.json
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-15T091500.200.json
-
-###
-
-GET http://localhost:5432/jpa/getAll
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-###
-
-POST http://localhost:8080/jpa/removeProduct/produkt3
 
 ###
 
