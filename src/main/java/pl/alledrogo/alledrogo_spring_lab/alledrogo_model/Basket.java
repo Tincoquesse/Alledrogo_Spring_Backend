@@ -1,6 +1,7 @@
 package pl.alledrogo.alledrogo_spring_lab.alledrogo_model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class Basket {
     private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Product> productsList;
+    private List<Product> productsList = new ArrayList<>();
 
     private String basketName;
 

@@ -1,10 +1,13 @@
 package pl.alledrogo.alledrogo_spring_lab.alledrogo_API;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.alledrogo.alledrogo_spring_lab.alledrogo_service.AlledrogoService;
 
 import javax.transaction.Transactional;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +17,13 @@ class AlledrogoControllerTest {
 
     @Autowired
     AlledrogoController alledrogoJPAController;
+    @Autowired
+    AlledrogoService alledrogoService;
 
+    @BeforeEach
+    void clear() {
+        alledrogoService.clearProductsList();
+    }
 
     @Test
     void addProduct() {
@@ -23,7 +32,7 @@ class AlledrogoControllerTest {
     //when
         int result= 1;
     //then
-        assertThat(alledrogoJPAController.getAllProducts().size()).isEqualTo(result);
+        assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
     }
 
     @Test
@@ -34,7 +43,7 @@ class AlledrogoControllerTest {
         //when
         int result= 2;
         //then
-        assertThat(alledrogoJPAController.getAllProducts().size()).isEqualTo(result);
+        assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
     }
 
     @Test
@@ -47,7 +56,7 @@ class AlledrogoControllerTest {
         //when
         int result = 4;
         //then
-        assertThat(alledrogoJPAController.getAllProducts().size()).isEqualTo(result);
+        assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
     }
 
     @Test

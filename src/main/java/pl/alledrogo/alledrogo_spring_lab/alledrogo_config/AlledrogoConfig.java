@@ -37,15 +37,4 @@ AlledrogoController controller;
         return new CorsFilter(source);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void doSomethingAfterStartup() {
-        controller.addProduct("produkt1", "pierwszy", 111);
-        controller.addProduct("produkt2", "drugi", 222);
-        controller.addProduct("produkt3", "trzeci", 333);
-        controller.addBasket("koszyk1");
-        controller.addBasket("koszyk2");
-        controller.addProductToBasket("koszyk1", "produkt1");
-        controller.addProductToBasket("koszyk1", "produkt2");
-        controller.addProductToBasket("koszyk2", "produkt3");
-    }
 }

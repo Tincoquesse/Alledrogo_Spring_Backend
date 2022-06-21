@@ -1,3 +1,15 @@
+GET http://localhost:8080/shop/basket/getAll
+
+<> 2022-06-21T110557.200.html
+
+###
+
+GET http://localhost:8080/shop/product/getAll
+
+<> 2022-06-21T110418.200.json
+
+###
+
 GET http://localhost:8080/shop/product/getAll
 
 <> 2022-06-21T090832.200.json
@@ -273,18 +285,6 @@ POST http://localhost:8080/jpa/addProductToBasket/koszyk1/sdf
 ###
 
 POST http://localhost:8080/jpa/removeBasket/koszyk1
-
-###
-
-GET http://localhost:8080/jpa/getAllBaskets
-
-<> 2022-06-15T093752.200.json
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-15T093741.200.json
 
 ###
 
