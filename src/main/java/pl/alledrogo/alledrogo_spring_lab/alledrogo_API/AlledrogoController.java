@@ -54,7 +54,7 @@ public class AlledrogoController {
         alledrogoService.deleteProduct(name);
     }
 
-    @PostMapping("/product/removeFromBasket/{basket}/{product}")
+    @DeleteMapping ("/product/removeFromBasket/{basket}/{product}")
     void removeProduct(@PathVariable String basket, @PathVariable String product) {
         alledrogoService.deleteProductFromBasket(basket, product);
     }
