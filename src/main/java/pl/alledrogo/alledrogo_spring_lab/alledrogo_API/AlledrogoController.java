@@ -42,6 +42,7 @@ public class AlledrogoController {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
 
+
     @GetMapping("/basket/getAll")
     @ResponseBody
     public List<Basket> getAllBaskets() {
@@ -64,15 +65,14 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/addToBasket/{basketName}/{product}")
-    public String addProductToBasket(@PathVariable String basketName, @PathVariable String product) {
-        alledrogoService.addProductToBasket(basketName, product);
-        return "Product: " + product + ", added to basket: " + basketName;
+    public ResponseEntity<Product> addProductToBasket(@PathVariable String basketName, @PathVariable String product) {
+       return ResponseEntity.ok().body(alledrogoService.addProductToBasket(basketName, product));
     }
 
     @GetMapping("/product/getAllFromBasket/{basketName}")
     @ResponseBody
-    public List<Product> getAllProductsFromBasket(@PathVariable String basketName) {
-        return alledrogoService.getALlProductsFromBasket(basketName);
+    public ResponseEntity<List<Product>> getAllProductsFromBasket(@PathVariable String basketName) {
+        return ResponseEntity.ok().body(alledrogoService.getALlProductsFromBasket(basketName));
     }
 
 }

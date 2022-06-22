@@ -10,6 +10,7 @@ import pl.alledrogo.alledrogo_spring_lab.alledrogo_repository.ProductRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -59,11 +60,12 @@ public class AlledrogoService {
         basketRepository.save(basket);
     }
 
-    public void addProductToBasket(String basketName, String productName) {
+    public Product addProductToBasket(String basketName, String productName) {
         basketRepository.findByBasketName(basketName).orElseThrow()
                 .addProductToBasket(productRepository.findByProductName(productName).orElseThrow(
                         () -> new ProductNotFoundException("Product: " + productName + ", was not found")));
 
+        return productRepository.findByProductName(productName).orElseThrow();
     }
 
     public List<Product> getALlProductsFromBasket(String basketName) {
@@ -72,4 +74,5 @@ public class AlledrogoService {
                 .getProductsList();
 
     }
+
 }

@@ -17,12 +17,12 @@ import java.util.Arrays;
 @EnableTransactionManagement
 public class AlledrogoConfig {
 
-final
-AlledrogoController controller;
-
-    public AlledrogoConfig(AlledrogoController controller) {
-        this.controller = controller;
-    }
+//final
+//AlledrogoController controller;
+//
+//    public AlledrogoConfig(AlledrogoController controller) {
+//        this.controller = controller;
+//    }
 
     @Bean
     public CorsFilter corsFilter() {

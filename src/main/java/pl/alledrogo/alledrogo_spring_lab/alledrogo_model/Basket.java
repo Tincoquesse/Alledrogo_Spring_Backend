@@ -17,10 +17,11 @@ public class Basket {
             generator = "basket_sequence")
     private Long id;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private String basketName;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Product> productsList = new ArrayList<>();
 
-    private String basketName;
 
     public Basket() {
     }

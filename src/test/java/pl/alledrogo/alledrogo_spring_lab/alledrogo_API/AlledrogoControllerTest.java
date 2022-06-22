@@ -80,7 +80,7 @@ class AlledrogoControllerTest {
         alledrogoJPAController.addProductToBasket("koszyk", "test1");
         alledrogoJPAController.addProductToBasket("koszyk", "test2");
         //then
-        assertThat(alledrogoJPAController.getAllProductsFromBasket("koszyk").size()).isEqualTo(result);
+        assertThat(alledrogoJPAController.getAllProductsFromBasket("koszyk").getBody().size()).isEqualTo(result);
     }
 
     @Test
