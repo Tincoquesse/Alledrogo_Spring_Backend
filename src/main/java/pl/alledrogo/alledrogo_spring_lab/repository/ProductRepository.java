@@ -1,8 +1,8 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_repository;
+package pl.alledrogo.alledrogo_spring_lab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Product;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
 
 import java.util.Optional;
 

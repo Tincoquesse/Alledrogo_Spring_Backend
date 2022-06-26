@@ -1,12 +1,12 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_API;
+package pl.alledrogo.alledrogo_spring_lab.api;
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Basket;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Product;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_service.AlledrogoService;
+import pl.alledrogo.alledrogo_spring_lab.model.Basket;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class AlledrogoController {
         this.alledrogoService = alledrogoService;
     }
 
-    @PostMapping("/product/add/{name}/{description}/{price}")
-    public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price) {
-        Product product1 = new Product(name, description, price);
+    @PostMapping("/product/add/{name}/{description}/{price}/{pictureURL}")
+    public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price, @PathVariable String pictureURL) {
+        Product product1 = new Product(name, description, price, pictureURL);
         alledrogoService.addProduct(product1);
         return "SAVED";
     }

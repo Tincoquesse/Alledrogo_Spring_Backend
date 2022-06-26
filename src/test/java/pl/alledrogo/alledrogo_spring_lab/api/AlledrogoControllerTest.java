@@ -1,10 +1,10 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_API;
+package pl.alledrogo.alledrogo_spring_lab.api;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_service.AlledrogoService;
+import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import javax.transaction.Transactional;
 
@@ -28,7 +28,7 @@ class AlledrogoControllerTest {
     @Test
     void addProduct() {
     //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234);
+        alledrogoJPAController.addProduct("test1", "testowy", 1234, "ccc");
     //when
         int result= 1;
     //then
@@ -38,8 +38,8 @@ class AlledrogoControllerTest {
     @Test
     void addTwoSameNameProducts() {
         //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234.);
-        alledrogoJPAController.addProduct("test1", "testowy", 1234.);
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "aaa");
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "bbb");
         //when
         int result= 2;
         //then
@@ -49,10 +49,10 @@ class AlledrogoControllerTest {
     @Test
     void getAllProducts() {
         //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234.);
-        alledrogoJPAController.addProduct("test2", "testowy", 1234.);
-        alledrogoJPAController.addProduct("test3", "testowy", 1234.);
-        alledrogoJPAController.addProduct("test4", "testowy", 1234.);
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "ddd");
+        alledrogoJPAController.addProduct("test2", "testowy", 1234., "eee");
+        alledrogoJPAController.addProduct("test3", "testowy", 1234., "fff");
+        alledrogoJPAController.addProduct("test4", "testowy", 1234., "ggg");
         //when
         int result = 4;
         //then
@@ -71,8 +71,8 @@ class AlledrogoControllerTest {
     @Test
     void addProductToBasket() {
         //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234.);
-        alledrogoJPAController.addProduct("test2", "testowy", 1234.);
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "hhh");
+        alledrogoJPAController.addProduct("test2", "testowy", 1234., "iii");
         alledrogoJPAController.addBasket("koszyk");
 
         //when

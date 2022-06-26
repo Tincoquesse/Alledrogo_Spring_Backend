@@ -1,16 +1,15 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_service;
+package pl.alledrogo.alledrogo_spring_lab.service;
 
 import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductNotFoundException;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Basket;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_model.Product;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_repository.BasketRepository;
-import pl.alledrogo.alledrogo_spring_lab.alledrogo_repository.ProductRepository;
+import pl.alledrogo.alledrogo_spring_lab.model.Basket;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
+import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional

@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_model;
+package pl.alledrogo.alledrogo_spring_lab.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +19,7 @@ public class Product {
     private String productName;
     private String productDescription;
     private Double productPrice;
+    private String imageURL;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Basket> baskets;
@@ -26,10 +27,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, Double price){
+    public Product(String name, String description, Double price, String pictureURL){
         this.productName = name;
         this.productDescription = description;
         this.productPrice = price;
+        this.imageURL = pictureURL;
     }
 
     public List<Basket> getBaskets() {
@@ -66,6 +68,14 @@ public class Product {
 
     public Long getId() {
         return id;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String pictureURL) {
+        this.imageURL = pictureURL;
     }
 
     @Override

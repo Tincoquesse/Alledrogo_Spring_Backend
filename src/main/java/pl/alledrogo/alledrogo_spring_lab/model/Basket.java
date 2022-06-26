@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.alledrogo_model;
+package pl.alledrogo.alledrogo_spring_lab.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
