@@ -21,9 +21,9 @@ public class AlledrogoController {
         this.alledrogoService = alledrogoService;
     }
 
-    @PostMapping("/product/add/{name}/{description}/{price}/{pictureURL}")
-    public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price, @PathVariable String pictureURL) {
-        Product product1 = new Product(name, description, price, pictureURL);
+    @PostMapping("/product/add/{name}/{description}/{price}/{imageURL}")
+    public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price, @PathVariable String imageURL) {
+        Product product1 = new Product(name, description, price, imageURL);
         alledrogoService.addProduct(product1);
         return "SAVED";
     }

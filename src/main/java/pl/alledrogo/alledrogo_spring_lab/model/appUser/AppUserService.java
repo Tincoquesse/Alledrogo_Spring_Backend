@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.appUser;
+package pl.alledrogo.alledrogo_spring_lab.model.appUser;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

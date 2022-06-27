@@ -1,6 +1,6 @@
 package pl.alledrogo.alledrogo_spring_lab.appRegistration.token;
 
-import pl.alledrogo.alledrogo_spring_lab.appUser.AppUser;
+import pl.alledrogo.alledrogo_spring_lab.model.appUser.AppUser;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
