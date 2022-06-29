@@ -1,4 +1,8 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
@@ -6,13 +10,14 @@ import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 @Transactional
 
-
-public class AppUserServiceImpl implements AppUserService{
+public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     private final AppUserRepository appUserRepository;
     private final RoleRepository roleRepository;
@@ -20,6 +25,22 @@ public class AppUserServiceImpl implements AppUserService{
     public AppUserServiceImpl(AppUserRepository appUserRepository, RoleRepository roleRepository) {
         this.appUserRepository = appUserRepository;
         this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        if (appUser == null) {
+            throw new UsernameNotFoundException("User not found in the database");
+        }else {
+            System.out.println("User found");
+        }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        appUser.getRoles().forEach(role ->
+        {authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+
+        return org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), authorities);
     }
 
     @Override
@@ -48,4 +69,6 @@ public class AppUserServiceImpl implements AppUserService{
     public List<AppUser> getAppUsers() {
         return appUserRepository.findAll();
     }
+
+
 }
