@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
+import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("/shop")
 public class AlledrogoController {
 
-    private final AlledrogoService alledrogoService;
+    private final AlledrogoServiceImpl alledrogoService;
 
 
-    public AlledrogoController(AlledrogoService alledrogoService) {
+    public AlledrogoController(AlledrogoServiceImpl alledrogoService) {
         this.alledrogoService = alledrogoService;
     }
 

@@ -5,17 +5,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import pl.alledrogo.alledrogo_spring_lab.api.AlledrogoController;
+import pl.alledrogo.alledrogo_spring_lab.api.AppUserController;
+import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
+import pl.alledrogo.alledrogo_spring_lab.model.Role;
+import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
+
+import java.util.ArrayList;
 
 
 @SpringBootApplication
 
 public class AlledrogoSpringLabApplication{
 
-    final
-    AlledrogoController controller;
 
-    public AlledrogoSpringLabApplication(AlledrogoController controller) {
+    private final AlledrogoController controller;
+    private final AppUserServiceImpl appUserService;
+
+    public AlledrogoSpringLabApplication(AlledrogoController controller, AppUserServiceImpl appUserService) {
         this.controller = controller;
+        this.appUserService = appUserService;
+
     }
 
     public static void main(String[] args) {
@@ -34,6 +43,10 @@ public class AlledrogoSpringLabApplication{
         controller.addProductToBasket("koszyk1", "Lenowo 45D");
         controller.addProductToBasket("koszyk1", "Asus TT");
         controller.addProductToBasket("koszyk2", "Hammer XS");
+
+        appUserService.saveAppUser(new AppUser(null, "kamiul", "k", "pass", new ArrayList<>()));
+        appUserService.saveRole(new Role(null, "USER"));
+        appUserService.addRoleToUser("k", "USER");
     }
 
 }

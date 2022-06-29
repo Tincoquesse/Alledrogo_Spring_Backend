@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
+import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import javax.transaction.Transactional;
 
@@ -18,7 +18,7 @@ class AlledrogoControllerTest {
     @Autowired
     AlledrogoController alledrogoJPAController;
     @Autowired
-    AlledrogoService alledrogoService;
+    AlledrogoServiceImpl alledrogoService;
 
     @BeforeEach
     void clear() {

@@ -12,10 +12,12 @@ repositories {
     mavenCentral()
 }
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.24'
+
 //    runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'
-    implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.0'
+//    implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-security:2.7.0'
