@@ -44,9 +44,9 @@ public class AlledrogoSpringLabApplication{
         controller.addProductToBasket("koszyk1", "Asus TT");
         controller.addProductToBasket("koszyk2", "Hammer XS");
 
-        appUserService.saveAppUser(new AppUser(null, "kamiul", "k", "pass", new ArrayList<>()));
-        appUserService.saveRole(new Role(null, "USER"));
-        appUserService.addRoleToUser("k", "USER");
+        appUserService.saveAppUser(new AppUser(null, "Kamil", "kamil.sound@gmail.com", "password", new ArrayList<>()));
+        appUserService.saveRole(new Role(null, "ROLE_USER"));
+        appUserService.addRoleToUser("kamil.sound@gmail.com", "ROLE_USER");
     }
 
 }
