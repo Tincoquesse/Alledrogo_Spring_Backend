@@ -41,7 +41,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         {authorities.add(new SimpleGrantedAuthority(role.getName()));
         });
 
-        return new User(appUser.getUsername(), appUser.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), authorities);
     }
 
     @Override
