@@ -87,7 +87,6 @@ public class AppUserController {
 
                 response.setHeader("error", exception.getMessage());
                 response.setStatus(FORBIDDEN.value());
-//                response.sendError(FORBIDDEN.value());
 
                 Map<String, String> error = new HashMap<>();
                 error.put("access_token", exception.getMessage());

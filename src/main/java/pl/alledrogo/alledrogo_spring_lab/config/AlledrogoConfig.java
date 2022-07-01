@@ -27,7 +27,7 @@ public class AlledrogoConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
         corsConfiguration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
         source.registerCorsConfiguration("/**", corsConfiguration);
