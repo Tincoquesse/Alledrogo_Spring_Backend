@@ -47,6 +47,7 @@ public class AlledrogoSpringLabApplication{
         appUserService.saveAppUser(new AppUser(null, "Kamil", "user", "user", new ArrayList<>()));
         appUserService.saveAppUser(new AppUser(null, "Kamil", "u", "u", new ArrayList<>()));
         appUserService.saveRole(new Role(null, "ROLE_USER"));
+        appUserService.saveRole(new Role(null, "ROLE_ADMIN"));
         appUserService.addRoleToUser("user", "ROLE_USER");
         appUserService.addRoleToUser("u", "ROLE_USER");
     }
