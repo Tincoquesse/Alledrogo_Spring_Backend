@@ -15,7 +15,7 @@ public class AppUser {
     private String name;
     private String username;
     private String password;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Basket basket;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
