@@ -16,7 +16,6 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "basket_sequence")
     private Long id;
-
     private String basketName;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -24,6 +23,11 @@ public class Basket {
 
 
     public Basket() {
+    }
+
+    public Basket(String basketName, List<Product> productsList) {
+        this.basketName = basketName;
+        this.productsList = productsList;
     }
 
     public Long getId() {
@@ -57,7 +61,6 @@ public class Basket {
     public String getBasketName() {
         return basketName;
     }
-
 
 
 }

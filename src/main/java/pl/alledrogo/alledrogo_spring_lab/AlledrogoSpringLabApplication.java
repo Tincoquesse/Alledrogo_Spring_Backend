@@ -37,19 +37,19 @@ public class AlledrogoSpringLabApplication{
         controller.addProduct("Asus TT", "drugi", 222, "https://image.ceneostatic.pl/data/products/106929535/f-xiaomi-mi-smart-clock-bialy.jpg");
         controller.addProduct("Hammer XS", "trzeci", 333, "https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/21/2145685/Smartfon-MYPHONE-Hammer-Energy-2-Pomaranczowy-tyl-front.jpg");
         controller.addProduct("IBM 3330", "czwarty", 444, "https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/22/2240435/Tablet-LENOVO-Tab-M8-HD-LTE-Szary-fronttyl.jpg");
-        controller.addBasket("koszyk1");
-        controller.addBasket("koszyk2");
-        controller.addBasket("koszyk3");
-        controller.addProductToBasket("koszyk1", "Lenowo 45D");
-        controller.addProductToBasket("koszyk1", "Asus TT");
-        controller.addProductToBasket("koszyk2", "Hammer XS");
-
-        appUserService.saveAppUser(new AppUser(null, "Kamil", "user", "user", new ArrayList<>()));
-        appUserService.saveAppUser(new AppUser(null, "Kamil", "u", "u", new ArrayList<>()));
-        appUserService.saveRole(new Role(null, "ROLE_USER"));
-        appUserService.saveRole(new Role(null, "ROLE_ADMIN"));
-        appUserService.addRoleToUser("user", "ROLE_USER");
-        appUserService.addRoleToUser("u", "ROLE_USER");
+//        controller.addBasket("koszyk1");
+//        controller.addBasket("koszyk2");
+//        controller.addBasket("koszyk3");
+//        controller.addProductToBasket("koszyk1", "Lenowo 45D");
+//        controller.addProductToBasket("koszyk1", "Asus TT");
+//        controller.addProductToBasket("koszyk2", "Hammer XS");
+//
+//        appUserService.saveAppUser(new AppUser(null, "Kamil", "user", "user", new ArrayList<>()));
+//        appUserService.saveAppUser(new AppUser(null, "Kamil", "u", "u", new ArrayList<>()));
+//        appUserService.saveRole(new Role(null, "ROLE_USER"));
+//        appUserService.saveRole(new Role(null, "ROLE_ADMIN"));
+//        appUserService.addRoleToUser("user", "ROLE_USER");
+//        appUserService.addRoleToUser("u", "ROLE_USER");
     }
 
 }

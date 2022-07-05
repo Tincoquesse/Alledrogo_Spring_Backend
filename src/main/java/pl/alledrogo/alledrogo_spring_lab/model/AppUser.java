@@ -1,12 +1,9 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 @Entity
 
@@ -18,7 +15,8 @@ public class AppUser {
     private String name;
     private String username;
     private String password;
-
+    @OneToOne
+    private Basket basket;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
 
@@ -71,5 +69,13 @@ public class AppUser {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Optional<Basket> basket) {
+        this.basket = basket.orElseThrow();
     }
 }
