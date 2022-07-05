@@ -15,7 +15,6 @@ import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -47,15 +46,15 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         appUser.getRoles().forEach(role ->
         {authorities.add(new SimpleGrantedAuthority(role.getName()));
         });
-
-        return new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(), authorities);
+        return new org.springframework.security.core.
+                userdetails.User(appUser.getUsername(), appUser.getPassword(), authorities);
     }
 
     @Override
     public AppUser saveAppUser(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(roleRepository.findByName("ROLE_USER"));
-        String basketCustomName = user.getName() + "B";
+        String basketCustomName = user.getUsername() + "B";
         Basket basket = new Basket(basketCustomName, new ArrayList<>());
         basketRepository.save(basket);
         user.setBasket(basketRepository.findByBasketName(basketCustomName));

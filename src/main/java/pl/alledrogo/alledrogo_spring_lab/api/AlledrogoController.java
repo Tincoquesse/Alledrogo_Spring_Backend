@@ -28,20 +28,19 @@ public class AlledrogoController {
         return "SAVED";
     }
 
-    @PostMapping("/basket/add/{name}")
-    public String addBasket(@PathVariable String name) {
-        Basket basket= new Basket();
-        basket.setBasketName(name);
-        alledrogoService.addBasket(basket);
-        return "SAVED";
-    }
+//    @PostMapping("/basket/add/{name}")
+//    public String addBasket(@PathVariable String name) {
+//        Basket basket= new Basket();
+//        basket.setBasketName(name);
+//        alledrogoService.addBasket(basket);
+//        return "SAVED";
+//    }
 
     @GetMapping("/product/getAll")
     @ResponseBody
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
-
 
     @GetMapping("/basket/getAll")
     @ResponseBody
