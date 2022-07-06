@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import javax.transaction.Transactional;
@@ -28,7 +29,7 @@ class AlledrogoControllerTest {
     @Test
     void addProduct() {
     //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234, "ccc");
+        alledrogoJPAController.addProduct("test1", "testowy", 1234, "ccc", ProductCategory.PHONE);
     //when
         int result= 1;
     //then
@@ -38,8 +39,8 @@ class AlledrogoControllerTest {
     @Test
     void addTwoSameNameProducts() {
         //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234., "aaa");
-        alledrogoJPAController.addProduct("test1", "testowy", 1234., "bbb");
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "aaa", ProductCategory.PHONE);
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "bbb", ProductCategory.WATCH);
         //when
         int result= 2;
         //then
@@ -49,10 +50,14 @@ class AlledrogoControllerTest {
     @Test
     void getAllProducts() {
         //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234., "ddd");
-        alledrogoJPAController.addProduct("test2", "testowy", 1234., "eee");
-        alledrogoJPAController.addProduct("test3", "testowy", 1234., "fff");
-        alledrogoJPAController.addProduct("test4", "testowy", 1234., "ggg");
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "ddd",
+                ProductCategory.TABLET);
+        alledrogoJPAController.addProduct("test2", "testowy", 1234., "eee",
+                ProductCategory.LAPTOP);
+        alledrogoJPAController.addProduct("test3", "testowy", 1234., "fff",
+                ProductCategory.TABLET);
+        alledrogoJPAController.addProduct("test4", "testowy", 1234., "ggg",
+                ProductCategory.TABLET);
         //when
         int result = 4;
         //then
@@ -71,9 +76,8 @@ class AlledrogoControllerTest {
     @Test
     void addProductToBasket() {
         //given
-        alledrogoJPAController.addProduct("test1", "testowy", 1234., "hhh");
-        alledrogoJPAController.addProduct("test2", "testowy", 1234., "iii");
-        alledrogoJPAController.addBasket("koszyk");
+        alledrogoJPAController.addProduct("test1", "testowy", 1234., "hhh", ProductCategory.PHONE);
+        alledrogoJPAController.addProduct("test2", "testowy", 1234., "iii", ProductCategory.WATCH);
 
         //when
         int result = 2;

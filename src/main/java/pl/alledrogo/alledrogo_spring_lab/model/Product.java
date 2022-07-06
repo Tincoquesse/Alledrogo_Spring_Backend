@@ -21,17 +21,21 @@ public class Product {
     private Double productPrice;
     private String imageURL;
 
+    @Enumerated(EnumType.STRING)
+    private ProductCategory category;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Basket> baskets;
 
     public Product() {
     }
 
-    public Product(String name, String description, Double price, String pictureURL){
+    public Product(String name, String description, Double price, String pictureURL, ProductCategory category){
         this.productName = name;
         this.productDescription = description;
         this.productPrice = price;
         this.imageURL = pictureURL;
+        this.category = category;
     }
 
     public List<Basket> getBaskets() {
@@ -76,6 +80,18 @@ public class Product {
 
     public void setImageURL(String pictureURL) {
         this.imageURL = pictureURL;
+    }
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+    public void setBaskets(List<Basket> baskets) {
+        this.baskets = baskets;
     }
 
     @Override
