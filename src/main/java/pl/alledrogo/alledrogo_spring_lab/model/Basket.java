@@ -1,29 +1,66 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
-import java.util.HashMap;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+@Entity
 public class Basket {
 
-    private final Map<String, Product> productMap = new HashMap<>();
+    @Id
+    @SequenceGenerator(
+            name = "basket_sequence",
+            sequenceName = "basket_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "basket_sequence")
+    private Long id;
+    private String basketName;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Product> productsList = new ArrayList<>();
+
 
     public Basket() {
     }
 
-    public void addProduct(Product product) {
-        productMap.put(product.getName(), product);
+    public Basket(String basketName, List<Product> productsList) {
+        this.basketName = basketName;
+        this.productsList = productsList;
     }
 
-    public void removeProduct(String name) {
-        productMap.remove(name);
+    public Long getId() {
+        return id;
     }
-    public List<Product> getAllProducts() {
-        return productMap.values()
-                .stream()
-                .toList();
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public void clear() {
-        productMap.clear();
+
+    public List<Product> getProductsList() {
+        return productsList;
     }
+
+    public void addProductToBasket(Product product) {
+        productsList.add(product);
+    }
+
+    public void removeProductFromBasket (Product product) {
+        productsList.remove(product);
+    }
+
+    public void setProductsList(List<Product> products) {
+        this.productsList = products;
+    }
+
+    public void setBasketName(String basketName) {
+        this.basketName = basketName;
+    }
+
+    public String getBasketName() {
+        return basketName;
+    }
+
+
 }

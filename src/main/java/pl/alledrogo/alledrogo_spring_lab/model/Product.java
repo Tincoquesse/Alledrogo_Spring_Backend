@@ -1,47 +1,107 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.*;
+import java.util.List;
 
+
+@Entity
 public class Product {
+    @Id
+    @SequenceGenerator(
+            name = "product_sequence",
+            sequenceName = "product_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "product_sequence")
+    private Long id;
 
-    private final String name;
-    private final String description;
-    private final double price;
+    private String productName;
+    private String productDescription;
+    private Double productPrice;
+    private String imageURL;
 
-//    public Product(String name, String description, double price) {
-//        this.name = name;
-//        this.description = description;
-//        this.price = price;
-//    }
-    @JsonCreator
-    public Product(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("price") double price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
+    @Enumerated(EnumType.STRING)
+    private ProductCategory category;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Basket> baskets;
+
+    public Product() {
     }
 
-    public String getName() {
-        return name;
+    public Product(String name, String description, Double price, String pictureURL, ProductCategory category){
+        this.productName = name;
+        this.productDescription = description;
+        this.productPrice = price;
+        this.imageURL = pictureURL;
+        this.category = category;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Basket> getBaskets() {
+        return baskets;
     }
 
-    public double getPrice() {
-        return price;
+    public void addBasket(Basket basket) {
+        this.baskets.add(basket);
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String pictureURL) {
+        this.imageURL = pictureURL;
+    }
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+    public void setBaskets(List<Basket> baskets) {
+        this.baskets = baskets;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", productPrice=" + productPrice +
+//                ", basket=" + basket +
                 '}';
     }
 }

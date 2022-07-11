@@ -1,43 +1,30 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
-import org.springframework.stereotype.Service;
-import pl.alledrogo.alledrogo_spring_lab.model.Order;
+import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.repository.ProductsInMemoryProvider;
-
 
 import java.util.List;
 
-@Service
-public class AlledrogoService {
+public interface AlledrogoService {
 
-    ProductsInMemoryProvider productsInMemoryProvider;
+    void addProduct(Product productAlt);
 
-    public AlledrogoService(ProductsInMemoryProvider products) {
-        this.productsInMemoryProvider = products;
-    }
+    List<Product> getAllProducts();
 
-    public void addProduct(Product product) {
-        productsInMemoryProvider.addProduct(product);
-    }
+    List<Basket> getAllBaskets();
 
-    public void addProductToBasket(String name) {
-        productsInMemoryProvider.addProductToBasket(name);
-    }
+    void deleteProduct(String name);
 
-    public void removeProductFromBasket(String name) {
-        productsInMemoryProvider.removeProductFromBasket(name);
-    }
+    void deleteBasket(String name);
 
-    public  List<Product> getAllProducts() {
-        return productsInMemoryProvider.getAllProducts();
-    }
+    void deleteProductFromBasket(String basket, String productName);
 
-    public List<Product> getALlProductsFromBasket() {
-        return productsInMemoryProvider.getAllProductsFromBasket();
-    }
+    void clearProductsList();
 
-    public Order makeOrder(String shipmentAddress) {
-        return productsInMemoryProvider.makeOrder(shipmentAddress);
-    }
+    void addBasket(Basket basket);
+
+    Product addProductToBasket(String basketName, String productName);
+
+    List<Product> getALlProductsFromBasket(String basketName);
+
 }

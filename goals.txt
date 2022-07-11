@@ -16,3 +16,7 @@ allegro lab:
   * akcja powinna zwracać poprawnie wypełniony obiekt typu Order
   * zakup czyści koszyk (usuwa wszysystkie dodane elementy)
 - dodaj testy do swoich kontrolerów aby być pewnym że działają
+
+
+
+
