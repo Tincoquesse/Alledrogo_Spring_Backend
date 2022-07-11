@@ -5,19 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import pl.alledrogo.alledrogo_spring_lab.api.AlledrogoController;
-import pl.alledrogo.alledrogo_spring_lab.api.AppUserController;
-import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
-import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
-
-import java.util.ArrayList;
 
 
 @SpringBootApplication
 
 public class AlledrogoSpringLabApplication{
-
 
     private final AlledrogoController controller;
     private final AppUserServiceImpl appUserService;
@@ -25,7 +19,6 @@ public class AlledrogoSpringLabApplication{
     public AlledrogoSpringLabApplication(AlledrogoController controller, AppUserServiceImpl appUserService) {
         this.controller = controller;
         this.appUserService = appUserService;
-
     }
 
     public static void main(String[] args) {
@@ -46,19 +39,6 @@ public class AlledrogoSpringLabApplication{
         controller.addProduct("IBM 3330", "czwarty", 444,
                 "https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/22/2240435/Tablet-LENOVO-Tab-M8-HD-LTE-Szary-fronttyl.jpg",
                 ProductCategory.TABLET);
-//        controller.addBasket("koszyk1");
-//        controller.addBasket("koszyk2");
-//        controller.addBasket("koszyk3");
-//        controller.addProductToBasket("koszyk1", "Lenowo 45D");
-//        controller.addProductToBasket("koszyk1", "Asus TT");
-//        controller.addProductToBasket("koszyk2", "Hammer XS");
-//
-//        appUserService.saveAppUser(new AppUser(null, "Kamil", "user", "user", new ArrayList<>()));
-//        appUserService.saveAppUser(new AppUser(null, "Kamil", "u", "u", new ArrayList<>()));
-//        appUserService.saveRole(new Role(null, "ROLE_USER"));
-//        appUserService.saveRole(new Role(null, "ROLE_ADMIN"));
-//        appUserService.addRoleToUser("user", "ROLE_USER");
-//        appUserService.addRoleToUser("u", "ROLE_USER");
     }
 
 }

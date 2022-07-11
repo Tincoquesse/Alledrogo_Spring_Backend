@@ -25,7 +25,11 @@ public class AlledrogoServiceImpl implements AlledrogoService {
     }
 
     public void addProduct(Product productAlt) {
-        productRepository.save(productAlt);
+        String pName = productAlt.getProductName();
+        if (productRepository.findByProductName(pName).isEmpty()){
+            productRepository.save(productAlt);
+        }
+
     }
 
     public List<Product> getAllProducts() {
@@ -60,7 +64,7 @@ public class AlledrogoServiceImpl implements AlledrogoService {
     }
 
     public Product addProductToBasket(String basketName, String productName) {
-        basketRepository.findByBasketName(basketName).orElseThrow()
+        basketRepository.findByBasketName(basketName).orElseThrow(() -> new BasketNotFoundException("Basket" + basketName + "was not found"))
                 .addProductToBasket(productRepository.findByProductName(productName).orElseThrow(
                         () -> new ProductNotFoundException("Product: " + productName + ", was not found")));
 

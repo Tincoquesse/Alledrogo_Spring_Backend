@@ -3,7 +3,6 @@ package pl.alledrogo.alledrogo_spring_lab.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
@@ -55,7 +54,7 @@ public class AlledrogoController {
         alledrogoService.deleteProduct(name);
     }
 
-    @DeleteMapping ("/product/removeFromBasket/{basket}/{product}")
+    @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
     void removeProduct(@PathVariable String basket, @PathVariable String product) {
         alledrogoService.deleteProductFromBasket(basket, product);
     }
@@ -65,9 +64,9 @@ public class AlledrogoController {
         alledrogoService.deleteBasket(name);
     }
 
-    @PostMapping("/product/addToBasket/{basketName}/{product}")
-    public ResponseEntity<Product> addProductToBasket(@PathVariable String basketName, @PathVariable String product) {
-       return ResponseEntity.ok().body(alledrogoService.addProductToBasket(basketName, product));
+    @PostMapping("/product/addToBasket/{basketName}/{productName}")
+    public ResponseEntity<Product> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
+        return ResponseEntity.ok().body(alledrogoService.addProductToBasket(basketName, productName));
     }
 
     @GetMapping("/product/getAllFromBasket/{basketName}")

@@ -4,11 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import javax.transaction.Transactional;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +46,7 @@ class AlledrogoControllerTest {
         alledrogoJPAController.addProduct("test1", "testowy", 1234., "aaa", ProductCategory.PHONE);
         alledrogoJPAController.addProduct("test1", "testowy", 1234., "bbb", ProductCategory.WATCH);
         //when
-        int result= 2;
+        int result= 1;
         //then
         assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
     }
@@ -78,7 +82,7 @@ class AlledrogoControllerTest {
         //given
         alledrogoJPAController.addProduct("test1", "testowy", 1234., "hhh", ProductCategory.PHONE);
         alledrogoJPAController.addProduct("test2", "testowy", 1234., "iii", ProductCategory.WATCH);
-
+        alledrogoService.addBasket(new Basket("koszyk", new ArrayList<>()));
         //when
         int result = 2;
         alledrogoJPAController.addProductToBasket("koszyk", "test1");
