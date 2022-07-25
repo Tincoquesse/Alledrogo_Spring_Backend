@@ -2,6 +2,7 @@ package pl.alledrogo.alledrogo_spring_lab.service;
 
 import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
+import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductAlreadyExistException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
@@ -24,10 +25,11 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         this.basketRepository = basketRepository;
     }
 
-    public void addProduct(Product productAlt) {
-        String pName = productAlt.getProductName();
-        if (productRepository.findByProductName(pName).isEmpty()){
-            productRepository.save(productAlt);
+    public Product addProduct(Product product) {
+        if (productRepository.findByProductName(product.getProductName()).isPresent()){
+            throw new ProductAlreadyExistException("Product Already Exist");
+        } else {
+            return productRepository.save(product);
         }
     }
 

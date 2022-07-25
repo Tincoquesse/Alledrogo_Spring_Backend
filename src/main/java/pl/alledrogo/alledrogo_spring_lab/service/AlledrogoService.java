@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AlledrogoService {
 
-    void addProduct(Product productAlt);
+    Product addProduct(Product productAlt);
 
     List<Product> getAllProducts();
 

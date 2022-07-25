@@ -21,21 +21,11 @@ public class AlledrogoController {
         this.alledrogoService = alledrogoService;
     }
 
-    @PostMapping("/product/add/{name}/{description}/{price}/{imageURL}")
-    public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price,
-                             @PathVariable String imageURL, @PathVariable ProductCategory category) {
-        Product product1 = new Product(name, description, price, imageURL, category);
-        alledrogoService.addProduct(product1);
-        return "SAVED";
-    }
+    @PostMapping("/product/add")
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        return ResponseEntity.ok().body(alledrogoService.addProduct(product));
 
-//    @PostMapping("/basket/add/{name}")
-//    public String addBasket(@PathVariable String name) {
-//        Basket basket= new Basket();
-//        basket.setBasketName(name);
-//        alledrogoService.addBasket(basket);
-//        return "SAVED";
-//    }
+    }
 
     @GetMapping("/product/getAll")
     @ResponseBody

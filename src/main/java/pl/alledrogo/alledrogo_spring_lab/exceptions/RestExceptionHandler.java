@@ -2,7 +2,6 @@ package pl.alledrogo.alledrogo_spring_lab.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -19,8 +18,13 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = UsernameNotFoundException.class)
+    @ExceptionHandler(value = UserNotFoundException.class)
     public ResponseEntity<String> handleUsernameNotFound(Exception exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = ProductAlreadyExistException.class)
+    public ResponseEntity<String> handleProductAlreadyExist(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
