@@ -29,7 +29,6 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         if (productRepository.findByProductName(pName).isEmpty()){
             productRepository.save(productAlt);
         }
-
     }
 
     public List<Product> getAllProducts() {
@@ -67,7 +66,6 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         basketRepository.findByBasketName(basketName).orElseThrow(() -> new BasketNotFoundException("Basket" + basketName + "was not found"))
                 .addProductToBasket(productRepository.findByProductName(productName).orElseThrow(
                         () -> new ProductNotFoundException("Product: " + productName + ", was not found")));
-
         return productRepository.findByProductName(productName).orElseThrow();
     }
 
@@ -75,7 +73,6 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         return basketRepository.findByBasketName(basketName)
                 .orElseThrow(() -> new BasketNotFoundException("Basket: " + basketName + ", was not found."))
                 .getProductsList();
-
     }
 
 }

@@ -83,5 +83,4 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         return appUserRepository.findAll();
     }
 
-
 }
