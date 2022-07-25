@@ -63,6 +63,17 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     }
 
     @Override
+    public AppUser saveAdmin(AppUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        addRoleToUser(user.getUsername(), "ROLE_ADMIN");
+        String basketCustomName = user.getUsername() + "B";
+        Basket basket = new Basket(basketCustomName, new ArrayList<>());
+        basketRepository.save(basket);
+        user.setBasket(basketRepository.findByBasketName(basketCustomName));
+        return appUserRepository.save(user);
+    }
+
+    @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
     }

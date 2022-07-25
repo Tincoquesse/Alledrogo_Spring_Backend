@@ -11,6 +11,7 @@ public interface AppUserService {
     AppUser saveAppUser(AppUser user);
     Role saveRole(Role role);
     void addRoleToUser(String username, String roleName);
+    AppUser saveAdmin(AppUser user);
     AppUser getAppUser(String username);
     List<AppUser> getAppUsers();
 

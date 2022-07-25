@@ -41,8 +41,11 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         return basketRepository.findAll();
     }
 
-    public void deleteProduct(String name) {
+    public Product deleteProduct(String name) {
+        Product product = productRepository.findByProductName(name).orElseThrow(() ->
+                new ProductNotFoundException("Product not found"));
         productRepository.deleteByProductName(name);
+        return  product;
     }
 
     public void deleteBasket(String name) {

@@ -13,7 +13,7 @@ public interface AlledrogoService {
 
     List<Basket> getAllBaskets();
 
-    void deleteProduct(String name);
+    Product deleteProduct(String name);
 
     void deleteBasket(String name);
 

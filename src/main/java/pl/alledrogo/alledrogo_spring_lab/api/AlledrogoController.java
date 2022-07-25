@@ -35,13 +35,13 @@ public class AlledrogoController {
 
     @GetMapping("/basket/getAll")
     @ResponseBody
-    public List<Basket> getAllBaskets() {
-        return alledrogoService.getAllBaskets();
+    public ResponseEntity<List<Basket>> getAllBaskets() {
+        return ResponseEntity.ok().body(alledrogoService.getAllBaskets());
     }
 
     @PostMapping("/product/remove/{name}")
-    void removeProduct(@PathVariable String name) {
-        alledrogoService.deleteProduct(name);
+    public ResponseEntity<Product> removeProduct(@PathVariable String name) {
+        return ResponseEntity.ok().body(alledrogoService.deleteProduct(name));
     }
 
     @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
