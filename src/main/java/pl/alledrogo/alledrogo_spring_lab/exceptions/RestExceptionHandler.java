@@ -9,26 +9,27 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RestExceptionHandler {
 
     @ExceptionHandler(value = BasketNotFoundException.class)
-    public ResponseEntity<String> handleBasketNotFound(Exception exception){
+    public ResponseEntity<String> handleBasketNotFound(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = ProductNotFoundException.class)
-    public ResponseEntity<String> handleProductNotFound(Exception exception){
+    public ResponseEntity<String> handleProductNotFound(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseEntity<String> handleUsernameNotFound(Exception exception){
+    public ResponseEntity<String> handleUsernameNotFound(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = ProductAlreadyExistException.class)
-    public ResponseEntity<String> handleProductAlreadyExist(Exception exception){
+    public ResponseEntity<String> handleProductAlreadyExist(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(value = UserAlreadyExistException.class)
-    public ResponseEntity<String> handleUserAlreadyExist(Exception exception){
+    public ResponseEntity<String> handleUserAlreadyExist(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
-    }}
+    }
+}
