@@ -27,4 +27,8 @@ public class RestExceptionHandler {
     public ResponseEntity<String> handleProductAlreadyExist(Exception exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
-}
+
+    @ExceptionHandler(value = UserAlreadyExistException.class)
+    public ResponseEntity<String> handleUserAlreadyExist(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }}
