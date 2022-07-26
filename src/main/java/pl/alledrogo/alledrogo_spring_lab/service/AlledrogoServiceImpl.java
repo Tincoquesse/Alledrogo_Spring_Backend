@@ -62,7 +62,7 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         Product byProductName = productRepository.findByProductName(productName).orElseThrow(()
                 -> new ProductNotFoundException("Product: " + productName + " is not present in database."));
         if (!basketEntity.getProductsList().contains(byProductName)) {
-            throw new ProductNotFoundException("Product: " + productName + "is not present.");
+            throw new ProductNotFoundException("Product: " + productName + " is not present.");
         }
         basketEntity.removeProductFromBasket(byProductName);
         basketRepository.save(basketEntity);

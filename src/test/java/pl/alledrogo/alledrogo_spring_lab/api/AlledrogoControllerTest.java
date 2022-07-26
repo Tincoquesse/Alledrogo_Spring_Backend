@@ -1,97 +1,71 @@
-//package pl.alledrogo.alledrogo_spring_lab.api;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import pl.alledrogo.alledrogo_spring_lab.model.Basket;
-//import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
-//import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
-//
-//import javax.transaction.Transactional;
-//
-//
-//import java.util.ArrayList;
-//import java.util.Collections;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//
-//@SpringBootTest
-//@Transactional
-//class AlledrogoControllerTest {
-//
-//    @Autowired
-//    AlledrogoController alledrogoJPAController;
-//    @Autowired
-//    AlledrogoServiceImpl alledrogoService;
-//
-//    @BeforeEach
-//    void clear() {
-//        alledrogoService.clearProductsList();
-//    }
-//
-//    @Test
-//    void addProduct() {
-//    //given
-//        alledrogoJPAController.addProduct("test1", "testowy", 1234, "ccc", ProductCategory.PHONE);
-//    //when
-//        int result= 1;
-//    //then
-//        assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
-//    }
-//
-//    @Test
-//    void addTwoSameNameProducts() {
-//        //given
-//        alledrogoJPAController.addProduct("test1", "testowy", 1234., "aaa", ProductCategory.PHONE);
-//        alledrogoJPAController.addProduct("test1", "testowy", 1234., "bbb", ProductCategory.WATCH);
-//        //when
-//        int result= 1;
-//        //then
-//        assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
-//    }
-//
-//    @Test
-//    void getAllProducts() {
-//        //given
-//        alledrogoJPAController.addProduct("test1", "testowy", 1234., "ddd",
-//                ProductCategory.TABLET);
-//        alledrogoJPAController.addProduct("test2", "testowy", 1234., "eee",
-//                ProductCategory.LAPTOP);
-//        alledrogoJPAController.addProduct("test3", "testowy", 1234., "fff",
-//                ProductCategory.TABLET);
-//        alledrogoJPAController.addProduct("test4", "testowy", 1234., "ggg",
-//                ProductCategory.TABLET);
-//        //when
-//        int result = 4;
-//        //then
-//        assertThat(alledrogoJPAController.getAllProducts().getBody().size()).isEqualTo(result);
-//    }
-//
-//    @Test
-//    void getAllProductsFromBasket() {
-//    }
-//
-//    @Test
-//    void makeOrder() {
-//
-//    }
-//
-//    @Test
-//    void addProductToBasket() {
-//        //given
-//        alledrogoJPAController.addProduct("test1", "testowy", 1234., "hhh", ProductCategory.PHONE);
-//        alledrogoJPAController.addProduct("test2", "testowy", 1234., "iii", ProductCategory.WATCH);
-//        alledrogoService.addBasket(new Basket("koszyk", new ArrayList<>()));
-//        //when
-//        int result = 2;
-//        alledrogoJPAController.addProductToBasket("koszyk", "test1");
-//        alledrogoJPAController.addProductToBasket("koszyk", "test2");
-//        //then
-//        assertThat(alledrogoJPAController.getAllProductsFromBasket("koszyk").getBody().size()).isEqualTo(result);
-//    }
-//
-//    @Test
-//    void removeProductFromBasket() {
-//    }
-//}
+package pl.alledrogo.alledrogo_spring_lab.api;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
+
+import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
+class AlledrogoControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    ProductRepository productRepository;
+
+    @Test
+    public void shouldGetAllProducts() throws Exception {
+        //GIVEN
+        productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
+        productRepository.save(new Product("Hammer", "phone", 111., "link", ProductCategory.PHONE));
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAll")).andReturn();
+
+        //THEN
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
+
+        assertThat(products.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void shouldGetTheSameNames() throws Exception {
+        //GIVEN
+        productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
+        productRepository.save(new Product("Hammer", "phone", 111., "link", ProductCategory.PHONE));
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAll")).andReturn();
+
+        //THEN
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
+
+        assertThat(products).containsExactlyInAnyOrder(new ProductDTO("Asus", "computer", 666., "link", ProductCategory.LAPTOP),
+                new ProductDTO("Hammer", "phone", 111., "link", ProductCategory.PHONE));
+    }
+}
