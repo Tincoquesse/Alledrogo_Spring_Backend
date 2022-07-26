@@ -6,11 +6,13 @@ import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductAlreadyExistException
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,27 +27,30 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         this.basketRepository = basketRepository;
     }
 
-    public Product addProduct(Product product) {
-        if (productRepository.findByProductName(product.getProductName()).isPresent()){
+    public ProductDTO addProduct(ProductDTO productDTO) {
+        if (productRepository.findByProductName(productDTO.getProductName()).isPresent()){
             throw new ProductAlreadyExistException("Product Already Exist");
         } else {
-            return productRepository.save(product);
+            Product save = productRepository.save(ProductMapper.fromDTO(productDTO));
+            return ProductMapper.fromEntity(save);
         }
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(ProductMapper::fromEntity)
+                .collect(Collectors.toList());
     }
 
     public List<Basket> getAllBaskets() {
         return basketRepository.findAll();
     }
 
-    public Product deleteProduct(String name) {
+    public String deleteProduct(String name) {
         Product product = productRepository.findByProductName(name).orElseThrow(() ->
                 new ProductNotFoundException("Product not found"));
         productRepository.deleteByProductName(name);
-        return  product;
+        return "Product: " + name + " deleted from database.";
     }
 
     public void deleteBasket(String name) {
@@ -67,11 +72,12 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         basketRepository.save(basket);
     }
 
-    public Product addProductToBasket(String basketName, String productName) {
+    public ProductDTO addProductToBasket(String basketName, String productName) {
         basketRepository.findByBasketName(basketName).orElseThrow(() -> new BasketNotFoundException("Basket" + basketName + "was not found"))
                 .addProductToBasket(productRepository.findByProductName(productName).orElseThrow(
                         () -> new ProductNotFoundException("Product: " + productName + ", was not found")));
-        return productRepository.findByProductName(productName).orElseThrow();
+        Product product = productRepository.findByProductName(productName).orElseThrow();
+        return ProductMapper.fromEntity(product);
     }
 
     public List<Product> getALlProductsFromBasket(String basketName) {

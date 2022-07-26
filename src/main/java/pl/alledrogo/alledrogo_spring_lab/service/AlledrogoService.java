@@ -2,18 +2,19 @@ package pl.alledrogo.alledrogo_spring_lab.service;
 
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 
 import java.util.List;
 
 public interface AlledrogoService {
 
-    Product addProduct(Product productAlt);
+    ProductDTO addProduct(ProductDTO productAlt);
 
-    List<Product> getAllProducts();
+    List<ProductDTO> getAllProducts();
 
     List<Basket> getAllBaskets();
 
-    Product deleteProduct(String name);
+    String deleteProduct(String name);
 
     void deleteBasket(String name);
 
@@ -23,7 +24,7 @@ public interface AlledrogoService {
 
     void addBasket(Basket basket);
 
-    Product addProductToBasket(String basketName, String productName);
+    ProductDTO addProductToBasket(String basketName, String productName);
 
     List<Product> getALlProductsFromBasket(String basketName);
 

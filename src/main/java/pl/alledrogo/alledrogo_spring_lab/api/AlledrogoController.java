@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import java.util.List;
@@ -22,14 +22,13 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/add")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        return ResponseEntity.ok().body(alledrogoService.addProduct(product));
-
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok().body(alledrogoService.addProduct(productDTO));
     }
 
     @GetMapping("/product/getAll")
     @ResponseBody
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
 
@@ -40,7 +39,7 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/remove/{name}")
-    public ResponseEntity<Product> removeProduct(@PathVariable String name) {
+    public ResponseEntity<String> removeProduct(@PathVariable String name) {
         return ResponseEntity.ok().body(alledrogoService.deleteProduct(name));
     }
 
@@ -55,7 +54,7 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/addToBasket/{basketName}/{productName}")
-    public ResponseEntity<Product> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
+    public ResponseEntity<ProductDTO> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
         return ResponseEntity.ok().body(alledrogoService.addProductToBasket(basketName, productName));
     }
 
