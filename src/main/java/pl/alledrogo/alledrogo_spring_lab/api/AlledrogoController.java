@@ -7,7 +7,6 @@ import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
-import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import java.util.List;
 

@@ -14,7 +14,6 @@ import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.model.RoleToUserForm;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserService;
-import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
