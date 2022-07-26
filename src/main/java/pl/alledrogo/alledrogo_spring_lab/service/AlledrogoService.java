@@ -14,11 +14,11 @@ public interface AlledrogoService {
 
     List<Basket> getAllBaskets();
 
-    String deleteProduct(String name);
+    void deleteProduct(String name);
 
     void deleteBasket(String name);
 
-    String deleteProductFromBasket(String basket, String productName);
+    void deleteProductFromBasket(String basket, String productName);
 
     void clearProductsList();
 

@@ -28,30 +28,34 @@ public class AlledrogoController {
     }
 
     @GetMapping("/product/getAll")
-//    @ResponseBody
+    @ResponseBody
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
 
     @GetMapping("/basket/getAll")
-    @ResponseBody
     public ResponseEntity<List<Basket>> getAllBaskets() {
         return ResponseEntity.ok().body(alledrogoService.getAllBaskets());
     }
 
     @DeleteMapping("/product/remove/{name}")
-    public ResponseEntity<String> removeProduct(@PathVariable String name) {
-        return ResponseEntity.ok().body(alledrogoService.deleteProduct(name));
+    @ResponseBody
+    public ResponseEntity<Void> removeProduct(@PathVariable String name) {
+        alledrogoService.deleteProduct(name);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
-    public ResponseEntity<String> removeProduct(@PathVariable String basket, @PathVariable String product) {
-        return ResponseEntity.ok().body(alledrogoService.deleteProductFromBasket(basket, product));
+    @ResponseBody
+    public ResponseEntity<Void> removeProduct(@PathVariable String basket, @PathVariable String product) {
+        alledrogoService.deleteProductFromBasket(basket, product);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/basket/remove/{name}")
-    void removeBasket(@PathVariable String name) {
+    public ResponseEntity<Void> removeBasket(@PathVariable String name) {
         alledrogoService.deleteBasket(name);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/product/addToBasket/{basketName}/{productName}")
@@ -60,7 +64,6 @@ public class AlledrogoController {
     }
 
     @GetMapping("/product/getAllFromBasket/{basketName}")
-    @ResponseBody
     public ResponseEntity<List<Product>> getAllProductsFromBasket(@PathVariable String basketName) {
         return ResponseEntity.ok().body(alledrogoService.getALlProductsFromBasket(basketName));
     }

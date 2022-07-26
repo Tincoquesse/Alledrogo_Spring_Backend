@@ -46,23 +46,26 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         return basketRepository.findAll();
     }
 
-    public String deleteProduct(String name) {
+    public void deleteProduct(String name) {
         productRepository.findByProductName(name).orElseThrow(() ->
                 new ProductNotFoundException("Product not found"));
         productRepository.deleteByProductName(name);
-        return "Product: " + name + " deleted from database.";
     }
 
     public void deleteBasket(String name) {
         basketRepository.deleteByBasketName(name);
     }
 
-    public String deleteProductFromBasket(String basket, String productName) {
-        basketRepository.findByBasketName(basket).orElseThrow(()
-                        -> new BasketNotFoundException("Basket: " + basket + ", was not found"))
-                .removeProductFromBasket(productRepository.findByProductName(productName).orElseThrow(()
-                        -> new ProductNotFoundException("Product: " + productName + ", was not found")));
-        return "Product: " + productName + " removed from basket: " + basket;
+    public void deleteProductFromBasket(String basket, String productName) {
+        Basket basketEntity = basketRepository.findByBasketName(basket).orElseThrow(()
+                -> new BasketNotFoundException("Basket: " + basket + ", was not found"));
+        Product byProductName = productRepository.findByProductName(productName).orElseThrow(()
+                -> new ProductNotFoundException("Product: " + productName + " is not present in database."));
+        if (!basketEntity.getProductsList().contains(byProductName)) {
+            throw new ProductNotFoundException("Product: " + productName + "is not present.");
+        }
+        basketEntity.removeProductFromBasket(byProductName);
+        basketRepository.save(basketEntity);
     }
 
     public void clearProductsList() {
