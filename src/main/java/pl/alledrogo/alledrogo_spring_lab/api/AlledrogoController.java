@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import java.util.List;
@@ -21,37 +21,26 @@ public class AlledrogoController {
         this.alledrogoService = alledrogoService;
     }
 
-    @PostMapping("/product/add/{name}/{description}/{price}/{imageURL}")
-    public String addProduct(@PathVariable String name, @PathVariable String description, @PathVariable double price,
-                             @PathVariable String imageURL, @PathVariable ProductCategory category) {
-        Product product1 = new Product(name, description, price, imageURL, category);
-        alledrogoService.addProduct(product1);
-        return "SAVED";
+    @PostMapping("/product/add")
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok().body(alledrogoService.addProduct(productDTO));
     }
-
-//    @PostMapping("/basket/add/{name}")
-//    public String addBasket(@PathVariable String name) {
-//        Basket basket= new Basket();
-//        basket.setBasketName(name);
-//        alledrogoService.addBasket(basket);
-//        return "SAVED";
-//    }
 
     @GetMapping("/product/getAll")
     @ResponseBody
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
 
     @GetMapping("/basket/getAll")
     @ResponseBody
-    public List<Basket> getAllBaskets() {
-        return alledrogoService.getAllBaskets();
+    public ResponseEntity<List<Basket>> getAllBaskets() {
+        return ResponseEntity.ok().body(alledrogoService.getAllBaskets());
     }
 
     @PostMapping("/product/remove/{name}")
-    void removeProduct(@PathVariable String name) {
-        alledrogoService.deleteProduct(name);
+    public ResponseEntity<String> removeProduct(@PathVariable String name) {
+        return ResponseEntity.ok().body(alledrogoService.deleteProduct(name));
     }
 
     @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
@@ -65,7 +54,7 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/addToBasket/{basketName}/{productName}")
-    public ResponseEntity<Product> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
+    public ResponseEntity<ProductDTO> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
         return ResponseEntity.ok().body(alledrogoService.addProductToBasket(basketName, productName));
     }
 

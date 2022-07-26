@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
+import pl.alledrogo.alledrogo_spring_lab.model.RoleToUserForm;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,23 +101,4 @@ public class AppUserController {
     }
 }
 
-class RoleToUserForm {
-    private String username;
-    private String roleName;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-}

@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.alledrogo.alledrogo_spring_lab.exceptions.UserNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
@@ -38,7 +39,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = appUserRepository.findByUsername(username);
         if (appUser == null) {
-            throw new UsernameNotFoundException("User not found in the database");
+            throw new UserNotFoundException("User not found in the database");
         }else {
             System.out.println("User found");
         }
@@ -54,6 +55,17 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     public AppUser saveAppUser(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(roleRepository.findByName("ROLE_USER"));
+        String basketCustomName = user.getUsername() + "B";
+        Basket basket = new Basket(basketCustomName, new ArrayList<>());
+        basketRepository.save(basket);
+        user.setBasket(basketRepository.findByBasketName(basketCustomName));
+        return appUserRepository.save(user);
+    }
+
+    @Override
+    public AppUser saveAdmin(AppUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        addRoleToUser(user.getUsername(), "ROLE_ADMIN");
         String basketCustomName = user.getUsername() + "B";
         Basket basket = new Basket(basketCustomName, new ArrayList<>());
         basketRepository.save(basket);
@@ -82,6 +94,5 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     public List<AppUser> getAppUsers() {
         return appUserRepository.findAll();
     }
-
 
 }
