@@ -18,7 +18,7 @@ public interface AlledrogoService {
 
     void deleteBasket(String name);
 
-    void deleteProductFromBasket(String basket, String productName);
+    String deleteProductFromBasket(String basket, String productName);
 
     void clearProductsList();
 

@@ -47,7 +47,7 @@ public class AlledrogoServiceImpl implements AlledrogoService {
     }
 
     public String deleteProduct(String name) {
-        Product product = productRepository.findByProductName(name).orElseThrow(() ->
+        productRepository.findByProductName(name).orElseThrow(() ->
                 new ProductNotFoundException("Product not found"));
         productRepository.deleteByProductName(name);
         return "Product: " + name + " deleted from database.";
@@ -57,11 +57,12 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         basketRepository.deleteByBasketName(name);
     }
 
-    public void deleteProductFromBasket(String basket, String productName) {
+    public String deleteProductFromBasket(String basket, String productName) {
         basketRepository.findByBasketName(basket).orElseThrow(()
                         -> new BasketNotFoundException("Basket: " + basket + ", was not found"))
                 .removeProductFromBasket(productRepository.findByProductName(productName).orElseThrow(()
                         -> new ProductNotFoundException("Product: " + productName + ", was not found")));
+        return "Product: " + productName + " removed from basket: " + basket;
     }
 
     public void clearProductsList() {

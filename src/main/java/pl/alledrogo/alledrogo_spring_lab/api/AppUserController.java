@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.model.RoleToUserForm;
+import pl.alledrogo.alledrogo_spring_lab.service.AppUserService;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +33,9 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RequestMapping("/api")
 public class AppUserController {
 
-    private final AppUserServiceImpl appUserService;
+    private final AppUserService appUserService;
 
-    public AppUserController(AppUserServiceImpl appUserService) {
+    public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoServiceImpl;
 
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.List;
 @RequestMapping("/shop")
 public class AlledrogoController {
 
-    private final AlledrogoServiceImpl alledrogoService;
+    private final AlledrogoService alledrogoService;
 
 
-    public AlledrogoController(AlledrogoServiceImpl alledrogoService) {
+    public AlledrogoController(AlledrogoService alledrogoService) {
         this.alledrogoService = alledrogoService;
     }
 
@@ -27,7 +28,7 @@ public class AlledrogoController {
     }
 
     @GetMapping("/product/getAll")
-    @ResponseBody
+//    @ResponseBody
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
@@ -38,17 +39,17 @@ public class AlledrogoController {
         return ResponseEntity.ok().body(alledrogoService.getAllBaskets());
     }
 
-    @PostMapping("/product/remove/{name}")
+    @DeleteMapping("/product/remove/{name}")
     public ResponseEntity<String> removeProduct(@PathVariable String name) {
         return ResponseEntity.ok().body(alledrogoService.deleteProduct(name));
     }
 
     @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
-    void removeProduct(@PathVariable String basket, @PathVariable String product) {
-        alledrogoService.deleteProductFromBasket(basket, product);
+    public ResponseEntity<String> removeProduct(@PathVariable String basket, @PathVariable String product) {
+        return ResponseEntity.ok().body(alledrogoService.deleteProductFromBasket(basket, product));
     }
 
-    @PostMapping("/basket/remove/{name}")
+    @DeleteMapping("/basket/remove/{name}")
     void removeBasket(@PathVariable String name) {
         alledrogoService.deleteBasket(name);
     }
