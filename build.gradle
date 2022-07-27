@@ -12,7 +12,6 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.24'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'
@@ -20,7 +19,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security:2.7.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.auth0:java-jwt:4.0.0'
-    implementation 'org.json:json:20140107'
+    implementation 'org.json:json:20220320'
+    implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.0'
+
 }
 
 

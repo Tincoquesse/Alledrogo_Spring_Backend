@@ -19,6 +19,7 @@ public class AppUser {
     private Basket basket;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
+    private boolean isVerified = false;
 
     public AppUser( String name, String username, String password, Collection<Role> roles) {
         this.name = name;
@@ -76,5 +77,13 @@ public class AppUser {
 
     public void setBasket(Optional<Basket> basket) {
         this.basket = basket.orElseThrow();
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }
