@@ -1,4 +1,9 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
+
+import net.bytebuddy.utility.RandomString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +19,10 @@ import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +36,8 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final BasketRepository basketRepository;
+    @Autowired
+    private JavaMailSender mailSender;
 
     public AppUserServiceImpl(AppUserRepository appUserRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, BasketRepository basketRepository) {
         this.appUserRepository = appUserRepository;
@@ -52,25 +62,61 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     }
 
     @Override
-    public AppUser saveAppUser(AppUser user) {
+    public AppUser registerUser(AppUser user) throws MessagingException, UnsupportedEncodingException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(roleRepository.findByName("ROLE_USER"));
-        String basketCustomName = user.getUsername() + "B";
+        String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName, new ArrayList<>());
         basketRepository.save(basket);
         user.setBasket(basketRepository.findByBasketName(basketCustomName));
+        String randomCode = RandomString.make(64);
+        user.setVerificationCode(randomCode);
+        sendVerificationEmail(user, "http://localhost:8080/api/");
         return appUserRepository.save(user);
+
+
     }
 
     @Override
     public AppUser saveAdmin(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         addRoleToUser(user.getUsername(), "ROLE_ADMIN");
-        String basketCustomName = user.getUsername() + "B";
+        String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName, new ArrayList<>());
         basketRepository.save(basket);
         user.setBasket(basketRepository.findByBasketName(basketCustomName));
+        user.setVerified(true);
         return appUserRepository.save(user);
+    }
+
+    private void sendVerificationEmail(AppUser user, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getUsername();
+        String fromAddress = "kamilforex87@gmail.com";
+        String senderName = "Alledrogo";
+        String subject = "Please verify your registration";
+        String content = "Dear [[name]],<br>"
+                + "Please click the link below to verify your registration:<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "Thank you,<br>"
+                + "Alledrogo.pl.";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.getName());
+        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+
+        content = content.replace("[[URL]]", verifyURL);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+
     }
 
     @Override

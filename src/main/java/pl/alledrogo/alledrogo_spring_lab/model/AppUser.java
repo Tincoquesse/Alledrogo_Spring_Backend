@@ -20,6 +20,7 @@ public class AppUser {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
     private boolean isVerified = false;
+    private String verificationCode;
 
     public AppUser( String name, String username, String password, Collection<Role> roles) {
         this.name = name;
@@ -85,5 +86,13 @@ public class AppUser {
 
     public void setVerified(boolean verified) {
         isVerified = verified;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 }

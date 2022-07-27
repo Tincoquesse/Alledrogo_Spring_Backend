@@ -15,9 +15,11 @@ import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.model.RoleToUserForm;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserService;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,9 +46,9 @@ public class AppUserController {
     }
 
     @PostMapping("/user/save")
-    public ResponseEntity<AppUser> saveUser(@RequestBody AppUser appUser) {
+    public ResponseEntity<AppUser> registerUser(@RequestBody AppUser appUser) throws MessagingException, UnsupportedEncodingException {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(appUserService.saveAppUser(appUser));
+        return ResponseEntity.created(uri).body(appUserService.registerUser(appUser));
     }
 
     @PostMapping("/role/save")
