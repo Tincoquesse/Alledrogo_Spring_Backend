@@ -62,7 +62,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     }
 
     @Override
-    public AppUser registerUser(AppUser user) throws MessagingException, UnsupportedEncodingException {
+    public AppUser registerUser(AppUser user, String siteUR) throws MessagingException, UnsupportedEncodingException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(roleRepository.findByName("ROLE_USER"));
         String basketCustomName = RandomString.make(20);
@@ -71,7 +71,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         user.setBasket(basketRepository.findByBasketName(basketCustomName));
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
-        sendVerificationEmail(user, "http://localhost:8080/api");
+        sendVerificationEmail(user, siteUR);
         return appUserRepository.save(user);
 
 
@@ -109,7 +109,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         helper.setSubject(subject);
 
         content = content.replace("[[name]]", user.getName());
-        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+        String verifyURL = siteURL + "/api/verify?code=" + user.getVerificationCode();
 
         content = content.replace("[[URL]]", verifyURL);
 

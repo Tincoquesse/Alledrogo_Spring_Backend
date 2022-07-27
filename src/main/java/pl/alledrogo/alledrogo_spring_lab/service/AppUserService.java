@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AppUserService {
 
-    AppUser registerUser(AppUser user) throws MessagingException, UnsupportedEncodingException;
+    AppUser registerUser(AppUser user, String siteUrl) throws MessagingException, UnsupportedEncodingException;
     Role saveRole(Role role);
     void addRoleToUser(String username, String roleName);
     AppUser saveAdmin(AppUser user);

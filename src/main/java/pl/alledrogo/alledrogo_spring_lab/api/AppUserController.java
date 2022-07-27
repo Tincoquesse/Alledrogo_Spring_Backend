@@ -41,15 +41,15 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<AppUser>> getAppUsers() {
-        return ResponseEntity.ok().body(appUserService.getAppUsers());
+    @PostMapping("/user/save")
+    public ResponseEntity<AppUser> registerUser(@RequestBody AppUser appUser, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
+        return ResponseEntity.created(uri).body(appUserService.registerUser(appUser, getSiteURL(request)));
     }
 
-    @PostMapping("/user/save")
-    public ResponseEntity<AppUser> registerUser(@RequestBody AppUser appUser) throws MessagingException, UnsupportedEncodingException {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(appUserService.registerUser(appUser));
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 
     @GetMapping("/verify")
@@ -59,6 +59,11 @@ public class AppUserController {
         } else {
             return ResponseEntity.badRequest().body("verify_fail");
         }
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<AppUser>> getAppUsers() {
+        return ResponseEntity.ok().body(appUserService.getAppUsers());
     }
 
     @PostMapping("/role/save")
@@ -111,6 +116,7 @@ public class AppUserController {
 
         }
     }
+
 }
 
 
