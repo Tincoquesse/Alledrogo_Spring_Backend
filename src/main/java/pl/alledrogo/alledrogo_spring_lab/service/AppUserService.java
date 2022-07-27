@@ -16,5 +16,5 @@ public interface AppUserService {
     AppUser saveAdmin(AppUser user);
     AppUser getAppUser(String username);
     List<AppUser> getAppUsers();
-
+    boolean verify(String verificationCode);
 }

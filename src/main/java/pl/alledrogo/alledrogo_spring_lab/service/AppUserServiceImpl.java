@@ -71,7 +71,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         user.setBasket(basketRepository.findByBasketName(basketCustomName));
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
-        sendVerificationEmail(user, "http://localhost:8080/api/");
+        sendVerificationEmail(user, "http://localhost:8080/api");
         return appUserRepository.save(user);
 
 
@@ -141,4 +141,17 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         return appUserRepository.findAll();
     }
 
+    @Override
+    public boolean verify(String verificationCode) {
+        AppUser appUser = appUserRepository.findByVerificationCode(verificationCode);
+
+        if (appUser == null || appUser.isVerified()) {
+            return false;
+        } else {
+            appUser.setVerificationCode(null);
+            appUser.setVerified(true);
+            appUserRepository.save(appUser);
+            return true;
+        }
+    }
 }
