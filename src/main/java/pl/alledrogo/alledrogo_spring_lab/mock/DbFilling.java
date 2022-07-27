@@ -1,4 +1,4 @@
-package pl.alledrogo.alledrogo_spring_lab.config;
+package pl.alledrogo.alledrogo_spring_lab.mock;
 
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
