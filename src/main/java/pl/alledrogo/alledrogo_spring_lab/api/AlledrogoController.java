@@ -1,6 +1,7 @@
 package pl.alledrogo.alledrogo_spring_lab.api;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
@@ -8,6 +9,7 @@ import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,9 +24,10 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/add")
+
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
-        return ResponseEntity.ok().body(alledrogoService.addProduct(productDTO));
-    }
+        return new  ResponseEntity<ProductDTO>(alledrogoService.addProduct(productDTO), HttpStatus.CREATED);
+            }
 
     @GetMapping("/product/getAll")
     @ResponseBody

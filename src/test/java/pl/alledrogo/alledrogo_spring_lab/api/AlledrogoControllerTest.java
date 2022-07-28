@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -19,9 +20,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 @Transactional
 class AlledrogoControllerTest {
 
@@ -33,6 +35,7 @@ class AlledrogoControllerTest {
 
     @Autowired
     ProductRepository productRepository;
+
 
     @Test
     public void shouldGetAllProducts() throws Exception {
@@ -52,20 +55,38 @@ class AlledrogoControllerTest {
     }
 
     @Test
-    public void shouldGetTheSameNames() throws Exception {
+    public void shouldGetTheSameProductsAsGiven() throws Exception {
         //GIVEN
         productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
         productRepository.save(new Product("Hammer", "phone", 111., "link", ProductCategory.PHONE));
 
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAll")).andReturn();
-
-        //THEN
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
 
-        assertThat(products).containsExactlyInAnyOrder(new ProductDTO("Asus", "computer", 666., "link", ProductCategory.LAPTOP),
+        //THEN
+        assertThat(products).containsExactlyInAnyOrder(
+                new ProductDTO("Asus", "computer", 666., "link", ProductCategory.LAPTOP),
                 new ProductDTO("Hammer", "phone", 111., "link", ProductCategory.PHONE));
+    }
+
+    @Test
+    public void shouldAddProductToDatabase() throws Exception {
+        //GIVEN
+        ProductDTO productDTO =
+                new ProductDTO("Asus", "computer", 666., "link", ProductCategory.LAPTOP);
+
+        //WHEN
+        String json = objectMapper.writeValueAsString(productDTO);
+        MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/add")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(json))
+                        .andReturn();
+        int status = mvcResult.getResponse().getStatus();
+
+        //THEN
+        assertThat(status).isEqualTo(201);
     }
 }
