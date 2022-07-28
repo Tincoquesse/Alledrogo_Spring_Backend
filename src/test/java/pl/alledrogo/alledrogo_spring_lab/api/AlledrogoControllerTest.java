@@ -20,8 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -90,5 +89,19 @@ class AlledrogoControllerTest {
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(productDTO).isEqualTo(ProductMapper.fromEntity(productRepository.findByProductName("Asus").get()));
+    }
+
+    @Test
+    public void shouldRemoveProductFromDatabase() throws Exception {
+        //GIVEN
+        productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/remove/Asus")).andReturn();
+        int status = mvcResult.getResponse().getStatus();
+
+        //THEN
+        assertThat(status).isEqualTo(202);
+        assertThat(productRepository.findAll().size()).isEqualTo(0);
     }
 }

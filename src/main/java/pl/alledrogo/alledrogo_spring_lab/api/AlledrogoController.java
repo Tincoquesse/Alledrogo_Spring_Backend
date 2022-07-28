@@ -42,7 +42,7 @@ public class AlledrogoController {
     @ResponseBody
     public ResponseEntity<Void> removeProduct(@PathVariable String name) {
         alledrogoService.deleteProduct(name);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
