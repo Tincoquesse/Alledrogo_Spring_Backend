@@ -13,6 +13,7 @@ import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
+import pl.alledrogo.alledrogo_spring_lab.service.ProductMapper;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
@@ -84,9 +85,13 @@ class AlledrogoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
                         .andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        ProductDTO product = objectMapper.readValue(contentAsString, ProductDTO.class);
         int status = mvcResult.getResponse().getStatus();
 
         //THEN
         assertThat(status).isEqualTo(201);
+        assertThat(productDTO).isEqualTo(ProductMapper.fromEntity(productRepository.findByProductName("Asus").get()));
     }
 }
