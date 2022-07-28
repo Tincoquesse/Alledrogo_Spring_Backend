@@ -107,14 +107,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         helper.setFrom(fromAddress, senderName);
         helper.setTo(toAddress);
         helper.setSubject(subject);
-
         content = content.replace("[[name]]", user.getName());
         String verifyURL = siteURL + "/api/verify?code=" + user.getVerificationCode();
-
         content = content.replace("[[URL]]", verifyURL);
-
         helper.setText(content, true);
-
         mailSender.send(message);
 
     }
