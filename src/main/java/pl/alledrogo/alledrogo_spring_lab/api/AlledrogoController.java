@@ -9,7 +9,6 @@ import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,6 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/add")
-
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
         return new  ResponseEntity<>(alledrogoService.addProduct(productDTO), HttpStatus.CREATED);
             }
