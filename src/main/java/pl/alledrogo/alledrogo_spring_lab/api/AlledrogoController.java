@@ -26,7 +26,7 @@ public class AlledrogoController {
     @PostMapping("/product/add")
 
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
-        return new  ResponseEntity<ProductDTO>(alledrogoService.addProduct(productDTO), HttpStatus.CREATED);
+        return new  ResponseEntity<>(alledrogoService.addProduct(productDTO), HttpStatus.CREATED);
             }
 
     @GetMapping("/product/getAll")

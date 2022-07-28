@@ -85,9 +85,6 @@ class AlledrogoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
                         .andReturn();
-        MockHttpServletResponse response = mvcResult.getResponse();
-        String contentAsString = response.getContentAsString();
-        ProductDTO product = objectMapper.readValue(contentAsString, ProductDTO.class);
         int status = mvcResult.getResponse().getStatus();
 
         //THEN
