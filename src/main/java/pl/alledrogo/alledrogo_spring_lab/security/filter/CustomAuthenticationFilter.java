@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
+import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 
 import javax.servlet.FilterChain;
@@ -20,9 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -83,5 +82,18 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     String findBasketName(String username) {
         AppUser user = this.userRepo.findByUsername(username);
         return user.getBasket().getBasketName();
+    }
+
+    public static String get_admin_access_token(String name){
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role("ROLE_ADMIN"));
+
+        return JWT.create()
+                .withSubject(name)
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .withClaim("isVerified", true)
+                .withClaim("roles", roles)
+                .sign(algorithm);
     }
 }
