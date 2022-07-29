@@ -9,16 +9,13 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
-import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 import pl.alledrogo.alledrogo_spring_lab.security.filter.CustomAuthenticationFilter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
