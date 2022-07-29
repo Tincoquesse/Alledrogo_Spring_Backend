@@ -45,10 +45,10 @@ public class AlledrogoController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
+    @DeleteMapping("/product/removeFromBasket/{basketName}/{productName}")
     @ResponseBody
-    public ResponseEntity<Void> removeProductFromBasket(@PathVariable String basket, @PathVariable String product) {
-        alledrogoService.deleteProductFromBasket(basket, product);
+    public ResponseEntity<Void> removeProductFromBasket(@PathVariable String basketName, @PathVariable String productName) {
+        alledrogoService.deleteProductFromBasket(basketName, productName);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 

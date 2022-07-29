@@ -18,7 +18,6 @@ import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 import pl.alledrogo.alledrogo_spring_lab.service.ProductMapper;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -125,5 +124,77 @@ class AlledrogoControllerTest {
         //THEN
         assertThat(status).isEqualTo(202);
         assertThat(productListSize).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldGetAllBaskets() throws Exception {
+        //GIVEN
+        basketRepository.save(new Basket("testBasket1"));
+        basketRepository.save(new Basket("testBasket2"));
+
+        //WHEN
+
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/basket/getAll")).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        List<Basket> baskets = Arrays.asList(objectMapper.readValue(contentAsString, Basket[].class));
+
+        //THEN
+        assertThat(baskets.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void shouldRemoveProductFromBasket() throws Exception {
+        //GIVEN
+        Product product = new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP);
+        Basket basket = new Basket("testBasket");
+        basket.addProductToBasket(product);
+        basketRepository.save(basket);
+
+        //
+        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/removeFromBasket/testBasket/Asus")).andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        int size = basketRepository.findByBasketName("testBasket").get().getProducts().size();
+
+        //THEN
+
+        assertThat(status).isEqualTo(202);
+        assertThat(size).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldRemoveBasketFromDatabase() throws Exception {
+        //GIVEN
+        basketRepository.save(new Basket("testBasket"));
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/basket/remove/testBasket")).andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        int basketNumber = basketRepository.findAll().size();
+
+        //THEN
+
+        assertThat(status).isEqualTo(202);
+        assertThat(basketNumber).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldGetAllProductsFromBasket() throws Exception {
+        //GIVEN
+        Basket basket = new Basket("testBasket");
+        Product productFirst = new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP);
+        Product productSecond = new Product("Lenovo", "computer", 666., "link", ProductCategory.LAPTOP);
+        basket.addProductToBasket(productFirst);
+        basket.addProductToBasket(productSecond);
+        basketRepository.save(basket);
+
+        //
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAllFromBasket/testBasket")).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
+
+        //THEN
+        assertThat(products.size()).isEqualTo(2);
     }
 }
