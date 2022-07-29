@@ -50,11 +50,11 @@ class AlledrogoControllerTest {
 
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAll")).andReturn();
-
-        //THEN
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
+
+        //THEN
 
         assertThat(products.size()).isEqualTo(2);
     }
