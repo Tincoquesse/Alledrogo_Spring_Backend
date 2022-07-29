@@ -47,20 +47,22 @@ public class AlledrogoController {
 
     @DeleteMapping("/product/removeFromBasket/{basket}/{product}")
     @ResponseBody
-    public ResponseEntity<Void> removeProduct(@PathVariable String basket, @PathVariable String product) {
+    public ResponseEntity<Void> removeProductFromBasket(@PathVariable String basket, @PathVariable String product) {
         alledrogoService.deleteProductFromBasket(basket, product);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @DeleteMapping("/basket/remove/{name}")
     public ResponseEntity<Void> removeBasket(@PathVariable String name) {
         alledrogoService.deleteBasket(name);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @PostMapping("/product/addToBasket/{basketName}/{productName}")
-    public ResponseEntity<ProductDTO> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
-        return ResponseEntity.ok().body(alledrogoService.addProductToBasket(basketName, productName));
+    @ResponseBody
+    public ResponseEntity<Void> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
+        alledrogoService.addProductToBasket(basketName, productName);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @GetMapping("/product/getAllFromBasket/{basketName}")

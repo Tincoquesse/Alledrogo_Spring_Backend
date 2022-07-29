@@ -9,13 +9,16 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
 import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 import pl.alledrogo.alledrogo_spring_lab.service.ProductMapper;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +38,9 @@ class AlledrogoControllerTest {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    BasketRepository basketRepository;
 
 
     @Test
@@ -77,9 +83,9 @@ class AlledrogoControllerTest {
         //GIVEN
         ProductDTO productDTO =
                 new ProductDTO("Asus", "computer", 666., "link", ProductCategory.LAPTOP);
+        String json = objectMapper.writeValueAsString(productDTO);
 
         //WHEN
-        String json = objectMapper.writeValueAsString(productDTO);
         MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/add")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
@@ -88,7 +94,7 @@ class AlledrogoControllerTest {
 
         //THEN
         assertThat(status).isEqualTo(201);
-        assertThat(productDTO).isEqualTo(ProductMapper.fromEntity(productRepository.findByProductName("Asus").get()));
+        assertThat(ProductMapper.fromEntity(productRepository.findByProductName("Asus").get())).isEqualTo(productDTO);
     }
 
     @Test
@@ -103,5 +109,21 @@ class AlledrogoControllerTest {
         //THEN
         assertThat(status).isEqualTo(202);
         assertThat(productRepository.findAll().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldAddProductToBasket() throws Exception {
+        //GIVEN
+        productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
+        basketRepository.save(new Basket("testBasket"));
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/addToBasket/testBasket/Asus")).andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        int productListSize = basketRepository.findByBasketName("testBasket").get().getProducts().size();
+
+        //THEN
+        assertThat(status).isEqualTo(202);
+        assertThat(productListSize).isEqualTo(1);
     }
 }

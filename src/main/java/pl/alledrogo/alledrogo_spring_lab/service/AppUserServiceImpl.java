@@ -66,7 +66,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(roleRepository.findByName("ROLE_USER"));
         String basketCustomName = RandomString.make(20);
-        Basket basket = new Basket(basketCustomName, new ArrayList<>());
+        Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
         user.setBasket(basketRepository.findByBasketName(basketCustomName));
         String randomCode = RandomString.make(64);
@@ -82,7 +82,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         addRoleToUser(user.getUsername(), "ROLE_ADMIN");
         String basketCustomName = RandomString.make(20);
-        Basket basket = new Basket(basketCustomName, new ArrayList<>());
+        Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
         user.setBasket(basketRepository.findByBasketName(basketCustomName));
         user.setVerified(true);

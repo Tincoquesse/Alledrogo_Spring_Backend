@@ -24,7 +24,7 @@ public interface AlledrogoService {
 
     void addBasket(Basket basket);
 
-    ProductDTO addProductToBasket(String basketName, String productName);
+    void addProductToBasket(String basketName, String productName);
 
     List<Product> getALlProductsFromBasket(String basketName);
 

@@ -19,15 +19,15 @@ public class Basket {
     private String basketName;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Product> productsList = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
 
     public Basket() {
     }
 
-    public Basket(String basketName, List<Product> productsList) {
+    public Basket(String basketName) {
         this.basketName = basketName;
-        this.productsList = productsList;
+
     }
 
     public Long getId() {
@@ -38,20 +38,20 @@ public class Basket {
         this.id = id;
     }
 
-    public List<Product> getProductsList() {
-        return productsList;
+    public List<Product> getProducts() {
+        return products;
     }
 
     public void addProductToBasket(Product product) {
-        productsList.add(product);
+        products.add(product);
     }
 
     public void removeProductFromBasket (Product product) {
-        productsList.remove(product);
+        products.remove(product);
     }
 
-    public void setProductsList(List<Product> products) {
-        this.productsList = products;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public void setBasketName(String basketName) {

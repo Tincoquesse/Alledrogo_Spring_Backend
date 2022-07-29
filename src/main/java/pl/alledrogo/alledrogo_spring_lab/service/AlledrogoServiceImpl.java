@@ -61,7 +61,7 @@ public class AlledrogoServiceImpl implements AlledrogoService {
                 -> new BasketNotFoundException("Basket: " + basket + ", was not found"));
         Product byProductName = productRepository.findByProductName(productName).orElseThrow(()
                 -> new ProductNotFoundException("Product: " + productName + " is not present in database."));
-        if (!basketEntity.getProductsList().contains(byProductName)) {
+        if (!basketEntity.getProducts().contains(byProductName)) {
             throw new ProductNotFoundException("Product: " + productName + " is not present.");
         }
         basketEntity.removeProductFromBasket(byProductName);
@@ -76,18 +76,19 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         basketRepository.save(basket);
     }
 
-    public ProductDTO addProductToBasket(String basketName, String productName) {
-        basketRepository.findByBasketName(basketName).orElseThrow(() -> new BasketNotFoundException("Basket" + basketName + "was not found"))
-                .addProductToBasket(productRepository.findByProductName(productName).orElseThrow(
-                        () -> new ProductNotFoundException("Product: " + productName + ", was not found")));
-        Product product = productRepository.findByProductName(productName).orElseThrow();
-        return ProductMapper.fromEntity(product);
+    public void addProductToBasket(String basketName, String productName) {
+        Basket basket = basketRepository.findByBasketName(basketName).orElseThrow(()
+                -> new BasketNotFoundException("Basket" + basketName + "was not found"));
+        Product product = productRepository.findByProductName(productName).orElseThrow(
+                () -> new ProductNotFoundException("Product: " + productName + ", was not found"));
+        basket.getProducts().add(product);
+        basketRepository.save(basket);
     }
 
     public List<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
                 .orElseThrow(() -> new BasketNotFoundException("Basket: " + basketName + ", was not found."))
-                .getProductsList();
+                .getProducts();
     }
 
 }
