@@ -13,6 +13,7 @@ import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 import pl.alledrogo.alledrogo_spring_lab.security.filter.CustomAuthenticationFilter;
+import pl.alledrogo.alledrogo_spring_lab.service.AppUserService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,21 +38,21 @@ class AppUserControllerTest {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    AppUserService appUserService;
 
     @Test
     public void shouldGetAppUsers() throws Exception {
         //GIVEN
         Role user = new Role("ROLE_USER");
-        roleRepository.save(user);
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role("ROLE_ADMIN"));
-        AppUser adminUser = new AppUser("Kamil", "kamil.sound@gmail.com", "password", roles);
-        appUserRepository.save(adminUser);
+        AppUser appUser = new AppUser("Kamil", "sound@gmail.com", "password", new ArrayList<>());
+        appUserService.saveRole(user);
+        appUserService.registerUser(appUser, "localhost");
 
         //WHEN
-        String token = CustomAuthenticationFilter.get_admin_access_token("john");
+        String token = CustomAuthenticationFilter.get_admin_access_token("sound@gmail.com");
         MvcResult mvcResult = this.mockMvc.perform(get("/api/users")
-                .header("Authorization", token))
+                        .header("Authorization", "Bearer " + token))
                 .andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
