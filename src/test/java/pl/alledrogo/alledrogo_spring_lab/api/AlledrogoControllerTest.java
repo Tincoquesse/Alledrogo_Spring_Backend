@@ -88,7 +88,7 @@ class AlledrogoControllerTest {
         MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/add")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
-                        .andReturn();
+                .andReturn();
         int status = mvcResult.getResponse().getStatus();
 
         //THEN

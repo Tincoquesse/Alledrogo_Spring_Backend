@@ -86,15 +86,15 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     public static String get_admin_access_token(String name){
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-        List<Role> roles = new ArrayList<>();
-        Role role = new Role("ROLE_ADMIN");
-        roles.add(role);
+        List<String> roles = new ArrayList<>();
+        roles.add("ROLE_ADMIN");
 
-        return JWT.create()
+        String sign = JWT.create()
                 .withSubject(name)
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .withClaim("isVerified", true)
-                .withClaim("roles", new ArrayList<Role>().add(role))
+                .withClaim("roles", roles)
                 .sign(algorithm);
+        return sign;
     }
 }
