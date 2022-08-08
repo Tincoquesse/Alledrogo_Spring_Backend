@@ -51,12 +51,13 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         AppUser appUser = appUserRepository.findByUsername(username);
         if (appUser == null) {
             throw new UserNotFoundException("User not found in the database");
-        }else {
+        } else {
             System.out.println("User found");
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         appUser.getRoles().forEach(role ->
-        {authorities.add(new SimpleGrantedAuthority(role.getName()));
+        {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
         });
         return new User(appUser.getUsername(), appUser.getPassword(), authorities);
     }

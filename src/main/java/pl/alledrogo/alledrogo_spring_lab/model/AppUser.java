@@ -16,7 +16,7 @@ public class AppUser {
     private String username;
     private String password;
     @OneToOne(fetch = FetchType.EAGER)
-    private Basket basket;
+    private Basket basket = new Basket();
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
     private boolean isVerified = false;
