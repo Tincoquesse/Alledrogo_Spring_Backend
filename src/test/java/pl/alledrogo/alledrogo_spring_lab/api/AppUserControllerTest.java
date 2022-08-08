@@ -18,6 +18,7 @@ import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 import pl.alledrogo.alledrogo_spring_lab.security.filter.CustomAuthenticationFilter;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserService;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class AppUserControllerTest {
 
     @Autowired
@@ -95,12 +97,12 @@ class AppUserControllerTest {
         MvcResult mvcResult = this.mockMvc.perform(post("/api/user/save")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json)
-//                        .servletPath("/localhost/api/user/save")
-                )
+                        .servletPath("/api/user/save"))
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
 
         //THEN
         assertThat(status).isEqualTo(201);
+        assertThat(appUserRepository.findAll().size()).isEqualTo(1);
     }
 }
