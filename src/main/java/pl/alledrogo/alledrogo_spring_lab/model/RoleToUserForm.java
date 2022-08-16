@@ -19,4 +19,9 @@ public class RoleToUserForm {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
+    public RoleToUserForm(String username, String roleName) {
+        this.username = username;
+        this.roleName = roleName;
+    }
 }

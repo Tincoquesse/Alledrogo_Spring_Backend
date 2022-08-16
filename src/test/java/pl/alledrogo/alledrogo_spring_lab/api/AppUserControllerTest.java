@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
+import pl.alledrogo.alledrogo_spring_lab.model.RoleToUserForm;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
@@ -147,5 +148,32 @@ class AppUserControllerTest {
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(roleRepository.findAll().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldAddRoleToUser() throws Exception {
+        //GIVEN
+        Role role = new Role("ROLE_ADMIN");
+        roleRepository.save(role);
+        basketRepository.save(new Basket("testOne"));
+
+        AppUser user = new AppUser("Kamil", "sound@gmail.com", "password", new ArrayList<>());
+        user.setBasket(basketRepository.findByBasketName("testOne"));
+        appUserRepository.save(user);
+
+        String json = objectMapper.writeValueAsString(new RoleToUserForm("sound@gmail.com", "ROLE_ADMIN"));
+
+        //WHEN
+        String token = CustomAuthenticationFilter.get_admin_access_token("kamil.sound@gmail.com");
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/role/addtouser")
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(json))
+                .andReturn();
+        int status = mvcResult.getResponse().getStatus();
+
+        //THEN
+        assertThat(status).isEqualTo(200);
+        assertThat(roleRepository.findByName("ROLE_ADMIN")).isSameAs(role);
     }
 }
