@@ -1,6 +1,7 @@
 package pl.alledrogo.alledrogo_spring_lab.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -54,7 +55,6 @@ class AppUserControllerTest {
     @Test
     public void shouldGetAppUsers() throws Exception {
         //GIVEN
-
         appUserService.saveRole(new Role("ROLE_USER"));
 
         basketRepository.save(new Basket("testOne"));
@@ -104,5 +104,28 @@ class AppUserControllerTest {
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(appUserRepository.findAll().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldVerifyUser() throws Exception {
+        //GIVEN
+        appUserService.saveRole(new Role("ROLE_USER"));
+        basketRepository.save(new Basket("testOne"));
+        AppUser userOne = new AppUser("Kamil", "sound@gmail.com", "password", new ArrayList<>());
+        userOne.setBasket(basketRepository.findByBasketName("testOne"));
+        String randomCode = RandomString.make(64);
+        userOne.setVerificationCode(randomCode);
+        appUserRepository.save(userOne);
+        appUserService.addRoleToUser("sound@gmail.com", "ROLE_USER");
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(get("/api/verify?code=" + randomCode)).andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        String body = mvcResult.getResponse().getContentAsString();
+
+        //THEN
+        assertThat(status).isEqualTo(200);
+        assertThat(body).isEqualTo("verify_success");
+
     }
 }
