@@ -1,5 +1,6 @@
 package pl.alledrogo.alledrogo_spring_lab.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
@@ -126,6 +127,25 @@ class AppUserControllerTest {
         //THEN
         assertThat(status).isEqualTo(200);
         assertThat(body).isEqualTo("verify_success");
+    }
 
+    @Test
+    public void shouldAddRole() throws Exception {
+        //GIVEN
+        Role role = new Role("ROLE_USER");
+        String json = objectMapper.writeValueAsString(role);
+
+        //WHEN
+        String token = CustomAuthenticationFilter.get_admin_access_token("kamil.sound@gmail.com");
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/role/save")
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(json))
+                .andReturn();
+        int status = mvcResult.getResponse().getStatus();
+
+        //THEN
+        assertThat(status).isEqualTo(201);
+        assertThat(roleRepository.findAll().size()).isEqualTo(1);
     }
 }
