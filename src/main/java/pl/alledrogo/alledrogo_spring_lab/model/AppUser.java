@@ -15,10 +15,13 @@ public class AppUser {
     private String name;
     private String username;
     private String password;
+
     @OneToOne(fetch = FetchType.EAGER)
-    private Basket basket = new Basket();
+    private Basket basket;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
+
     private boolean isVerified = false;
     private String verificationCode;
 

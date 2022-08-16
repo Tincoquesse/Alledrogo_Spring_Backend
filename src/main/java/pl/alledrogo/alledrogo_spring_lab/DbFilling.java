@@ -6,15 +6,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import pl.alledrogo.alledrogo_spring_lab.api.AlledrogoController;
-import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
-import pl.alledrogo.alledrogo_spring_lab.model.Role;
+import pl.alledrogo.alledrogo_spring_lab.model.*;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
+import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
 
-import java.util.Collections;
+import java.util.ArrayList;
 
 @Component
 @Profile("prod")
@@ -24,12 +22,14 @@ public class DbFilling {
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
     private final AppUserRepository appUserRepository;
+    private BasketRepository basketRepository;
 
-    public DbFilling(AlledrogoController controller, AppUserServiceImpl appUserService, RoleRepository roleRepository, AppUserRepository appUserRepository) {
+    public DbFilling(AlledrogoController controller, AppUserServiceImpl appUserService, RoleRepository roleRepository, AppUserRepository appUserRepository, BasketRepository basketRepository) {
         this.controller = controller;
         this.appUserService = appUserService;
         this.roleRepository = roleRepository;
         this.appUserRepository = appUserRepository;
+        this.basketRepository = basketRepository;
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -55,7 +55,11 @@ public class DbFilling {
 
         Role admin = new Role("ROLE_ADMIN");
         Role user = new Role("ROLE_USER");
-        AppUser adminUser = new AppUser("Kamil", "kamil.sound@gmail.com", "password", Collections.emptyList());
+
+        basketRepository.save(new Basket("testOne"));
+
+        AppUser adminUser = new AppUser("Kamil", "kamil.sound@gmail.com", "password", new ArrayList<>());
+        adminUser.setBasket(basketRepository.findByBasketName("testOne"));
 
         roleRepository.save(admin);
         roleRepository.save(user);
