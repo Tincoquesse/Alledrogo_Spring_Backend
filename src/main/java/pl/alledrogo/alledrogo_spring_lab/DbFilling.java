@@ -22,7 +22,7 @@ public class DbFilling {
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
     private final AppUserRepository appUserRepository;
-    private BasketRepository basketRepository;
+    private final BasketRepository basketRepository;
 
     public DbFilling(AlledrogoController controller, AppUserServiceImpl appUserService, RoleRepository roleRepository, AppUserRepository appUserRepository, BasketRepository basketRepository) {
         this.controller = controller;
@@ -58,7 +58,7 @@ public class DbFilling {
 
         basketRepository.save(new Basket("testOne"));
 
-        AppUser adminUser = new AppUser("Kamil", "password", "password", new ArrayList<>());
+        AppUser adminUser = new AppUser("Kamil", "admin", "admin", new ArrayList<>());
         adminUser.setBasket(basketRepository.findByBasketName("testOne"));
 
         roleRepository.save(admin);

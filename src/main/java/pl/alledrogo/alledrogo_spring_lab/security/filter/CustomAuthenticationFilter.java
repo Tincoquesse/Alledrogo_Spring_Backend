@@ -47,7 +47,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response, FilterChain chain,
-                                            Authentication authentication) throws IOException, ServletException {
+                                            Authentication authentication) throws IOException {
         User user = (User) authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
 
@@ -56,6 +56,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("basketName", findBasketName(user.getUsername()))
+                .withClaim("name", findName(user.getUsername()))
                 .withClaim("isVerified", isUserVerified(user.getUsername()))
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
@@ -83,17 +84,21 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         return user.getBasket().getBasketName();
     }
 
-    public static String get_admin_access_token(String name){
+    String findName(String username) {
+        AppUser user = this.userRepo.findByUsername(username);
+        return user.getName();
+    }
+
+    public static String get_admin_access_token(String name) {
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_ADMIN");
 
-        String sign = JWT.create()
+        return JWT.create()
                 .withSubject(name)
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .withClaim("isVerified", true)
                 .withClaim("roles", roles)
                 .sign(algorithm);
-        return sign;
     }
 }
