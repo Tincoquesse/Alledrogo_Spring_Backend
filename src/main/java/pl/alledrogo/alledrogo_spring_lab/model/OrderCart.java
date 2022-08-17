@@ -13,6 +13,9 @@ public class OrderCart {
     @ManyToMany
     private List<Product> products;
 
+    @ManyToOne
+    private AppUser appUser;
+
     private String street;
     private String postalCode;
     private String city;
@@ -23,7 +26,6 @@ public class OrderCart {
 
     public OrderCart(List<Product> products, String street, String postalCode, String city, Integer phoneNumber) {
         this.products = products;
-
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
@@ -68,5 +70,13 @@ public class OrderCart {
 
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

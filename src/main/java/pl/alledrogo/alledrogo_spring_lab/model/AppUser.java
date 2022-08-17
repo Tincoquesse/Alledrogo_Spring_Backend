@@ -3,6 +3,7 @@ package pl.alledrogo.alledrogo_spring_lab.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -19,6 +20,8 @@ public class AppUser {
     @OneToOne(fetch = FetchType.EAGER)
     private Basket basket = new Basket();
 
+    @OneToMany
+    private List<OrderCart> orderCarts = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>() ;
 
@@ -97,5 +100,13 @@ public class AppUser {
 
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+    public List<OrderCart> getOrderCarts() {
+        return orderCarts;
+    }
+
+    public void setOrderCarts(List<OrderCart> orderCarts) {
+        this.orderCarts = orderCarts;
     }
 }
