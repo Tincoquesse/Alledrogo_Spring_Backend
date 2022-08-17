@@ -55,16 +55,10 @@ public class DbFilling {
 
         Role admin = new Role("ROLE_ADMIN");
         Role user = new Role("ROLE_USER");
-
-        basketRepository.save(new Basket("testOne"));
-
-        AppUser adminUser = new AppUser("Kamil", "admin", "admin", new ArrayList<>());
-        adminUser.setBasket(basketRepository.findByBasketName("testOne"));
-
         roleRepository.save(admin);
         roleRepository.save(user);
-        appUserRepository.save(adminUser);
-        appUserService.saveAdmin(adminUser);
 
+        AppUser adminUser = new AppUser("Kamil", "admin", "admin", new ArrayList<>());
+        appUserService.saveAdmin(adminUser);
     }
 }

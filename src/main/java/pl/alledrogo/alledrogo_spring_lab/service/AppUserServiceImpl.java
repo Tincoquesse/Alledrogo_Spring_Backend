@@ -81,7 +81,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     @Override
     public AppUser saveAdmin(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        addRoleToUser(user.getUsername(), "ROLE_ADMIN");
+        user.getRoles().add(roleRepository.findByName("ROLE_ADMIN"));
         String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
