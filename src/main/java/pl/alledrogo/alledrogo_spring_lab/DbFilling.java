@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import pl.alledrogo.alledrogo_spring_lab.api.AlledrogoController;
-import pl.alledrogo.alledrogo_spring_lab.model.*;
+import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
+import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
@@ -21,15 +24,12 @@ public class DbFilling {
     private final AlledrogoController controller;
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
-    private final AppUserRepository appUserRepository;
-    private final BasketRepository basketRepository;
+
 
     public DbFilling(AlledrogoController controller, AppUserServiceImpl appUserService, RoleRepository roleRepository, AppUserRepository appUserRepository, BasketRepository basketRepository) {
         this.controller = controller;
         this.appUserService = appUserService;
         this.roleRepository = roleRepository;
-        this.appUserRepository = appUserRepository;
-        this.basketRepository = basketRepository;
     }
 
     @EventListener(ApplicationReadyEvent.class)
