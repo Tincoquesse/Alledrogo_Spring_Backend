@@ -1,8 +1,6 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
-import pl.alledrogo.alledrogo_spring_lab.model.Basket;
-import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.model.*;
 
 import java.util.List;
 
@@ -28,4 +26,5 @@ public interface AlledrogoService {
 
     List<Product> getALlProductsFromBasket(String basketName);
 
+    OrderCartDTO addOrder(OrderCartDTO orderDTO);
 }

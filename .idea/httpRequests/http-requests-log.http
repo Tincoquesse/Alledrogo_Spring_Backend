@@ -1,3 +1,7 @@
+POST http://localhost:8080/shop/order/save
+
+###
+
 POST http://localhost:8080/shop/product/addToBasket/cGOZeyTOIlcsnVo1kY0E/Asus%20TT
 
 ###
@@ -283,12 +287,6 @@ GET http://localhost:8080/shop/product/getAll
 GET http://localhost:8080/jpa/getAll
 
 <> 2022-06-18T101810.200.html
-
-###
-
-GET http://localhost:8080/jpa/getAll
-
-<> 2022-06-18T101730.200.html
 
 ###
 

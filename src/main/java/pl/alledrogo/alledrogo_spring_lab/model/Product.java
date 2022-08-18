@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 public class Product {
+
     @Id
     @SequenceGenerator(
             name = "product_sequence",
@@ -37,6 +38,7 @@ public class Product {
         this.imageURL = pictureURL;
         this.category = category;
     }
+
 
     public List<Basket> getBaskets() {
         return baskets;

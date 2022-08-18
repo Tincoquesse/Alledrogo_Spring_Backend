@@ -4,9 +4,7 @@ package pl.alledrogo.alledrogo_spring_lab.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.alledrogo.alledrogo_spring_lab.model.Basket;
-import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.model.*;
 import pl.alledrogo.alledrogo_spring_lab.service.AlledrogoService;
 
 import java.util.List;
@@ -34,6 +32,7 @@ public class AlledrogoController {
     }
 
     @GetMapping("/basket/getAll")
+    @ResponseBody
     public ResponseEntity<List<Basket>> getAllBaskets() {
         return ResponseEntity.ok().body(alledrogoService.getAllBaskets());
     }
@@ -59,7 +58,6 @@ public class AlledrogoController {
     }
 
     @PostMapping("/product/addToBasket/{basketName}/{productName}")
-    @ResponseBody
     public ResponseEntity<Void> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
         alledrogoService.addProductToBasket(basketName, productName);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
@@ -68,6 +66,12 @@ public class AlledrogoController {
     @GetMapping("/product/getAllFromBasket/{basketName}")
     public ResponseEntity<List<Product>> getAllProductsFromBasket(@PathVariable String basketName) {
         return ResponseEntity.ok().body(alledrogoService.getALlProductsFromBasket(basketName));
+    }
+
+    @PostMapping("/order/save")
+    public ResponseEntity<OrderCartDTO> addOrder(@RequestBody OrderCartDTO orderDTO) {
+        System.out.println("good adress");
+        return new  ResponseEntity<>(alledrogoService.addOrder(orderDTO), HttpStatus.CREATED);
     }
 
 }

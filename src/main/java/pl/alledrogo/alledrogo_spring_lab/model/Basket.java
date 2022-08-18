@@ -34,10 +34,6 @@ public class Basket {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public List<Product> getProducts() {
         return products;
     }
