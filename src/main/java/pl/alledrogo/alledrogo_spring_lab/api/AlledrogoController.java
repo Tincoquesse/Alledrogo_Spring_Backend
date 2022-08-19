@@ -68,7 +68,7 @@ public class AlledrogoController {
         return ResponseEntity.ok().body(alledrogoService.getALlProductsFromBasket(basketName));
     }
 
-    @PostMapping("/order/save")
+    @PostMapping("/order/add")
     public ResponseEntity<OrderCartDTO> addOrder(@RequestBody OrderCartDTO orderDTO) {
         return new  ResponseEntity<>(alledrogoService.addOrder(orderDTO), HttpStatus.CREATED);
     }

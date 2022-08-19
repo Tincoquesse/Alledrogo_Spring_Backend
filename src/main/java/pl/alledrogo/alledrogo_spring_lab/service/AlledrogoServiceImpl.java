@@ -1,10 +1,12 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductAlreadyExistException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.model.*;
+import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.OrderCartRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
@@ -20,12 +22,14 @@ public class AlledrogoServiceImpl implements AlledrogoService {
     private final ProductRepository productRepository;
     private final BasketRepository basketRepository;
     private final OrderCartRepository orderCartRepository;
+    private final AppUserRepository appUserRepository;
 
 
-    public AlledrogoServiceImpl(ProductRepository productRepository, BasketRepository basketRepository, OrderCartRepository orderCartRepository) {
+    public AlledrogoServiceImpl(ProductRepository productRepository, BasketRepository basketRepository, OrderCartRepository orderCartRepository, AppUserRepository appUserRepository) {
         this.productRepository = productRepository;
         this.basketRepository = basketRepository;
         this.orderCartRepository = orderCartRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     public ProductDTO addProduct(ProductDTO productDTO) {
@@ -94,6 +98,13 @@ public class AlledrogoServiceImpl implements AlledrogoService {
 
     public OrderCartDTO addOrder(OrderCartDTO orderDTO) {
         OrderCart save = orderCartRepository.save(OrderCartMapper.fromDTO(orderDTO));
+        AppUser appUser = appUserRepository.findByUsername(orderDTO.getUsername());
+        appUser.getOrderCarts().add(save);
+        String basketCustomName = RandomString.make(20);
+        Basket basket = new Basket(basketCustomName);
+        basketRepository.save(basket);
+        appUser.setBasket(basketRepository.findByBasketName(basketCustomName));
+        appUserRepository.save(appUser);
         return OrderCartMapper.fromEntity(save);
     }
 

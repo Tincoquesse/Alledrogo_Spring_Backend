@@ -13,18 +13,19 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String username;
-    private String password;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Basket basket = new Basket();
 
     @OneToMany
     private List<OrderCart> orderCarts = new ArrayList<>();
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>() ;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+
+    private Collection<Role> roles = new ArrayList<>() ;
+    private String name;
+    private String username;
+    private String password;
     private boolean isVerified = false;
     private String verificationCode;
 

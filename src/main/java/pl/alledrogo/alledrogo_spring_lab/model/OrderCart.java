@@ -15,30 +15,30 @@ public class OrderCart {
     @ManyToMany
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne
-    private AppUser appUser;
-
     private String firstAndLastName;
     private String street;
     private String postalCode;
     private String city;
     private Integer phoneNumber;
     private LocalDateTime orderDate;
+    private String username;
+    private String basketName;
 
     public OrderCart() {
     }
 
     public OrderCart(List<Product> products, String street, String postalCode,
                      String city, Integer phoneNumber, LocalDateTime orderDate,
-                     AppUser appUser, String firstAndLastName) {
+                     String firstAndLastName, String username, String basketName) {
         this.products = products;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.orderDate = orderDate;
-        this.appUser = appUser;
         this.firstAndLastName = firstAndLastName;
+        this.username = username;
+        this.basketName = basketName;
     }
 
     public Long getId() {
@@ -85,14 +85,6 @@ public class OrderCart {
         this.phoneNumber = phoneNumber;
     }
 
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
-
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
@@ -107,5 +99,21 @@ public class OrderCart {
 
     public void setFirstAndLastName(String firstAndLastName) {
         this.firstAndLastName = firstAndLastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getBasketName() {
+        return basketName;
+    }
+
+    public void setBasketName(String basketName) {
+        this.basketName = basketName;
     }
 }

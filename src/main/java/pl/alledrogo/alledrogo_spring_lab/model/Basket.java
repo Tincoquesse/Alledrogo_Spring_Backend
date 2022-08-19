@@ -16,10 +16,11 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "basket_sequence")
     private Long id;
-    private String basketName;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Product> products = new ArrayList<>();
+
+    private String basketName;
 
 
     public Basket() {
