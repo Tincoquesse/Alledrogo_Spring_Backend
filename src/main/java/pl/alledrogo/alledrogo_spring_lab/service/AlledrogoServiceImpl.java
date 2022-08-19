@@ -1,6 +1,5 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
-import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductAlreadyExistException;
@@ -32,8 +31,14 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         this.appUserRepository = appUserRepository;
     }
 
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(ProductMapper::fromEntity)
+                .collect(Collectors.toList());
+    }
+
     public ProductDTO addProduct(ProductDTO productDTO) {
-        if (productRepository.findByProductName(productDTO.getProductName()).isPresent()){
+        if (productRepository.findByProductName(productDTO.getProductName()).isPresent()) {
             throw new ProductAlreadyExistException("Product Already Exist");
         } else {
             Product save = productRepository.save(ProductMapper.fromDTO(productDTO));
@@ -41,20 +46,22 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         }
     }
 
-    public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll().stream()
-                .map(ProductMapper::fromEntity)
-                .collect(Collectors.toList());
+    public void deleteProduct(String name) {
+        productRepository.findByProductName(name).orElseThrow(() ->
+                new ProductNotFoundException("Product not found"));
+        productRepository.deleteByProductName(name);
+    }
+
+    public void clearProductsList() {
+        productRepository.deleteAll();
     }
 
     public List<Basket> getAllBaskets() {
         return basketRepository.findAll();
     }
 
-    public void deleteProduct(String name) {
-        productRepository.findByProductName(name).orElseThrow(() ->
-                new ProductNotFoundException("Product not found"));
-        productRepository.deleteByProductName(name);
+    public void addBasket(Basket basket) {
+        basketRepository.save(basket);
     }
 
     public void deleteBasket(String name) {
@@ -71,14 +78,6 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         }
         basketEntity.removeProductFromBasket(byProductName);
         basketRepository.save(basketEntity);
-    }
-
-    public void clearProductsList() {
-        productRepository.deleteAll();
-    }
-
-    public void addBasket(Basket basket) {
-        basketRepository.save(basket);
     }
 
     public void addProductToBasket(String basketName, String productName) {
@@ -100,10 +99,7 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         OrderCart save = orderCartRepository.save(OrderCartMapper.fromDTO(orderDTO));
         AppUser appUser = appUserRepository.findByUsername(orderDTO.getUsername());
         appUser.getOrderCarts().add(save);
-        String basketCustomName = RandomString.make(20);
-        Basket basket = new Basket(basketCustomName);
-        basketRepository.save(basket);
-        appUser.setBasket(basketRepository.findByBasketName(basketCustomName).get());
+        appUser.getBasket().getProducts().clear();
         appUserRepository.save(appUser);
         return OrderCartMapper.fromEntity(save);
     }
