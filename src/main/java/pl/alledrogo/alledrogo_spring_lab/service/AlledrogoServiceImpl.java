@@ -103,7 +103,7 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
-        appUser.setBasket(basketRepository.findByBasketName(basketCustomName));
+        appUser.setBasket(basketRepository.findByBasketName(basketCustomName).get());
         appUserRepository.save(appUser);
         return OrderCartMapper.fromEntity(save);
     }

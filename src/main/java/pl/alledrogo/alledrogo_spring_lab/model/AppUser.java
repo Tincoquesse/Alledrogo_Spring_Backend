@@ -79,8 +79,8 @@ public class AppUser {
         return basket;
     }
 
-    public void setBasket(Optional<Basket> basket) {
-        this.basket = basket.orElseThrow();
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 
     public boolean isVerified() {

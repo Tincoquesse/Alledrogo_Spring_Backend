@@ -64,8 +64,8 @@ class AppUserControllerTest {
         AppUser userOne = new AppUser("Kamil", "sound@gmail.com", "password", new ArrayList<>());
         AppUser userTwo = new AppUser("Rafal", "thunder@gmail.com", "password", new ArrayList<>());
 
-        userOne.setBasket(basketRepository.findByBasketName("testOne"));
-        userTwo.setBasket(basketRepository.findByBasketName("testTwo"));
+        userOne.setBasket(basketRepository.findByBasketName("testOne").get());
+        userTwo.setBasket(basketRepository.findByBasketName("testTwo").get());
 
         appUserRepository.save(userOne);
         appUserRepository.save(userTwo);
@@ -113,7 +113,7 @@ class AppUserControllerTest {
         appUserService.saveRole(new Role("ROLE_USER"));
         basketRepository.save(new Basket("testOne"));
         AppUser userOne = new AppUser("Kamil", "sound@gmail.com", "password", new ArrayList<>());
-        userOne.setBasket(basketRepository.findByBasketName("testOne"));
+        userOne.setBasket(basketRepository.findByBasketName("testOne").get());
         String randomCode = RandomString.make(64);
         userOne.setVerificationCode(randomCode);
         appUserRepository.save(userOne);
@@ -157,7 +157,7 @@ class AppUserControllerTest {
         basketRepository.save(new Basket("testOne"));
 
         AppUser user = new AppUser("Kamil", "sound@gmail.com", "password", new ArrayList<>());
-        user.setBasket(basketRepository.findByBasketName("testOne"));
+        user.setBasket(basketRepository.findByBasketName("testOne").get());
         appUserRepository.save(user);
 
         String json = objectMapper.writeValueAsString(new RoleToUserForm("sound@gmail.com", "ROLE_ADMIN"));

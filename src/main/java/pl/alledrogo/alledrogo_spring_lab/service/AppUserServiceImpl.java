@@ -31,13 +31,14 @@ import java.util.List;
 @Transactional
 
 public class AppUserServiceImpl implements AppUserService, UserDetailsService {
+    @Autowired
+    private JavaMailSender mailSender;
 
     private final AppUserRepository appUserRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final BasketRepository basketRepository;
-    @Autowired
-    private JavaMailSender mailSender;
+
 
     public AppUserServiceImpl(AppUserRepository appUserRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, BasketRepository basketRepository) {
         this.appUserRepository = appUserRepository;
@@ -69,7 +70,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
-        user.setBasket(basketRepository.findByBasketName(basketCustomName));
+        user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
         sendVerificationEmail(user, siteUR);
@@ -85,7 +86,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
-        user.setBasket(basketRepository.findByBasketName(basketCustomName));
+        user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
         user.setVerified(true);
         return appUserRepository.save(user);
     }
