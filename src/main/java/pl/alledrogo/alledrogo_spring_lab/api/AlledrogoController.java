@@ -70,7 +70,6 @@ public class AlledrogoController {
 
     @PostMapping("/order/save")
     public ResponseEntity<OrderCartDTO> addOrder(@RequestBody OrderCartDTO orderDTO) {
-        System.out.println("good adress");
         return new  ResponseEntity<>(alledrogoService.addOrder(orderDTO), HttpStatus.CREATED);
     }
 

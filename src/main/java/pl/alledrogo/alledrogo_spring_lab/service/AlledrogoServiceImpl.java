@@ -93,7 +93,6 @@ public class AlledrogoServiceImpl implements AlledrogoService {
     }
 
     public OrderCartDTO addOrder(OrderCartDTO orderDTO) {
-        System.out.println("add order method");
         OrderCart save = orderCartRepository.save(OrderCartMapper.fromDTO(orderDTO));
         return OrderCartMapper.fromEntity(save);
     }

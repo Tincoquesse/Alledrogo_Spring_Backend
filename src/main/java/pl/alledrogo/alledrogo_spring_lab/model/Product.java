@@ -28,6 +28,9 @@ public class Product {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Basket> baskets;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<OrderCart> orders;
+
     public Product() {
     }
 
@@ -94,6 +97,14 @@ public class Product {
 
     public void setBaskets(List<Basket> baskets) {
         this.baskets = baskets;
+    }
+
+    public List<OrderCart> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderCart> orders) {
+        this.orders = orders;
     }
 
     @Override

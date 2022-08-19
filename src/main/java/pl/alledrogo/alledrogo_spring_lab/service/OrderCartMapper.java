@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.alledrogo.alledrogo_spring_lab.model.OrderCart;
 import pl.alledrogo.alledrogo_spring_lab.model.OrderCartDTO;
+import pl.alledrogo.alledrogo_spring_lab.model.Product;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderCartMapper {
@@ -23,7 +27,7 @@ public class OrderCartMapper {
 
     public static OrderCart fromDTO(OrderCartDTO orderCartDTO) {
 
-        return new OrderCart(basketRepository.findByBasketName(orderCartDTO.getBasketName()).get().getProducts(),
+        return new OrderCart(mappingProductsFromBasket(orderCartDTO.getBasketName()),
                 orderCartDTO.getStreet(),
                 orderCartDTO.getPostalCode(),
                 orderCartDTO.getCity(),
@@ -43,6 +47,10 @@ public class OrderCartMapper {
                 orderCart.getPostalCode(),
                 orderCart.getCity(),
                 orderCart.getPhoneNumber());
+    }
+
+    private static List<Product> mappingProductsFromBasket(String basketName) {
+        return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getProducts());
     }
 
 }
