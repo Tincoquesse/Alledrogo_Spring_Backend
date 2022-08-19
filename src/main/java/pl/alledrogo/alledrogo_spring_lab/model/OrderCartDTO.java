@@ -1,5 +1,7 @@
 package pl.alledrogo.alledrogo_spring_lab.model;
 
+import java.util.Objects;
+
 public class OrderCartDTO {
 
     private String username;
@@ -78,5 +80,18 @@ public class OrderCartDTO {
 
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrderCartDTO)) return false;
+        OrderCartDTO that = (OrderCartDTO) o;
+        return Objects.equals(username, that.username) && Objects.equals(firstAndLastName, that.firstAndLastName) && Objects.equals(basketName, that.basketName) && Objects.equals(street, that.street) && Objects.equals(postalCode, that.postalCode) && Objects.equals(city, that.city) && Objects.equals(phoneNumber, that.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, firstAndLastName, basketName, street, postalCode, city, phoneNumber);
     }
 }

@@ -1,6 +1,7 @@
 package pl.alledrogo.alledrogo_spring_lab.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,15 +10,14 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import pl.alledrogo.alledrogo_spring_lab.model.Basket;
-import pl.alledrogo.alledrogo_spring_lab.model.Product;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductCategory;
-import pl.alledrogo.alledrogo_spring_lab.model.ProductDTO;
+import pl.alledrogo.alledrogo_spring_lab.model.*;
+import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.ProductRepository;
 import pl.alledrogo.alledrogo_spring_lab.service.ProductMapper;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,10 +36,13 @@ class AlledrogoControllerTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    BasketRepository basketRepository;
+    private BasketRepository basketRepository;
+
+    @Autowired
+    private AppUserRepository appUserRepository;
 
 
     @Test
@@ -196,5 +199,38 @@ class AlledrogoControllerTest {
 
         //THEN
         assertThat(products.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void shouldMakeOrder() throws Exception {
+        //GIVEN
+        Product product = productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
+        Basket basket = new Basket("testBasket");
+        basket.addProductToBasket(product);
+        basketRepository.save(basket);
+
+        AppUser appUser = new AppUser("Jon", "test", "test", new ArrayList<>());
+        appUser.setBasket(basketRepository.findByBasketName("testBasket").get());
+        appUserRepository.save(appUser);
+
+        OrderCartDTO orderCartDTO = new OrderCartDTO("test", "test test", "testBasket",
+                "street", "31-311", "testCity", 999888777);
+        String json = objectMapper.writeValueAsString(orderCartDTO);
+
+        //WHEN
+        MvcResult mvcResult = this.mockMvc.perform(post("/shop/order/add")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(json))
+                .andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        OrderCartDTO responseOrderCartDTO = objectMapper.readValue(contentAsString, OrderCartDTO.class);
+
+
+        //THEN
+        assertThat(status).isEqualTo(201);
+        assertThat(responseOrderCartDTO).isEqualTo(orderCartDTO);
+        assertThat(appUserRepository.findByUsername("test").getBasket().getProducts()).isEmpty();
     }
 }
