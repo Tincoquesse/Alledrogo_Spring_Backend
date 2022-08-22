@@ -95,10 +95,10 @@ class AppUserControllerTest {
         String json = objectMapper.writeValueAsString(appUser);
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(post("/api/user/save")
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json)
-                        .servletPath("/api/user/save"))
+                        .servletPath("/api/user"))
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
 
@@ -137,7 +137,7 @@ class AppUserControllerTest {
 
         //WHEN
         String token = CustomAuthenticationFilter.get_admin_access_token("kamil.sound@gmail.com");
-        MvcResult mvcResult = this.mockMvc.perform(post("/api/role/save")
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/role")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
@@ -164,7 +164,7 @@ class AppUserControllerTest {
 
         //WHEN
         String token = CustomAuthenticationFilter.get_admin_access_token("kamil.sound@gmail.com");
-        MvcResult mvcResult = this.mockMvc.perform(post("/api/role/addtouser")
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/role/toUser")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))

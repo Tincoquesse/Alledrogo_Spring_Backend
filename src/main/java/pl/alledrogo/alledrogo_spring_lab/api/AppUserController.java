@@ -41,7 +41,7 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
-    @PostMapping("/user/save")
+    @PostMapping("/user")
     public ResponseEntity<AppUser> registerUser(@RequestBody AppUser appUser, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(appUserService.registerUser(appUser, getSiteURL(request)));
@@ -66,13 +66,13 @@ public class AppUserController {
         return ResponseEntity.ok().body(appUserService.getAppUsers());
     }
 
-    @PostMapping("/role/save")
+    @PostMapping("/role")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(appUserService.saveRole(role));
     }
 
-    @PostMapping("/role/addtouser")
+    @PostMapping("/role/toUser")
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
         appUserService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
