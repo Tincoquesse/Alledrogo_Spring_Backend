@@ -52,7 +52,7 @@ class AlledrogoControllerTest {
         productRepository.save(new Product("Hammer", "phone", 111., "link", ProductCategory.PHONE));
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAll")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/products")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
@@ -69,7 +69,7 @@ class AlledrogoControllerTest {
         productRepository.save(new Product("Hammer", "phone", 111., "link", ProductCategory.PHONE));
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAll")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/products")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
@@ -88,7 +88,7 @@ class AlledrogoControllerTest {
         String json = objectMapper.writeValueAsString(productDTO);
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/add")
+        MvcResult mvcResult = this.mockMvc.perform(post("/shop/product")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
                 .andReturn();
@@ -105,7 +105,7 @@ class AlledrogoControllerTest {
         productRepository.save(new Product("Asus", "computer", 666., "link", ProductCategory.LAPTOP));
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/remove/Asus")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/Asus")).andReturn();
         int status = mvcResult.getResponse().getStatus();
 
         //THEN
@@ -120,7 +120,7 @@ class AlledrogoControllerTest {
         basketRepository.save(new Basket("testBasket"));
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/addToBasket/testBasket/Asus")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/toBasket/testBasket/Asus")).andReturn();
         int status = mvcResult.getResponse().getStatus();
         int productListSize = basketRepository.findByBasketName("testBasket").get().getProducts().size();
 
@@ -137,7 +137,7 @@ class AlledrogoControllerTest {
 
         //WHEN
 
-        MvcResult mvcResult = this.mockMvc.perform(get("/shop/basket/getAll")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/baskets")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<Basket> baskets = Arrays.asList(objectMapper.readValue(contentAsString, Basket[].class));
@@ -155,7 +155,7 @@ class AlledrogoControllerTest {
         basketRepository.save(basket);
 
         //
-        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/removeFromBasket/testBasket/Asus")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/fromBasket/testBasket/Asus")).andReturn();
         int status = mvcResult.getResponse().getStatus();
         int size = basketRepository.findByBasketName("testBasket").get().getProducts().size();
 
@@ -171,7 +171,7 @@ class AlledrogoControllerTest {
         basketRepository.save(new Basket("testBasket"));
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/basket/remove/testBasket")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(delete("/shop/basket/testBasket")).andReturn();
         int status = mvcResult.getResponse().getStatus();
         int basketNumber = basketRepository.findAll().size();
 
@@ -192,7 +192,7 @@ class AlledrogoControllerTest {
         basketRepository.save(basket);
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(get("/shop/product/getAllFromBasket/testBasket")).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(get("/shop/products/fromBasket/testBasket")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
@@ -216,7 +216,7 @@ class AlledrogoControllerTest {
         String json = objectMapper.writeValueAsString(orderCartDTO);
 
         //WHEN
-        MvcResult mvcResult = this.mockMvc.perform(post("/shop/order/add")
+        MvcResult mvcResult = this.mockMvc.perform(post("/shop/order")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
                 .andReturn();

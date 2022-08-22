@@ -20,55 +20,55 @@ public class AlledrogoController {
         this.alledrogoService = alledrogoService;
     }
 
-    @PostMapping("/product/add")
+    @PostMapping("/product")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
         return new  ResponseEntity<>(alledrogoService.addProduct(productDTO), HttpStatus.CREATED);
             }
 
-    @GetMapping("/product/getAll")
+    @GetMapping("/products")
     @ResponseBody
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok().body(alledrogoService.getAllProducts());
     }
 
-    @GetMapping("/basket/getAll")
+    @GetMapping("/baskets")
     @ResponseBody
     public ResponseEntity<List<Basket>> getAllBaskets() {
         return ResponseEntity.ok().body(alledrogoService.getAllBaskets());
     }
 
-    @DeleteMapping("/product/remove/{name}")
+    @DeleteMapping("/product/{name}")
     @ResponseBody
     public ResponseEntity<Void> removeProduct(@PathVariable String name) {
         alledrogoService.deleteProduct(name);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @DeleteMapping("/product/removeFromBasket/{basketName}/{productName}")
+    @DeleteMapping("/product/fromBasket/{basketName}/{productName}")
     @ResponseBody
     public ResponseEntity<Void> removeProductFromBasket(@PathVariable String basketName, @PathVariable String productName) {
         alledrogoService.deleteProductFromBasket(basketName, productName);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @DeleteMapping("/basket/remove/{name}")
+    @DeleteMapping("/basket/{name}")
     public ResponseEntity<Void> removeBasket(@PathVariable String name) {
         alledrogoService.deleteBasket(name);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @PostMapping("/product/addToBasket/{basketName}/{productName}")
+    @PostMapping("/product/toBasket/{basketName}/{productName}")
     public ResponseEntity<Void> addProductToBasket(@PathVariable String basketName, @PathVariable String productName) {
         alledrogoService.addProductToBasket(basketName, productName);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @GetMapping("/product/getAllFromBasket/{basketName}")
+    @GetMapping("/products/fromBasket/{basketName}")
     public ResponseEntity<List<Product>> getAllProductsFromBasket(@PathVariable String basketName) {
         return ResponseEntity.ok().body(alledrogoService.getALlProductsFromBasket(basketName));
     }
 
-    @PostMapping("/order/add")
+    @PostMapping("/order")
     public ResponseEntity<OrderCartDTO> addOrder(@RequestBody OrderCartDTO orderDTO) {
         return new  ResponseEntity<>(alledrogoService.addOrder(orderDTO), HttpStatus.CREATED);
     }
