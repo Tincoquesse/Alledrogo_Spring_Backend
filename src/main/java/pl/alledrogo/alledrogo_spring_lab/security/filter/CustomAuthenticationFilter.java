@@ -74,17 +74,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     }
 
     private Boolean isUserVerified(String username) {
-        AppUser user = this.userRepo.findByUsername(username);
+        AppUser user = this.userRepo.findByUsername(username).orElseThrow();
         return user.isVerified();
     }
 
     String findBasketName(String username) {
-        AppUser user = this.userRepo.findByUsername(username);
+        AppUser user = this.userRepo.findByUsername(username).orElseThrow();
         return user.getBasket().getBasketName();
     }
 
     String findName(String username) {
-        AppUser user = this.userRepo.findByUsername(username);
+        AppUser user = this.userRepo.findByUsername(username).orElseThrow();
         return user.getName();
     }
 

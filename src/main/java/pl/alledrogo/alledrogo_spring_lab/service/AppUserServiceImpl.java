@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
+import pl.alledrogo.alledrogo_spring_lab.exceptions.UserAlreadyExistException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.UserNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Basket;
@@ -49,12 +51,9 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser appUser = appUserRepository.findByUsername(username);
-        if (appUser == null) {
-            throw new UserNotFoundException("User not found in the database");
-        } else {
-            System.out.println("User found");
-        }
+        AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
+                new UserNotFoundException("User " + username + " was not found."));
+        System.out.println("User found");
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         appUser.getRoles().forEach(role ->
         {
@@ -64,17 +63,21 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     }
 
     @Override
-    public AppUser registerUser(AppUser user, String siteUR) throws MessagingException, UnsupportedEncodingException {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(roleRepository.findByName("ROLE_USER"));
-        String basketCustomName = RandomString.make(20);
-        Basket basket = new Basket(basketCustomName);
-        basketRepository.save(basket);
-        user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
-        String randomCode = RandomString.make(64);
-        user.setVerificationCode(randomCode);
-        sendVerificationEmail(user, siteUR);
-        return appUserRepository.save(user);
+    public void registerUser(AppUser user, String siteUR) throws MessagingException, UnsupportedEncodingException {
+        if (appUserRepository.findByUsername(user.getUsername()).isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.getRoles().add(roleRepository.findByName("ROLE_USER"));
+            String basketCustomName = RandomString.make(20);
+            Basket basket = new Basket(basketCustomName);
+            basketRepository.save(basket);
+            user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
+            String randomCode = RandomString.make(64);
+            user.setVerificationCode(randomCode);
+            sendVerificationEmail(user, siteUR);
+            appUserRepository.save(user);
+        } else {
+            throw new UserAlreadyExistException("User " + user.getUsername()+ " already exist.");
+        }
 
 
     }
@@ -86,7 +89,8 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         String basketCustomName = RandomString.make(20);
         Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
-        user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
+        user.setBasket(basketRepository.findByBasketName(basketCustomName).orElseThrow(() ->
+                new BasketNotFoundException("Basket " +  basketCustomName + " was not found.")));
         user.setVerified(true);
         return appUserRepository.save(user);
     }
@@ -124,14 +128,15 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        AppUser user = appUserRepository.findByUsername(username);
+        AppUser user = appUserRepository.findByUsername(username).orElseThrow(() ->
+                new UserNotFoundException("User " + username + " was not found."));
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
     }
 
     @Override
     public AppUser getAppUser(String username) {
-        return appUserRepository.findByUsername(username);
+        return appUserRepository.findByUsername(username).orElseThrow();
     }
 
     @Override

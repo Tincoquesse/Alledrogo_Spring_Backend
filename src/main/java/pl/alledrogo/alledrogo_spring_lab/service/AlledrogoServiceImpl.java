@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductAlreadyExistException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductNotFoundException;
+import pl.alledrogo.alledrogo_spring_lab.exceptions.UserNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.model.*;
 import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.repository.BasketRepository;
@@ -97,7 +98,8 @@ public class AlledrogoServiceImpl implements AlledrogoService {
 
     public OrderCartDTO addOrder(OrderCartDTO orderDTO) {
         OrderCart save = orderCartRepository.save(OrderCartMapper.fromDTO(orderDTO));
-        AppUser appUser = appUserRepository.findByUsername(orderDTO.getUsername());
+        AppUser appUser = appUserRepository.findByUsername(orderDTO.getUsername()).orElseThrow(()
+                -> new UserNotFoundException("User " + orderDTO.getUsername() + " was not found."));
         appUser.getOrderCarts().add(save);
         appUser.getBasket().getProducts().clear();
         appUserRepository.save(appUser);

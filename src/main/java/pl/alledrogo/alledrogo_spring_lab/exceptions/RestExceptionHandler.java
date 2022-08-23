@@ -19,7 +19,7 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseEntity<String> handleUsernameNotFound(Exception exception) {
+    public ResponseEntity<String> handleUserNotFound(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
