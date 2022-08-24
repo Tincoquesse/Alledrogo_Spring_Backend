@@ -35,9 +35,6 @@ public class DbFilling {
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
 
-
-
-
         controller.addProduct(new ProductDTO("Lenovo 45D", "What", 111.65,
                 "https://imgs.search.brave.com/ZMFeRlJFVSMMx0tMJw8vIguIHU-3TMD8SIaIpJqwyRs/rs:fit:150:150:1/g:ce/aHR0cDovL3N0YXRp/Yy5iaHBob3RvLmNv/bS9pbWFnZXMvaW1h/Z2VzMTUweDE1MC8x/NDQ1Mjc2MTE2MDAw/XzExODcxOTMuanBn",
                 ProductCategory.WATCH));
