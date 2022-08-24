@@ -228,6 +228,6 @@ class AlledrogoControllerTest {
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(responseOrderCartDTO).isEqualTo(orderCartDTO);
-        assertThat(appUserRepository.findByUsername("test").getBasket().getProducts()).isEmpty();
+        assertThat(appUserRepository.findByUsername("test").get().getBasket().getProducts()).isEmpty();
     }
 }
