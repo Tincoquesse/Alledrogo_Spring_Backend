@@ -6,7 +6,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.annotations.ValueGenerationType;
 import org.json.JSONObject;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.alledrogo.alledrogo_spring_lab.model.AppUser;
 import pl.alledrogo.alledrogo_spring_lab.model.Role;
 import pl.alledrogo.alledrogo_spring_lab.model.RoleToUserForm;
+import pl.alledrogo.alledrogo_spring_lab.repository.AppUserRepository;
 import pl.alledrogo.alledrogo_spring_lab.service.AppUserService;
 
 import javax.mail.MessagingException;
@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @RestController
@@ -39,9 +38,11 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 public class AppUserController {
 
     private final AppUserService appUserService;
+    private final AppUserRepository appUserRepository;
 
-    public AppUserController(AppUserService appUserService) {
+    public AppUserController(AppUserService appUserService, AppUserRepository appUserRepository) {
         this.appUserService = appUserService;
+        this.appUserRepository = appUserRepository;
     }
 
     @PostMapping("/user")
@@ -98,6 +99,9 @@ public class AppUserController {
                         .withSubject(user.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
+                        .withClaim("basketName", findBasketName(user.getUsername()))
+                        .withClaim("name", findName(user.getUsername()))
+                        .withClaim("isVerified", isUserVerified(user.getUsername()))
                         .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                         .sign(algorithm);
                 Map<String, String> tokens = new HashMap<>();
@@ -120,6 +124,20 @@ public class AppUserController {
             throw new RuntimeException("Refresh Token is Missing");
 
         }
+    }
+    private Boolean isUserVerified(String username) {
+        AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
+        return user.isVerified();
+    }
+
+    String findBasketName(String username) {
+        AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
+        return user.getBasket().getBasketName();
+    }
+
+    String findName(String username) {
+        AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
+        return user.getName();
     }
 
 }

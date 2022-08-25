@@ -1,5 +1,6 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.BasketNotFoundException;
 import pl.alledrogo.alledrogo_spring_lab.exceptions.ProductAlreadyExistException;
@@ -101,7 +102,11 @@ public class AlledrogoServiceImpl implements AlledrogoService {
         AppUser appUser = appUserRepository.findByUsername(orderDTO.getUsername()).orElseThrow(()
                 -> new UserNotFoundException("User " + orderDTO.getUsername() + " was not found."));
         appUser.getOrderCarts().add(save);
-        appUser.getBasket().getProducts().clear();
+        String basketCustomName = RandomString.make(20);
+        Basket basket = new Basket(basketCustomName);
+        basketRepository.save(basket);
+        appUser.setBasket(basketRepository.findByBasketName(basketCustomName).orElseThrow(() ->
+                new BasketNotFoundException("Basket " +  basketCustomName + " was not found.")));
         appUserRepository.save(appUser);
         return OrderCartMapper.fromEntity(save);
     }

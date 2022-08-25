@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class OrderCartDTO {
 
-    private String username;
     private String firstAndLastName;
-    private String basketName;
     private String street;
     private String postalCode;
     private String city;
     private Integer phoneNumber;
+    private String username;
+    private String basketName;
 
 
     public OrderCartDTO(String username, String firstAndLastName,
