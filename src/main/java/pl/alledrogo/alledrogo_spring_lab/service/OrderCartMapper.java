@@ -16,11 +16,9 @@ public class OrderCartMapper {
 
     private static BasketRepository basketRepository;
 
-    private static AppUserRepository appUserRepository;
 
     public OrderCartMapper(BasketRepository basketRepository, AppUserRepository appUserRepository) {
         OrderCartMapper.basketRepository = basketRepository;
-        OrderCartMapper.appUserRepository = appUserRepository;
     }
 
     public static OrderCart fromDTO(OrderCartDTO orderCartDTO) {
