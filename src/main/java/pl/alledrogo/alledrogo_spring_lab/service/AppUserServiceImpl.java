@@ -1,7 +1,13 @@
 package pl.alledrogo.alledrogo_spring_lab.service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,11 +29,16 @@ import pl.alledrogo.alledrogo_spring_lab.repository.RoleRepository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @Service
 @Transactional
@@ -95,6 +106,50 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         return appUserRepository.save(user);
     }
 
+
+
+    @Override
+    public void refresh(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            try {
+                String refresh_token = authorizationHeader.substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+                DecodedJWT decodedJWT = jwtVerifier.verify(refresh_token);
+                String username = decodedJWT.getSubject();
+                AppUser user = getAppUser(username);
+                String access_token = JWT.create()
+                        .withSubject(user.getUsername())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                        .withIssuer(request.getRequestURL().toString())
+                        .withClaim("basketName", findBasketName(user.getUsername()))
+                        .withClaim("name", findName(user.getUsername()))
+                        .withClaim("isVerified", isUserVerified(user.getUsername()))
+                        .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
+                        .sign(algorithm);
+                Map<String, String> tokens = new HashMap<>();
+                tokens.put("access_token", access_token);
+                tokens.put("refresh_token", refresh_token);
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+            } catch (Exception exception) {
+
+                response.setHeader("error", exception.getMessage());
+                response.setStatus(FORBIDDEN.value());
+
+                Map<String, String> error = new HashMap<>();
+                error.put("access_token", exception.getMessage());
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
+        } else {
+            throw new RuntimeException("Refresh Token is Missing");
+
+        }
+    }
+
     private void sendVerificationEmail(AppUser user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getUsername();
@@ -156,5 +211,20 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             appUserRepository.save(appUser);
             return true;
         }
+    }
+
+    private Boolean isUserVerified(String username) {
+        AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
+        return user.isVerified();
+    }
+
+    String findBasketName(String username) {
+        AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
+        return user.getBasket().getBasketName();
+    }
+
+    String findName(String username) {
+        AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
+        return user.getName();
     }
 }
