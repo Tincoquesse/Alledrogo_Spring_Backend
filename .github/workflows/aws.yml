@@ -60,6 +60,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
   deploy:
+    needs: build
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
