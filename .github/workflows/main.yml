@@ -14,10 +14,10 @@ jobs:
     steps:
       # checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@master
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 17
           
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -48,6 +48,6 @@ jobs:
           aws_secret_key: Eg00N8azq7qwbBvfLLuK3o1m3pT8LiTYAWv0DAE/
           application_name: test-harmpro
           environment_name: Test-harmpro-env-prod
-          version_label: ${{ github.SHA }}
+          version_label: 1234
           region: ue-north-1
           deployment_package: spring-test-server-0.0.1-SNAPSHOT.jar
