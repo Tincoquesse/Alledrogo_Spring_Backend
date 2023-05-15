@@ -42,7 +42,7 @@ jobs:
           name: artifact
       # deploy the artifact (JAR) into AWS Beanstalk
       - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v20
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: AKIA5RLTPQK5OJ43WBHV
           aws_secret_key: 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
