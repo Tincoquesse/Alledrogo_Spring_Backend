@@ -18,7 +18,6 @@ import pl.alledrogo.alledrogo_spring_lab.service.AppUserServiceImpl;
 import java.util.ArrayList;
 
 @Component
-@Profile("prod")
 public class DbFilling {
 
     private final AlledrogoController controller;
