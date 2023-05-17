@@ -48,7 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/token/refresh",
                 "/api/user",
                 "/api/verify",
-                "/console/**").permitAll();
+                "/console/**",
+                "/")
+                .permitAll();
         http.headers().frameOptions().disable();
         http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
