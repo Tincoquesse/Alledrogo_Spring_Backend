@@ -27,7 +27,7 @@ public class AlledrogoConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(List.of(CorsConfiguration.ALL));
+        corsConfiguration.setAllowedOrigins(List.of("http://allegrogo.harmpro.click"));
         corsConfiguration.setAllowedMethods(List.of(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(List.of(CorsConfiguration.ALL));
         source.registerCorsConfiguration("/**", corsConfiguration);
