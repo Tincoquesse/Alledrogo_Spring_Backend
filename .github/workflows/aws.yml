@@ -49,5 +49,5 @@ jobs:
           application_name: harmopro-test-app
           environment_name: Harmopro-test-app-env
           version_label: 3
-          region: ue-north-1
+          region: eu-north-1
           deployment_package: Alledrogo_Spring_Lab-0.0.1-SNAPSHOT.jar
