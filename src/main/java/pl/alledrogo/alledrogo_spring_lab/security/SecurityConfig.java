@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/api/login",
-                "/shop/products/toBasket/**",
+                "/shop/product/toBasket/**",
                 "/shop/products",
                 "/api/token/refresh",
                 "/api/user",
