@@ -48,6 +48,6 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: alledrogo-app
           environment_name: Alledrogo-app-env
-          version_label: alledrogo-app-version-4
+          version_label: alledrogo-app-version-3
           region: eu-north-1
           deployment_package: Alledrogo_Spring_Lab-0.0.1-SNAPSHOT.jar
