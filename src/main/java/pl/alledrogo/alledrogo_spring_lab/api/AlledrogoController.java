@@ -72,5 +72,4 @@ public class AlledrogoController {
     public ResponseEntity<OrderCartDTO> addOrder(@RequestBody OrderCartDTO orderDTO) {
         return new  ResponseEntity<>(alledrogoService.addOrder(orderDTO), HttpStatus.CREATED);
     }
-
 }
